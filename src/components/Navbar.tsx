@@ -120,9 +120,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection: propA
   };
 
   const portfolioCategories = [
-    { label: 'Brand Identity', desc: 'Minimalist luxury marks', icon: Sparkles },
-    { label: 'Packaging & Labels', desc: '300 DPI CMYK dielines', icon: Layers },
-    { label: 'Social Media Ads', desc: 'High-CTR campaign sets', icon: Zap },
+    { label: 'Logo & Branding', desc: 'Original brand system designs', icon: Sparkles, sectionId: 'portfolio' },
+    { label: 'Graphics Design', desc: 'Packaging, SaaS branding, and print assets', icon: Layers, sectionId: 'graphics-design' },
   ];
 
   return (
@@ -223,7 +222,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection: propA
                       {portfolioCategories.map((cat, i) => (
                         <button
                           key={i}
-                          onClick={() => handleLinkClick('portfolio')}
+                          onClick={() => handleLinkClick(cat.sectionId)}
                           className="w-full text-left p-2 rounded-xl hover:bg-white/10 transition-all flex items-center justify-between cursor-pointer group"
                         >
                           <div>

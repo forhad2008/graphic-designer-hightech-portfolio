@@ -21,6 +21,7 @@ interface PortfolioModalProps {
 
 export const PortfolioModal: React.FC<PortfolioModalProps> = ({ item, onClose, onBookSimilar }) => {
   const [copiedHex, setCopiedHex] = useState<string | null>(null);
+  const [isCloseHovered, setIsCloseHovered] = useState(false);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -46,6 +47,15 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({ item, onClose, o
     setTimeout(() => setCopiedHex(null), 1800);
   };
 
+  // Dynamic style extraction based on the design's own color palette
+  const hexes = item.colors && item.colors.length > 0 ? item.colors.map((c) => c.hex) : ['#402fb5', '#cf30aa'];
+  const c1 = hexes[0] || '#402fb5';
+  const c2 = hexes[1] || hexes[0] || '#a099d8';
+  const c3 = hexes[2] || hexes[1] || hexes[0] || '#cf30aa';
+  const c4 = hexes[3] || hexes[2] || hexes[1] || hexes[0] || '#dfa2da';
+
+  const conicBackground = `conic-gradient(rgba(0,0,0,0) 0%, ${c1} 12%, ${c2} 22%, rgba(0,0,0,0) 35%, rgba(0,0,0,0) 50%, ${c3} 65%, ${c4} 75%, rgba(0,0,0,0) 90%)`;
+
   return (
     <div
       data-no-butterfly="true"
@@ -57,26 +67,38 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({ item, onClose, o
     >
       <div className="fixed inset-0" onClick={onClose} />
 
-      {/* Uiverse Glow Rotating Conic Border Wrapper */}
+      {/* Uiverse Glow Rotating Conic Border Wrapper with Dynamic Shadows */}
       <div 
         data-no-butterfly="true"
         data-visual-window="true"
-        className="relative w-full max-w-5xl p-[2px] rounded-3xl overflow-hidden shadow-[0_0_50px_rgba(207,48,170,0.35),0_0_30px_rgba(64,47,181,0.5)] my-auto max-h-[92vh] flex flex-col z-10 visual-window no-butterfly"
+        className="relative w-full max-w-5xl p-[2px] rounded-3xl overflow-hidden my-auto max-h-[92vh] flex flex-col z-10 visual-window no-butterfly transition-all duration-500"
+        style={{
+          boxShadow: `0 0 50px ${c3}30, 0 0 30px ${c1}40`,
+        }}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Outer Rotating Conic Glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300%] h-[300%] animate-[conicRotate_6s_linear_infinite] bg-[conic-gradient(rgba(0,0,0,0)_0%,#402fb5_12%,#a099d8_20%,rgba(0,0,0,0)_35%,rgba(0,0,0,0)_50%,#cf30aa_65%,#dfa2da_75%,rgba(0,0,0,0)_90%)] filter blur-[18px] opacity-75 pointer-events-none -z-20" />
+        <div 
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300%] h-[300%] animate-[conicRotate_6s_linear_infinite] filter blur-[18px] opacity-75 pointer-events-none -z-20"
+          style={{ backgroundImage: conicBackground }}
+        />
         
         {/* Crisp Rotating Conic Border */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300%] h-[300%] animate-[conicRotate_6s_linear_infinite] bg-[conic-gradient(rgba(0,0,0,0)_0%,#402fb5_12%,#a099d8_18%,rgba(0,0,0,0)_30%,rgba(0,0,0,0)_50%,#cf30aa_65%,#dfa2da_72%,rgba(0,0,0,0)_85%)] opacity-100 pointer-events-none -z-10" />
+        <div 
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300%] h-[300%] animate-[conicRotate_6s_linear_infinite] opacity-100 pointer-events-none -z-10"
+          style={{ backgroundImage: conicBackground }}
+        />
 
         {/* Modal Core Window */}
         <div className="relative w-full bg-[#080712] rounded-[22px] overflow-hidden flex flex-col max-h-[90vh]">
           
           {/* Floating Absolute Close Button (Sleek Circular Glass over the Image) */}
           <button
+            onMouseEnter={() => setIsCloseHovered(true)}
+            onMouseLeave={() => setIsCloseHovered(false)}
             onClick={onClose}
-            className="absolute top-4 right-4 z-50 p-2 rounded-full bg-black/60 hover:bg-[#cf30aa] text-white/90 hover:text-white border border-white/10 hover:border-transparent hover:scale-105 active:scale-95 transition-all shadow-[0_4px_12px_rgba(0,0,0,0.5)] backdrop-blur-md cursor-pointer"
+            className="absolute top-4 right-4 z-50 p-2 rounded-full bg-black/60 text-white/90 border border-white/10 hover:scale-105 active:scale-95 transition-all shadow-[0_4px_12px_rgba(0,0,0,0.5)] backdrop-blur-md cursor-pointer"
+            style={isCloseHovered ? { backgroundColor: c3, borderColor: 'transparent', color: '#fff' } : {}}
             aria-label="Close modal"
           >
             <X className="w-5 h-5" />
@@ -114,11 +136,11 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({ item, onClose, o
               {/* Challenge & Solution */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5 p-5 rounded-2xl bg-[#090715]/75 border border-white/5 text-xs shadow-lg backdrop-blur-sm">
                 <div className="space-y-1.5">
-                  <span className="text-amber-400 font-mono font-bold uppercase tracking-wider block">Challenge</span>
+                  <span className="font-mono font-bold uppercase tracking-wider block" style={{ color: c2 }}>Challenge</span>
                   <p className="text-slate-300 leading-relaxed">{item.challenge}</p>
                 </div>
                 <div className="space-y-1.5">
-                  <span className="text-[#dfa2da] font-mono font-bold uppercase tracking-wider block">Solution</span>
+                  <span className="font-mono font-bold uppercase tracking-wider block" style={{ color: c3 }}>Solution</span>
                   <p className="text-slate-300 leading-relaxed">{item.solution}</p>
                 </div>
               </div>
@@ -130,7 +152,7 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({ item, onClose, o
                   <ul className="space-y-2 text-slate-200">
                     {item.deliverables.map((d, i) => (
                       <li key={i} className="flex items-center gap-2">
-                        <CheckCircle className="w-4 h-4 text-[#cf30aa]" />
+                        <CheckCircle className="w-4 h-4" style={{ color: c3 }} />
                         <span>{d}</span>
                       </li>
                     ))}
@@ -142,7 +164,7 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({ item, onClose, o
                     <span className="font-mono text-slate-400 uppercase font-bold tracking-wider block mb-2">Master Formats</span>
                     <div className="flex flex-wrap gap-1.5">
                       {item.formats.map((f, i) => (
-                        <span key={i} className="px-2.5 py-0.5 rounded-lg bg-white/5 border border-white/10 font-mono text-[#dfa2da] font-semibold text-[10px]">
+                        <span key={i} className="px-2.5 py-0.5 rounded-lg bg-white/5 border border-white/10 font-mono font-semibold text-[10px]" style={{ color: c3, borderColor: `${c3}30` }}>
                           {f}
                         </span>
                       ))}
@@ -193,7 +215,7 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({ item, onClose, o
               rel="noopener noreferrer"
               className="px-4 py-2 text-xs font-semibold text-slate-300 hover:text-white flex items-center gap-1.5"
             >
-              <MessageCircle className="w-4 h-4 text-[#dfa2da]" />
+              <MessageCircle className="w-4 h-4 text-[#dfa2da]" style={{ color: c3 }} />
               <span>WhatsApp</span>
             </a>
 
@@ -202,7 +224,11 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({ item, onClose, o
                 onClose();
                 onBookSimilar(item.title);
               }}
-              className="px-5 py-2 text-xs font-extrabold text-white neu-3d-btn-primary rounded-xl flex items-center gap-1.5 cursor-pointer shadow-[0_0_15px_rgba(207,48,170,0.5)]"
+              className="px-5 py-2 text-xs font-extrabold text-white rounded-xl flex items-center gap-1.5 cursor-pointer transition-all hover:scale-105 active:scale-95"
+              style={{
+                backgroundColor: c3,
+                boxShadow: `0 0 20px ${c3}60`,
+              }}
             >
               <span>Order Similar</span>
               <ArrowUpRight className="w-4 h-4" />

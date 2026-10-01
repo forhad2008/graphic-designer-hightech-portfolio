@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { PORTFOLIO_ITEMS } from '../data/portfolioData';
-import { PortfolioItem, CategoryType } from '../types';
+import { PortfolioItem } from '../types';
 import { DesignArtwork } from './DesignArtworks';
 import { ArrowUpRight, FolderKanban, Eye, Heart } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
@@ -12,21 +12,6 @@ interface PortfolioProps {
 }
 
 export const Portfolio: React.FC<PortfolioProps> = ({ onSelectItem, onOrderSimilar }) => {
-  const [activeCategory, setActiveCategory] = useState<CategoryType>('all');
-
-  const categories: { id: CategoryType; label: string }[] = [
-    { id: 'all', label: 'All' },
-    { id: 'branding', label: 'Branding' },
-    { id: 'packaging', label: 'Packaging' },
-    { id: 'social', label: 'Social Ads' },
-    { id: 'youtube', label: 'YouTube' },
-    { id: 'print', label: 'Print' },
-  ];
-
-  const filteredItems = activeCategory === 'all'
-    ? PORTFOLIO_ITEMS
-    : PORTFOLIO_ITEMS.filter((item) => item.category === activeCategory);
-
   return (
     <section className="py-20 md:py-28 border-t border-white/5 relative">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-8">
@@ -36,52 +21,25 @@ export const Portfolio: React.FC<PortfolioProps> = ({ onSelectItem, onOrderSimil
           <div>
             <div className="inline-flex items-center gap-2 text-xs font-mono text-[#dfa2da] mb-1.5 font-bold">
               <FolderKanban className="w-3.5 h-3.5 text-[#cf30aa]" />
-              <span>PORTFOLIO</span>
+              <span>LOGO & BRANDING</span>
             </div>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-white font-display tracking-tight">
-              Selected Work
+              Logo & Branding
             </h2>
             <p className="text-slate-400 text-sm mt-1">
               Brand systems, print packaging, and digital marketing assets.
             </p>
           </div>
-
-          {/* Minimal Filter Tabs */}
-          <div className="flex items-center gap-1.5 p-1.5 neu-inset rounded-2xl overflow-x-auto border border-[#402fb5]/30">
-            {categories.map((cat) => (
-              <button
-                key={cat.id}
-                onClick={() => setActiveCategory(cat.id)}
-                className={`px-3.5 py-1.5 text-xs font-semibold rounded-xl transition-all whitespace-nowrap cursor-pointer ${
-                  activeCategory === cat.id
-                    ? 'btn-gradient-purple-pink text-white font-bold shadow-[0_0_12px_rgba(207,48,170,0.5)]'
-                    : 'text-slate-400 hover:text-white'
-                }`}
-              >
-                {cat.label}
-              </button>
-            ))}
-          </div>
         </div>
 
         {/* Portfolio Grid with Rotating Conic Glow on Every Card */}
-        <motion.div
-          layout
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
-          <AnimatePresence mode="popLayout">
-            {filteredItems.map((item, index) => (
-              <motion.div
-                key={item.id}
-                layout
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.4, delay: index * 0.04 }}
-                whileHover={{ y: -6 }}
-                onClick={() => onSelectItem(item)}
-                className="cursor-pointer"
-              >
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {PORTFOLIO_ITEMS.map((item, index) => (
+            <div
+              key={item.id}
+              onClick={() => onSelectItem(item)}
+              className="cursor-pointer transition-transform duration-300 hover:-translate-y-1.5"
+            >
                 <GlowCard intensity="medium" rounded="rounded-3xl">
                   <div className="group relative w-full h-[380px] sm:h-[440px] rounded-3xl overflow-hidden transition-all duration-300 flex flex-col justify-end border border-white/10 bg-[#07060f]">
                     
@@ -143,10 +101,9 @@ export const Portfolio: React.FC<PortfolioProps> = ({ onSelectItem, onOrderSimil
 
                   </div>
                 </GlowCard>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </motion.div>
+            </div>
+          ))}
+        </div>
 
         {/* Minimal Bottom CTA Strip with Rotating Conic Glow */}
         <div className="mt-12">

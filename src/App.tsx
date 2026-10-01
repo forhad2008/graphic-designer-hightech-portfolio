@@ -3,6 +3,7 @@ import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { BeforeAfterSlider } from './components/BeforeAfterSlider';
 import { Portfolio } from './components/Portfolio';
+import { GraphicsDesignShowcase } from './components/DesignShowcases';
 import { PortfolioModal } from './components/PortfolioModal';
 import { ServicesGigs } from './components/ServicesGigs';
 import { PricingTiers } from './components/PricingTiers';
@@ -104,6 +105,12 @@ export default function App() {
           onOrderSimilar={handleOrderSimilar}
         />
       </ScrollSection>
+
+      {/* Graphics Design Showcase Section for New Design Webp Files */}
+      <GraphicsDesignShowcase
+        onSelectItem={(item) => setSelectedPortfolioItem(item)}
+        onOrderSimilar={handleOrderSimilar}
+      />
 
       {/* Fiverr Gigs & Specialized Services */}
       <ScrollSection id="services" distance={40} duration={0.8}>

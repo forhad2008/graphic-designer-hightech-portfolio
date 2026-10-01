@@ -24,34 +24,45 @@ export const Hero: React.FC<HeroProps> = ({ onExploreWork, onBookProject, onOpen
   const [copiedHex, setCopiedHex] = useState<string | null>(null);
   const [activeShowcaseTab, setActiveShowcaseTab] = useState<'brand' | 'packaging' | 'social'>('brand');
 
-  const brandColors = [
-    { hex: '#cf30aa', label: '#cf30aa', name: 'Neon Pink' },
-    { hex: '#402fb5', label: '#402fb5', name: 'Cyber Purple' },
-    { hex: '#a099d8', label: '#a099d8', name: 'Lavender' },
-    { hex: '#dfa2da', label: '#dfa2da', name: 'Deep Pink' },
-  ];
-
   const showcaseItems = {
     brand: {
       title: 'Aura Botanicals',
       category: 'Brand Identity',
-      image: IMAGE_ASSETS.heroShowcase.brand,
+      image: '/brand6.png',
       tag: 'Vector AI / 300DPI',
-      font: 'Syne + Plus Jakarta Sans',
+      font: 'Modern Sans-serif + Plus Jakarta Sans',
+      colors: [
+        { hex: '#112C20', name: 'Forest Green' },
+        { hex: '#305C33', name: 'Foliage' },
+        { hex: '#FFFFFF', name: 'Pure White' },
+        { hex: '#F3F4F1', name: 'Soft Cream' },
+      ]
     },
     packaging: {
-      title: 'Velo Roasters',
+      title: 'Volt Energy Can',
       category: 'Packaging Dieline',
-      image: IMAGE_ASSETS.heroShowcase.packaging,
+      image: '/brand3.png',
       tag: 'CMYK Bleeds + Foil',
-      font: 'Cabinet Grotesk + Mono',
+      font: 'Cabinet Grotesk + JetBrains Mono',
+      colors: [
+        { hex: '#E50914', name: 'Crimson' },
+        { hex: '#0C0C0E', name: 'Pitch Black' },
+        { hex: '#FF4500', name: 'Lava Orange' },
+        { hex: '#BDBDBD', name: 'Silver' },
+      ]
     },
     social: {
-      title: 'Ignite Streetwear',
+      title: 'Abdullah Psychotic Luxe',
       category: 'Social Ad Campaign',
-      image: IMAGE_ASSETS.heroShowcase.social,
+      image: '/brand5.png',
       tag: 'Feed & Story PSD',
-      font: 'Syne Extra Bold',
+      font: 'Sophisticated Serif + Cabinet Grotesk',
+      colors: [
+        { hex: '#000000', name: 'Matte Black' },
+        { hex: '#FF0000', name: 'Vibrant Red' },
+        { hex: '#C0C0C0', name: 'Silver' },
+        { hex: '#1A1A1A', name: 'Dark Charcoal' },
+      ]
     },
   };
 
@@ -74,12 +85,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreWork, onBookProject, onOpen
         <div className="grid grid-cols-1 xl:grid-cols-12 gap-10 xl:gap-8 items-center">
           
           {/* LEFT COLUMN: Minimal Typography & Call to Action */}
-          <motion.div
-            initial={{ opacity: 0, y: 25 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="xl:col-span-5 space-y-5 text-left"
-          >
+          <div className="xl:col-span-5 space-y-5 text-left">
             
             {/* Uiverse Glow Status Pill */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full liquid-glass-pill text-xs font-mono border border-[#cf30aa]/30 shadow-[0_0_15px_rgba(207,48,170,0.25)]">
@@ -147,15 +153,10 @@ export const Hero: React.FC<HeroProps> = ({ onExploreWork, onBookProject, onOpen
               </button>
             </div>
 
-          </motion.div>
+          </div>
 
           {/* RIGHT COLUMN: Minimal Design Showcase Container (7 cols) with Rotating Conic Glow */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.96, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.75, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-            className="xl:col-span-7"
-          >
+          <div className="xl:col-span-7">
             <GlowCard alwaysGlow intensity="vibrant" rounded="rounded-3xl">
               <div className="relative rounded-3xl bg-[#090714]/90 neu-3d-raised-lg p-5 sm:p-6 backdrop-blur-xl">
                 
@@ -225,7 +226,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreWork, onBookProject, onOpen
                         <span className="text-[9px] text-[#dfa2da] font-semibold">Click to copy</span>
                       </div>
                       <div className="grid grid-cols-4 gap-2">
-                        {brandColors.map((c) => (
+                        {activeItem.colors.map((c) => (
                           <button
                             key={c.hex}
                             onClick={() => copyHex(c.hex)}
@@ -269,7 +270,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreWork, onBookProject, onOpen
 
               </div>
             </GlowCard>
-          </motion.div>
+          </div>
 
         </div>
 

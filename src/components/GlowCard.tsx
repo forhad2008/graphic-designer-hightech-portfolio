@@ -7,6 +7,7 @@ interface GlowCardProps {
   alwaysGlow?: boolean;
   intensity?: 'subtle' | 'medium' | 'vibrant';
   rounded?: string;
+  customColors?: string[];
 }
 
 export const GlowCard: React.FC<GlowCardProps> = ({
@@ -16,6 +17,7 @@ export const GlowCard: React.FC<GlowCardProps> = ({
   alwaysGlow = false,
   intensity = 'medium',
   rounded = 'rounded-3xl',
+  customColors,
 }) => {
   const glowOpacity =
     intensity === 'vibrant'
@@ -23,6 +25,10 @@ export const GlowCard: React.FC<GlowCardProps> = ({
       : intensity === 'subtle'
       ? 'opacity-50 group-hover:opacity-80'
       : 'opacity-70 group-hover:opacity-100';
+
+  const conicBackground = customColors && customColors.length > 0
+    ? `conic-gradient(rgba(0,0,0,0) 0%, ${customColors[0]} 12%, ${customColors[1] || customColors[0]} 20%, rgba(0,0,0,0) 35%, rgba(0,0,0,0) 50%, ${customColors[2] || customColors[0]} 65%, ${customColors[3] || customColors[1] || customColors[0]} 75%, rgba(0,0,0,0) 90%)`
+    : undefined;
 
   return (
     <div
@@ -34,7 +40,10 @@ export const GlowCard: React.FC<GlowCardProps> = ({
           alwaysGlow ? 'opacity-85' : glowOpacity
         }`}
       >
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300%] h-[300%] animate-[conicRotate_5s_linear_infinite] bg-[conic-gradient(rgba(0,0,0,0)_0%,#402fb5_12%,#a099d8_20%,rgba(0,0,0,0)_35%,rgba(0,0,0,0)_50%,#cf30aa_65%,#dfa2da_75%,rgba(0,0,0,0)_90%)]" />
+        <div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300%] h-[300%] animate-[conicRotate_5s_linear_infinite]"
+          style={conicBackground ? { backgroundImage: conicBackground } : {}}
+        />
       </div>
 
       {/* Crisp Rotating Conic Border Sweep */}
@@ -43,7 +52,10 @@ export const GlowCard: React.FC<GlowCardProps> = ({
           alwaysGlow ? 'opacity-100' : 'opacity-75 group-hover:opacity-100'
         } ${glowClassName}`}
       >
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300%] h-[300%] animate-[conicRotate_4s_linear_infinite] bg-[conic-gradient(rgba(0,0,0,0)_0%,#402fb5_12%,#a099d8_18%,rgba(0,0,0,0)_30%,rgba(0,0,0,0)_50%,#cf30aa_65%,#dfa2da_72%,rgba(0,0,0,0)_85%)]" />
+        <div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300%] h-[300%] animate-[conicRotate_4s_linear_infinite]"
+          style={conicBackground ? { backgroundImage: conicBackground } : {}}
+        />
       </div>
 
       {/* Inner Card Surface */}
