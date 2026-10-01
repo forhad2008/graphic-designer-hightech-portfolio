@@ -26,13 +26,13 @@ const RobustImage: React.FC<{
             ? 'bg-[#cf30aa]/10 border-[#cf30aa]/40 text-[#dfa2da]'
             : 'bg-red-500/10 border-red-500/30 text-red-300'
         }`}>
-          <span className="text-3xl font-black font-display">{isAfter ? '1P' : '1'}</span>
+          <span className="text-3xl font-black font-display">{isAfter ? 'AB' : 'L'}</span>
         </div>
         <h4 className="text-base font-bold text-white font-display mb-1">
-          {isAfter ? 'Transformed Vector Logo' : 'Original Legacy Logo'}
+          {isAfter ? 'Aura Botanicals Redesign' : 'Aura Legacy Concept'}
         </h4>
         <span className="text-xs font-mono px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-slate-300 shadow-inner">
-          {isAfter ? 'public/logo1p.png' : 'public/logo1.png'}
+          {isAfter ? 'Aura Skincare Packaging Showcase' : 'Initial Draft Outline'}
         </span>
       </div>
     );
@@ -92,10 +92,10 @@ export const BeforeAfterSlider: React.FC = () => {
             <span>CASE STUDY</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white font-display tracking-tight">
-            Brand Transformation
+            Case Study: Aura Botanicals
           </h2>
           <p className="text-slate-400 text-sm mt-2">
-            Slide to compare legacy logo (<span className="text-[#dfa2da] font-mono">logo1.png</span>) vs modern vector redesign (<span className="text-[#dfa2da] font-mono">logo1p.png</span>).
+            Slide to compare the legacy wellness mark against the fully realized organic skincare identity &amp; premium cosmetics packaging.
           </p>
 
           {/* Quick preset buttons in 3D socket */}
@@ -148,15 +148,16 @@ export const BeforeAfterSlider: React.FC = () => {
                 onTouchMove={handleTouchMove}
                 className="relative w-full h-[340px] sm:h-[420px] rounded-2xl overflow-hidden select-none border border-white/10 shadow-2xl cursor-ew-resize bg-[#06040d]"
               >
-                {/* AFTER: Modern Brand (logo1p.png or high quality vector fallback) */}
+                {/* AFTER: Modern Brand (brand6.png showcase) */}
                 <div className="absolute inset-0 w-full h-full flex items-center justify-center bg-gradient-to-br from-[#12081f] via-[#080612] to-[#1e0a2b]">
                   {/* Subtle technical brand lines grid */}
                   <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
                   <RobustImage
                     sources={[
-                      '/logo1p.png',
+                      './brand6.png',
+                      './brand6.png',
+                      'brand6.png',
                       './logo1p.png',
-                      'logo1p.png',
                       IMAGE_ASSETS.beforeAfter.afterRedesign,
                       'https://images.unsplash.com/photo-1608248597359-009947e45260?auto=format&fit=crop&w=1200&q=80'
                     ]}
@@ -166,8 +167,8 @@ export const BeforeAfterSlider: React.FC = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
 
-                  <div className="absolute top-4 right-4 px-3 py-1.5 rounded-xl bg-[#090714]/85 border border-[#cf30aa]/50 text-[#dfa2da] text-xs font-mono font-bold drop-shadow shadow-[0_0_15px_rgba(207,48,170,0.3)] z-20">
-                    AFTER: Redesigned Vector Brand
+                  <div className="absolute top-4 right-4 px-3 py-1.5 rounded-xl bg-emerald-950/85 backdrop-blur-md border border-emerald-500/30 text-emerald-300 text-xs font-mono font-bold drop-shadow shadow-[0_0_15px_rgba(16,185,129,0.3)] z-20">
+                    AFTER: Aura Botanicals Packaging
                   </div>
                 </div>
 
@@ -186,7 +187,7 @@ export const BeforeAfterSlider: React.FC = () => {
                     <div className="absolute inset-0 bg-[linear-gradient(rgba(239,68,68,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(239,68,68,0.015)_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none" />
                     <RobustImage
                       sources={[
-                        '/logo1.png',
+                        './logo1.png',
                         './logo1.png',
                         'logo1.png',
                         IMAGE_ASSETS.beforeAfter.beforeLegacy,
@@ -198,8 +199,8 @@ export const BeforeAfterSlider: React.FC = () => {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
 
-                    <div className="absolute top-4 left-4 px-3 py-1.5 rounded-xl bg-red-950/85 backdrop-blur-md border border-red-500/30 text-red-300 text-xs font-mono font-bold shadow-md z-20">
-                      BEFORE: Legacy Original Mark
+                    <div className="absolute top-4 left-4 px-3 py-1.5 rounded-xl bg-slate-900/85 backdrop-blur-md border border-slate-700/50 text-slate-300 text-xs font-mono font-bold shadow-md z-20">
+                      BEFORE: Legacy Design Draft
                     </div>
                   </div>
                 </div>
@@ -218,9 +219,9 @@ export const BeforeAfterSlider: React.FC = () => {
           </GlowCard>
 
           <div className="flex items-center justify-between mt-3 text-xs text-slate-500 font-mono px-1">
-            <span>← Slide left to view Transformed logo1p.png</span>
-            <span className="text-[#dfa2da] font-semibold">Brand Transformation View</span>
-            <span>Slide right to view Original logo1.png →</span>
+            <span>← Slide left to view Transformed Aura Botanicals</span>
+            <span className="text-[#dfa2da] font-semibold">Case Study Comparison</span>
+            <span>Slide right to view Original Concept →</span>
           </div>
         </div>
 

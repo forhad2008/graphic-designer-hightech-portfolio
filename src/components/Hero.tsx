@@ -28,7 +28,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreWork, onBookProject, onOpen
     brand: {
       title: 'Aura Botanicals',
       category: 'Brand Identity',
-      image: '/brand6.png',
+      image: './brand6.png',
       tag: 'Vector AI / 300DPI',
       font: 'Modern Sans-serif + Plus Jakarta Sans',
       colors: [
@@ -41,7 +41,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreWork, onBookProject, onOpen
     packaging: {
       title: 'Volt Energy Can',
       category: 'Packaging Dieline',
-      image: '/brand3.png',
+      image: './brand3.png',
       tag: 'CMYK Bleeds + Foil',
       font: 'Cabinet Grotesk + JetBrains Mono',
       colors: [
@@ -54,7 +54,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreWork, onBookProject, onOpen
     social: {
       title: 'Abdullah Psychotic Luxe',
       category: 'Social Ad Campaign',
-      image: '/brand5.png',
+      image: './brand5.png',
       tag: 'Feed & Story PSD',
       font: 'Sophisticated Serif + Cabinet Grotesk',
       colors: [
