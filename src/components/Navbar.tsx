@@ -38,6 +38,17 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection: propA
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [activeSection, setActiveSection] = useState<string>(propActiveSection || 'portfolio');
   const [showTopNotice, setShowTopNotice] = useState(true);
+  const [isAnyModalOpen, setIsAnyModalOpen] = useState(false);
+
+  useEffect(() => {
+    const checkModals = () => {
+      const modals = document.querySelectorAll('[data-modal="true"], [role="dialog"]');
+      setIsAnyModalOpen(modals.length > 0);
+    };
+    const interval = setInterval(checkModals, 100);
+    checkModals();
+    return () => clearInterval(interval);
+  }, []);
 
   // Hover states for the circular symbolic buttons
   const [hoveredButton, setHoveredButton] = useState<'search' | 'whatsapp' | 'book' | 'menu' | null>(null);
@@ -67,7 +78,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection: propA
         setScrollProgress(progress);
       }
 
-      const sections = ['portfolio', 'graphics-design', 'design-templates', 'pricing', 'estimator', 'process', 'reviews', 'social', 'contact', 'faq'];
+      const sections = ['portfolio', 'graphics-design', 'design-templates', 'social-banners', 'pricing', 'estimator', 'process', 'reviews', 'contact', 'faq'];
       const scrollPosition = scrollY + 200;
 
       for (let i = sections.length - 1; i >= 0; i--) {
@@ -123,11 +134,12 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection: propA
     { label: 'Logo & Branding', desc: 'Original brand system designs', icon: Sparkles, sectionId: 'portfolio' },
     { label: 'Graphics Design', desc: 'Packaging, SaaS branding, and print sets', icon: Layers, sectionId: 'graphics-design' },
     { label: 'Design Templates', desc: 'Premium resource blueprints', icon: Layers, sectionId: 'design-templates' },
+    { label: 'Social Headers', desc: 'Gritty sports & luxury corporate banners', icon: Layers, sectionId: 'social-banners' },
   ];
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isAnyModalOpen ? 'opacity-0 pointer-events-none -translate-y-full' : 'opacity-100 translate-y-0'}`}>
         
         {/* Top Minimal Notice Bar */}
         {showTopNotice && (
@@ -549,7 +561,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection: propA
                       Quick Navigator
                     </span>
                     <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-[#cf30aa]/20 text-[#dfa2da] border border-[#cf30aa]/30">
-                      7 Sections
+                      8 Sections
                     </span>
                   </div>
                   <button

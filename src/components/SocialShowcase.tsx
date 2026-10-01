@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Sparkles, ArrowUpRight, Copy, Check, Sliders, ChevronRight, FileCode, CheckCircle2, X, MessageCircle } from 'lucide-react';
+import { Sparkles, ArrowUpRight, Copy, Check, ChevronRight, CheckCircle2, X, MessageCircle } from 'lucide-react';
 import { GlowCard } from './GlowCard';
 import { DesignArtwork } from './DesignArtworks';
 
-interface TemplateItem {
+interface SocialItem {
   id: string;
   title: string;
   category: string;
@@ -17,128 +17,115 @@ interface TemplateItem {
   deliverables: string[];
 }
 
-const TEMPLATE_ITEMS: TemplateItem[] = [
+const SOCIAL_ITEMS: SocialItem[] = [
   {
-    id: 'tem-1',
-    title: 'Thomas Shelby: Peaky Blinders Vintage Business Card',
-    category: 'print',
-    categoryLabel: 'Premium Business Card',
-    format: 'Adobe Photoshop · Adobe Illustrator',
-    image: './tem1.webp',
-    description: 'A sophisticated, retro-inspired business card design featuring a dual-tone diagonal split in textured deep olive-bronze and warm champagne, highlighted by elegant metallic gold accents.',
-    gridRatio: '3.5:2 Vertical Layout',
-    colors: [
-      { name: 'Bronze Brown', hex: '#4E4437' },
-      { name: 'Champagne Gold', hex: '#D7D3C5' },
-      { name: 'Accent Gold', hex: '#B88D3D' },
-      { name: 'Deep Charcoal', hex: '#1A1917' }
-    ],
-    fonts: ['Cinzel Serif', 'Montserrat Sans'],
-    deliverables: ['Print-Ready Vector PDF', 'Fully Layered PSD Mockup', 'Adobe Illustrator Source File', 'High-Resolution JPEG Previews']
-  },
-  {
-    id: 'tem-2',
-    title: 'Thomas Shelby: Golden Glitter Premium Identity Card',
-    category: 'print',
-    categoryLabel: 'Elegant Business Card',
-    format: 'Adobe Illustrator · Photoshop',
-    image: './tem2.webp',
-    description: 'A sophisticated, textured business card design boasting a deep bronze-gold glitter finish, custom circular portrait placeholder, and luxury metallic accents.',
-    gridRatio: '3.5:2 Standard Card',
-    colors: [
-      { name: 'Deep Bronze', hex: '#383129' },
-      { name: 'Antique Gold', hex: '#987E4C' },
-      { name: 'Warm Taupe', hex: '#5A4F41' },
-      { name: 'Off-White', hex: '#E5E1DB' }
-    ],
-    fonts: ['Montserrat Sans', 'Cinzel Serif'],
-    deliverables: ['Print-Ready Vector Files', 'Double-Sided Layout Design', 'Customizable Photo Placeholder', 'High-Resolution Mockup']
-  },
-  {
-    id: 'tem-3',
-    title: 'Thomas Shelby: Dark Bronze Metallic Hang Tag & Card',
-    category: 'print',
-    categoryLabel: 'Luxury Business Card',
+    id: 'social-1',
+    title: 'Neon Cyberpunk Stream & Social Media Header Kit',
+    category: 'gaming',
+    categoryLabel: 'Twitch / YouTube Banner',
     format: 'Adobe Photoshop · Illustrator',
-    image: './tem3.webp',
-    description: 'A luxury, textured business card and hangtag design showcasing a dark bronze-charcoal metallic finish accented by elegant gold typography and integrated portrait frame.',
-    gridRatio: '3.5 x 2 Card Grid',
+    image: './social1.png',
+    description: 'A vibrant, cyber-futuristic streaming and social media header featuring glowing neon pink and cyan aesthetics, high-tech geometric framing, and high-contrast typography.',
+    gridRatio: '16:9 Landscape Banner',
     colors: [
-      { name: 'Dark Bronze Charcoal', hex: '#343129' },
-      { name: 'Muted Gold', hex: '#B1966C' },
-      { name: 'Off-White Linen', hex: '#E1DFD9' }
+      { name: 'Neon Pink', hex: '#FF2A85' },
+      { name: 'Cyber Cyan', hex: '#00F0FF' },
+      { name: 'Deep Space', hex: '#0A0915' },
+      { name: 'Electric Violet', hex: '#9D00FF' }
     ],
-    fonts: ['Cinzel Serif', 'Montserrat Sans'],
-    deliverables: ['Fully Layered PSD Mockup', 'Print-Ready Vector Layout (AI/EPS)', 'High-Resolution PDF with Bleed Marks', 'Custom Gold Monogram Asset']
+    fonts: ['Rajdhani', 'Montserrat'],
+    deliverables: [
+      'Twitch & YouTube Banner (2560x1440px)',
+      'Twitter / X Header (1500x500px)',
+      'Layered PSD & AI Source Files',
+      'High-Resolution Export Renders'
+    ]
   },
   {
-    id: 'tem-4',
-    title: 'The Hunter: Rugged Vertical Linen Card Blueprint',
-    category: 'print',
-    categoryLabel: 'Vertical Business Card',
-    format: 'Adobe Illustrator · Adobe Photoshop',
-    image: './tem4.webp',
-    description: 'A striking and rugged vertical business card design showcasing a detailed wolf head illustration alongside clean, structured typography on textured linen cardstock.',
-    gridRatio: '3.5 x 2 Vertical standard',
+    id: 'social-2',
+    title: "UFC Professional Fighter 'No Limits' Branding Banner",
+    category: "sports",
+    categoryLabel: "Twitter / X Header Banner",
+    format: "Adobe Photoshop",
+    image: "./social2.png",
+    description: "A high-impact, dark, and gritty sports design banner featuring multiple exposures of a professional UFC fighter. The composition centers on a muscular back profile enhanced by dramatic red and white studio rim lighting, flanked by monochrome action shots and highly detailed portraits. Raw, textured brush typography is balanced by clean, widely tracked sans-serif sub-elements to convey an intense, motivational brand tone.",
+    gridRatio: "3:1 Landscape Banner",
     colors: [
-      { name: 'Textured Off-White', hex: '#E5E5E3' },
-      { name: 'Deep Steel Blue', hex: '#1A3E5C' },
-      { name: 'Ink Black', hex: '#111111' }
+      { name: "Championship Red", hex: "#E10600" },
+      { name: "Octagon Black", hex: "#0D0D0D" },
+      { name: "Pure White", hex: "#FFFFFF" },
+      { name: "Gritty Gray", hex: "#737373" }
     ],
-    fonts: ['Montserrat Sans', 'Cinzel Serif'],
-    deliverables: ['Print-Ready Vector Template', 'High-Resolution Wolf Illustration', 'Layered PSD Mockup Asset', 'Customizable Layout with Bleeds']
+    fonts: ["Montserrat", "Road Rage", "Signature Script"],
+    deliverables: [
+      "Twitter/X Header Banner (1500x500px)",
+      "Layered Adobe Photoshop (PSD) Source Template",
+      "High-Resolution Isolated Character Cutouts",
+      "Social Media Graphic Asset Pack"
+    ]
   },
   {
-    id: 'tem-5',
-    title: 'Thomas Shelby: Charcoal Black & Gold Industrial Set',
-    category: 'print',
-    categoryLabel: 'Business Card & Hang Tag',
-    format: 'Adobe Photoshop · Illustrator',
-    image: './tem5.webp',
-    description: 'A sophisticated, dark-themed business card and hang tag design featuring a textured charcoal black background, striking gold accents, and vintage industrial aesthetics.',
-    gridRatio: '3.5:2 Standard Layout',
+    id: 'social-3',
+    title: "Vertex Corporate Brand Hero Banner",
+    category: "corporate",
+    categoryLabel: "Corporate Hero Banner",
+    format: "Adobe Photoshop · Figma",
+    image: "./social3.png",
+    description: "A sophisticated, high-end corporate hero banner featuring a cinematic visual of an executive overlooking a modern city skyline at sunset from a luxury high-rise office. The left side showcases crisp, modern sans-serif typography in white and vibrant electric blue, establishing a tech-forward brand identity. Deep contrasts, dramatic backlighting, and a dark, moody color palette evoke a premium, visionary, and highly professional tone.",
+    gridRatio: "21:9 Ultra-Wide Banner",
     colors: [
-      { name: 'Charcoal Black', hex: '#1E2022' },
-      { name: 'Classic Gold', hex: '#C59B51' },
-      { name: 'Muted Cream', hex: '#E6DCD0' }
+      { name: "Midnight Black", hex: "#070c14" },
+      { name: "Electric Blue", hex: "#3fa9fc" },
+      { name: "Platinum White", hex: "#f8fafc" },
+      { name: "Muted Slate Blue", hex: "#475569" }
     ],
-    fonts: ['Cinzel Serif', 'Montserrat Sans', 'Playfair Display'],
-    deliverables: ['Print-Ready Card Layout', 'Fully Layered PSD Source File', 'High-Resolution Realistic Mockup', 'Customizable Vector Assets']
+    fonts: ["Montserrat", "Inter", "Proxima Nova"],
+    deliverables: [
+      "Website Hero Banner Asset",
+      "LinkedIn Company Page Header",
+      "Social Media Advertising Creative",
+      "Corporate Brand Style Guide Asset"
+    ]
   },
   {
-    id: 'tem-6',
-    title: 'Thomas Shelby: Vintage Taupe Personal Branding Card',
-    category: 'print',
-    categoryLabel: 'Personal Business Card',
-    format: 'Adobe Photoshop · Illustrator',
-    image: './tem6.webp',
-    description: 'This sophisticated business card template features a vintage-inspired aesthetic with a rich taupe background, luxurious gold accents, and a distinctive circular portrait frame.',
-    gridRatio: '3.5 x 2 Standard Card',
+    id: 'social-4',
+    title: "Alex Dante Graphic Designer Portfolio Cover",
+    category: "portfolio",
+    categoryLabel: "Behance Header Banner",
+    format: "Adobe Photoshop · Adobe Illustrator · Adobe After Effects",
+    image: "./social4.png",
+    description: "A highly professional, dark-themed hero banner for a graphic design portfolio, blending a realistic, moody desk mockup with slick typographic elements. Glowing neon purple backlighting contrasts with warm desktop lamp illumination, highlighting custom branding elements like a 'Good Design Builds Brands' desktop screen and a styled 'Design Creates Value' coffee mug.",
+    gridRatio: "3:1 Landscape Banner",
     colors: [
-      { name: 'Taupe Brown', hex: '#544A42' },
-      { name: 'Vintage Gold', hex: '#C59D57' },
-      { name: 'Soft Cream', hex: '#F0EBD9' },
-      { name: 'Deep Charcoal', hex: '#3C352F' }
+      { name: "Electric Purple", hex: "#7B3FE4" },
+      { name: "Dark Charcoal", hex: "#0D0C10" },
+      { name: "Warm Gold", hex: "#F0AC3A" },
+      { name: "Pure White", hex: "#FFFFFF" }
     ],
-    fonts: ['Cinzel Serif', 'Montserrat Sans'],
-    deliverables: ['Fully Customizable PSD Template', 'High-Resolution Presentation Mockup', 'Print-Ready CMYK Files with Bleed', 'Organized Layers with Smart Objects']
+    fonts: ["Montserrat", "Helvetica Neue"],
+    deliverables: [
+      "Behance Cover Banner",
+      "LinkedIn Header Art",
+      "Personal Portfolio Hero Banner",
+      "Twitter Header"
+    ]
   }
 ];
 
-interface TemplatesShowcaseProps {
+interface SocialShowcaseProps {
   onOrderSimilar: (categoryOrTitle: string) => void;
 }
 
-export const TemplatesShowcase: React.FC<TemplatesShowcaseProps> = ({ onOrderSimilar }) => {
+export const SocialShowcase: React.FC<SocialShowcaseProps> = ({ onOrderSimilar }) => {
   const [filter, setFilter] = useState<string>('all');
-  const [selectedTemplate, setSelectedTemplate] = useState<TemplateItem | null>(null);
+  const [selectedSocial, setSelectedSocial] = useState<SocialItem | null>(null);
   const [copiedColor, setCopiedColor] = useState<string | null>(null);
-  const [hoveredTemplateId, setHoveredTemplateId] = useState<string | null>(null);
+  const [hoveredSocialId, setHoveredSocialId] = useState<string | null>(null);
   const [isCloseHovered, setIsCloseHovered] = useState<boolean>(false);
 
   const filteredItems = filter === 'all' 
-    ? TEMPLATE_ITEMS 
-    : TEMPLATE_ITEMS.filter(item => item.category === filter);
+    ? SOCIAL_ITEMS 
+    : SOCIAL_ITEMS.filter(item => item.category === filter);
 
   const copyToClipboard = (hex: string) => {
     navigator.clipboard.writeText(hex);
@@ -147,29 +134,29 @@ export const TemplatesShowcase: React.FC<TemplatesShowcaseProps> = ({ onOrderSim
   };
 
   return (
-    <section id="design-templates" className="py-20 md:py-28 border-t border-white/5 bg-[#030208] relative overflow-hidden transition-colors duration-1000">
+    <section id="social-banners" className="py-20 md:py-28 border-t border-white/5 bg-[#020106] relative overflow-hidden transition-colors duration-1000">
       
-      {/* 3. Full dynamic background for the entire templates section using the WebP mockup images */}
+      {/* Ambient Section Background covered by full WebP/PNG images */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 select-none">
-        {TEMPLATE_ITEMS.map((item) => (
+        {SOCIAL_ITEMS.map((item) => (
           <div
             key={item.id}
             className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-              hoveredTemplateId === item.id || (hoveredTemplateId === null && item.id === 'tem-1')
-                ? 'opacity-[0.15]'
+              hoveredSocialId === item.id || (hoveredSocialId === null && item.id === 'social-1')
+                ? 'opacity-[0.14]'
                 : 'opacity-0'
             }`}
           >
             <img
               src={item.image}
               alt=""
-              className="w-full h-full object-cover filter blur-[80px] scale-110"
+              className="w-full h-full object-cover filter blur-[70px] scale-110"
               referrerPolicy="no-referrer"
             />
           </div>
         ))}
-        {/* Deep visual gradient overlay to ensure outstanding section readability */}
-        <div className="absolute inset-0 bg-[#030208]/90 backdrop-blur-[2px]" />
+        {/* Soft dark overlay for outstanding typography legibility */}
+        <div className="absolute inset-0 bg-[#020106]/92 backdrop-blur-[2px]" />
       </div>
 
       <div className="max-w-[1440px] mx-auto px-4 sm:px-8 relative z-10">
@@ -179,19 +166,19 @@ export const TemplatesShowcase: React.FC<TemplatesShowcaseProps> = ({ onOrderSim
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 text-xs font-mono text-[#dfa2da] mb-2 font-bold uppercase tracking-wider">
               <Sparkles className="w-3.5 h-3.5 text-[#cf30aa]" />
-              <span>Premium Resource Hub</span>
+              <span>Premium Identity Assets</span>
             </div>
             <h2 className="text-3xl sm:text-5xl font-extrabold text-white font-display tracking-tight leading-tight">
-              Design Templates &amp; Core Blueprints
+              Social Media Headers &amp; Visual Banners
             </h2>
             <p className="text-slate-400 text-sm sm:text-base mt-2 max-w-xl leading-relaxed">
-              Explore my production-ready design templates. Use their raw visual identity systems as a robust layout foundation for your next brand launch.
+              Explore my custom social header designs. Hand-crafted layouts built to capture corporate authority, athletic grit, and elite artistic portfolios.
             </p>
           </div>
 
-          {/* Interactive Filter segmented controls - Non-pill unboxed styling */}
+          {/* Interactive Filter segmented controls */}
           <div className="flex flex-wrap items-center gap-1.5 p-1.5 bg-white/[0.03] rounded-2xl border border-white/5 self-start">
-            {['all', 'branding', 'tech', 'social', 'print'].map((cat) => (
+            {['all', 'gaming', 'sports', 'corporate', 'portfolio'].map((cat) => (
               <button
                 key={cat}
                 onClick={() => setFilter(cat)}
@@ -201,20 +188,20 @@ export const TemplatesShowcase: React.FC<TemplatesShowcaseProps> = ({ onOrderSim
                     : 'text-slate-400 hover:text-slate-200 hover:bg-white/5 border border-transparent'
                 }`}
               >
-                {cat === 'all' ? 'All Templates' : cat}
+                {cat === 'all' ? 'All Headers' : cat}
               </button>
             ))}
           </div>
         </div>
 
-        {/* Templates Grid - Full background image per product card */}
+        {/* Banners Grid - Full background image per product card */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredItems.map((item) => (
             <div
               key={item.id}
-              onClick={() => setSelectedTemplate(item)}
-              onMouseEnter={() => setHoveredTemplateId(item.id)}
-              onMouseLeave={() => setHoveredTemplateId(null)}
+              onClick={() => setSelectedSocial(item)}
+              onMouseEnter={() => setHoveredSocialId(item.id)}
+              onMouseLeave={() => setHoveredSocialId(null)}
               className="cursor-pointer transition-transform duration-300 hover:-translate-y-1.5"
             >
               <GlowCard intensity="medium" rounded="rounded-3xl" customColors={item.colors.map(c => c.hex)}>
@@ -235,7 +222,7 @@ export const TemplatesShowcase: React.FC<TemplatesShowcaseProps> = ({ onOrderSim
 
                   {/* Liquid frosted glass hover cover overlay */}
                   <div className="absolute inset-0 bg-black/55 backdrop-blur-[3px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-2 text-white text-sm font-bold font-mono z-20">
-                    <span className="tracking-wider">Explore Template Specs</span>
+                    <span className="tracking-wider">Explore Banner Specs</span>
                     <ArrowUpRight className="w-5 h-5 text-[#dfa2da]" />
                   </div>
 
@@ -287,9 +274,9 @@ export const TemplatesShowcase: React.FC<TemplatesShowcaseProps> = ({ onOrderSim
           ))}
         </div>
 
-        {/* Extended Specs Detail Drawer Modal for Selected Template (The 2nd Window Style) */}
-        {selectedTemplate && (() => {
-          const hexes = selectedTemplate.colors ? selectedTemplate.colors.map(c => c.hex) : ['#402fb5', '#cf30aa'];
+        {/* Extended Specs Detail Drawer Modal for Selected Banner (The 2nd Window Style) */}
+        {selectedSocial && (() => {
+          const hexes = selectedSocial.colors ? selectedSocial.colors.map(c => c.hex) : ['#402fb5', '#cf30aa'];
           const c1 = hexes[0] || '#402fb5';
           const c2 = hexes[1] || c1 || '#a099d8';
           const c3 = hexes[2] || c2 || c1 || '#cf30aa';
@@ -304,9 +291,9 @@ export const TemplatesShowcase: React.FC<TemplatesShowcaseProps> = ({ onOrderSim
               role="dialog"
               aria-modal="true"
               className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-xl overflow-y-auto animate-fadeIn visual-window modal-window no-butterfly"
-              onClick={() => setSelectedTemplate(null)}
+              onClick={() => setSelectedSocial(null)}
             >
-              <div className="fixed inset-0" onClick={() => setSelectedTemplate(null)} />
+              <div className="fixed inset-0" onClick={() => setSelectedSocial(null)} />
 
               {/* Uiverse Glow Rotating Conic Border Wrapper with Dynamic Shadows */}
               <div 
@@ -337,7 +324,7 @@ export const TemplatesShowcase: React.FC<TemplatesShowcaseProps> = ({ onOrderSim
                   <button
                     onMouseEnter={() => setIsCloseHovered(true)}
                     onMouseLeave={() => setIsCloseHovered(false)}
-                    onClick={() => setSelectedTemplate(null)}
+                    onClick={() => setSelectedSocial(null)}
                     className="absolute top-4 right-4 z-50 p-2 rounded-full bg-black/60 text-white/90 border border-white/10 hover:scale-105 active:scale-95 transition-all shadow-[0_4px_12px_rgba(0,0,0,0.5)] backdrop-blur-md cursor-pointer"
                     style={isCloseHovered ? { backgroundColor: c3, borderColor: 'transparent', color: '#fff' } : {}}
                     aria-label="Close modal"
@@ -351,8 +338,8 @@ export const TemplatesShowcase: React.FC<TemplatesShowcaseProps> = ({ onOrderSim
                     {/* Full Stacked Image Presentation */}
                     <div className="flex flex-col w-full bg-[#020108] border-b border-white/10">
                       <img
-                        src={selectedTemplate.image}
-                        alt={selectedTemplate.title}
+                        src={selectedSocial.image}
+                        alt={selectedSocial.title}
                         className="w-full h-auto block select-none"
                         loading="lazy"
                       />
@@ -363,13 +350,13 @@ export const TemplatesShowcase: React.FC<TemplatesShowcaseProps> = ({ onOrderSim
                       
                       <div className="space-y-2">
                         <span className="text-[10px] font-mono px-2.5 py-1 rounded-lg uppercase font-bold tracking-wider inline-block" style={{ backgroundColor: `${c3}25`, color: c3, border: `1px solid ${c3}40` }}>
-                          {selectedTemplate.categoryLabel} Blueprint
+                          {selectedSocial.categoryLabel} Banner
                         </span>
                         <h2 className="text-2xl font-extrabold text-white font-display tracking-tight sm:text-3xl">
-                          {selectedTemplate.title}
+                          {selectedSocial.title}
                         </h2>
                         <p className="text-slate-300 text-sm leading-relaxed max-w-3xl">
-                          {selectedTemplate.description}
+                          {selectedSocial.description}
                         </p>
                       </div>
 
@@ -378,7 +365,7 @@ export const TemplatesShowcase: React.FC<TemplatesShowcaseProps> = ({ onOrderSim
                         <div className="p-5 rounded-2xl bg-[#090715]/75 border border-white/5 space-y-2.5 shadow-lg backdrop-blur-sm">
                           <span className="font-mono text-slate-400 uppercase font-bold tracking-wider block">Master Deliverables Included</span>
                           <ul className="space-y-2 text-slate-200">
-                            {selectedTemplate.deliverables.map((d, i) => (
+                            {selectedSocial.deliverables.map((d, i) => (
                               <li key={i} className="flex items-center gap-2">
                                 <CheckCircle2 className="w-4 h-4 shrink-0" style={{ color: c3 }} />
                                 <span>{d}</span>
@@ -390,15 +377,15 @@ export const TemplatesShowcase: React.FC<TemplatesShowcaseProps> = ({ onOrderSim
                         <div className="p-5 rounded-2xl bg-[#090715]/75 border border-white/5 space-y-3.5 shadow-lg backdrop-blur-sm">
                           <div>
                             <span className="font-mono text-slate-400 uppercase font-bold tracking-wider block mb-1">File Types / Format</span>
-                            <span className="font-mono text-white font-bold">{selectedTemplate.format}</span>
+                            <span className="font-mono text-white font-bold">{selectedSocial.format}</span>
                           </div>
                           <div>
                             <span className="font-mono text-slate-400 uppercase font-bold tracking-wider block mb-1">Grid Ratio</span>
-                            <span className="font-mono text-white font-bold">{selectedTemplate.gridRatio}</span>
+                            <span className="font-mono text-white font-bold">{selectedSocial.gridRatio}</span>
                           </div>
                           <div>
                             <span className="font-mono text-slate-400 uppercase font-bold tracking-wider block mb-1">Primary Fonts</span>
-                            <span className="font-mono text-slate-300 font-semibold">{selectedTemplate.fonts.join(' • ')}</span>
+                            <span className="font-mono text-slate-300 font-semibold">{selectedSocial.fonts.join(' • ')}</span>
                           </div>
                         </div>
                       </div>
@@ -410,7 +397,7 @@ export const TemplatesShowcase: React.FC<TemplatesShowcaseProps> = ({ onOrderSim
                           <span className="text-slate-500 font-semibold">Click swatch to copy hex</span>
                         </div>
                         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-                          {selectedTemplate.colors.map((c) => (
+                          {selectedSocial.colors.map((c) => (
                             <button
                               key={c.hex}
                               onClick={() => {
@@ -446,9 +433,9 @@ export const TemplatesShowcase: React.FC<TemplatesShowcaseProps> = ({ onOrderSim
 
                     <button
                       onClick={() => {
-                        const title = selectedTemplate.title;
-                        setSelectedTemplate(null);
-                        onOrderSimilar(`Template: ${title}`);
+                        const title = selectedSocial.title;
+                        setSelectedSocial(null);
+                        onOrderSimilar(`Banner: ${title}`);
                       }}
                       className="px-5 py-2 text-xs font-extrabold text-white rounded-xl flex items-center gap-1.5 cursor-pointer transition-all hover:scale-105 active:scale-95"
                       style={{
@@ -456,7 +443,7 @@ export const TemplatesShowcase: React.FC<TemplatesShowcaseProps> = ({ onOrderSim
                         boxShadow: `0 0 20px ${c3}60`,
                       }}
                     >
-                      <span>Use This Template Identity</span>
+                      <span>Order Similar Identity</span>
                       <ArrowUpRight className="w-4 h-4" />
                     </button>
                   </div>

@@ -5,12 +5,12 @@ import { BeforeAfterSlider } from './components/BeforeAfterSlider';
 import { Portfolio } from './components/Portfolio';
 import { GraphicsDesignShowcase } from './components/DesignShowcases';
 import { TemplatesShowcase } from './components/TemplatesShowcase';
+import { SocialShowcase } from './components/SocialShowcase';
 import { PortfolioModal } from './components/PortfolioModal';
 import { PricingTiers } from './components/PricingTiers';
 import { ProjectEstimator } from './components/ProjectEstimator';
 import { Reviews } from './components/Reviews';
 import { DesignProcess } from './components/DesignProcess';
-import { SocialVisibility } from './components/SocialVisibility';
 import { ContactBooking } from './components/ContactBooking';
 import { FAQ } from './components/FAQ';
 import { Footer } from './components/Footer';
@@ -117,6 +117,13 @@ export default function App() {
         />
       </ScrollSection>
 
+      {/* Social Media Headers & Visual Banners Showcase Section */}
+      <ScrollSection id="social-banners" distance={45} duration={0.8}>
+        <SocialShowcase
+          onOrderSimilar={handleOrderSimilar}
+        />
+      </ScrollSection>
+
       {/* Transparent Pricing Tiers */}
       <ScrollSection id="pricing" distance={45} duration={0.8}>
         <PricingTiers onSelectPackage={handleSelectPackage} />
@@ -135,11 +142,6 @@ export default function App() {
       {/* Client Reviews & Fiverr Testimonials */}
       <ScrollSection id="reviews" distance={40} duration={0.8}>
         <Reviews />
-      </ScrollSection>
-
-      {/* Social Media & Visibility Integration */}
-      <ScrollSection id="social" distance={40} duration={0.8}>
-        <SocialVisibility />
       </ScrollSection>
 
       {/* Client Booking & Contact Form */}

@@ -234,7 +234,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
       data-modal="true"
       role="dialog"
       aria-modal="true"
-      className="fixed inset-0 z-[100] flex items-start justify-center pt-16 sm:pt-24 px-4 bg-black/85 backdrop-blur-xl animate-fadeIn visual-window modal-window no-butterfly"
+      className="fixed inset-0 z-[99999] flex items-start justify-center pt-16 sm:pt-24 px-4 bg-black/85 backdrop-blur-xl animate-fadeIn visual-window modal-window no-butterfly"
     >
       <div className="fixed inset-0" onClick={onClose} />
 

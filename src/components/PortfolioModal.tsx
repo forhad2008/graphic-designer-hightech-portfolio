@@ -63,7 +63,7 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({ item, onClose, o
       data-modal="true"
       role="dialog"
       aria-modal="true"
-      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-xl overflow-y-auto animate-fadeIn visual-window modal-window no-butterfly"
+      className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-xl overflow-y-auto animate-fadeIn visual-window modal-window no-butterfly"
     >
       <div className="fixed inset-0" onClick={onClose} />
 
