@@ -3,6 +3,53 @@ import { ArrowLeftRight, Sparkles } from 'lucide-react';
 import { GlowCard } from './GlowCard';
 import { IMAGE_ASSETS } from '../data/imageAssets';
 
+const RobustImage: React.FC<{
+  sources: string[];
+  alt: string;
+  className?: string;
+  isAfter?: boolean;
+}> = ({ sources, alt, className = '', isAfter = false }) => {
+  const [index, setIndex] = useState(0);
+
+  const candidateList = sources.filter(Boolean);
+  const currentSrc = candidateList[index];
+
+  if (!currentSrc || index >= candidateList.length) {
+    return (
+      <div className={`w-full h-full flex flex-col items-center justify-center p-6 text-center select-none ${
+        isAfter
+          ? 'bg-gradient-to-br from-[#130722] via-[#090714] to-[#1a0833]'
+          : 'bg-gradient-to-br from-[#160a0f] via-[#080612] to-[#12080a]'
+      }`}>
+        <div className={`w-20 h-20 rounded-2xl flex items-center justify-center mb-3 shadow-2xl border ${
+          isAfter
+            ? 'bg-[#cf30aa]/10 border-[#cf30aa]/40 text-[#dfa2da]'
+            : 'bg-red-500/10 border-red-500/30 text-red-300'
+        }`}>
+          <span className="text-3xl font-black font-display">{isAfter ? '1P' : '1'}</span>
+        </div>
+        <h4 className="text-base font-bold text-white font-display mb-1">
+          {isAfter ? 'Transformed Vector Logo' : 'Original Legacy Logo'}
+        </h4>
+        <span className="text-xs font-mono px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-slate-300 shadow-inner">
+          {isAfter ? 'public/logo1p.png' : 'public/logo1.png'}
+        </span>
+      </div>
+    );
+  }
+
+  return (
+    <img
+      src={currentSrc}
+      alt={alt}
+      onError={() => {
+        setIndex((prev) => prev + 1);
+      }}
+      className={className}
+    />
+  );
+};
+
 export const BeforeAfterSlider: React.FC = () => {
   const [sliderPosition, setSliderPosition] = useState<number>(50);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -48,16 +95,16 @@ export const BeforeAfterSlider: React.FC = () => {
             Brand Transformation
           </h2>
           <p className="text-slate-400 text-sm mt-2">
-            Slide to compare legacy raster logo vs modern luxury vector redesign.
+            Slide to compare legacy logo (<span className="text-[#dfa2da] font-mono">logo1.png</span>) vs modern vector redesign (<span className="text-[#dfa2da] font-mono">logo1p.png</span>).
           </p>
 
           {/* Quick preset buttons in 3D socket */}
           <div className="flex items-center justify-center gap-2 mt-5">
             <div className="p-1.5 neu-3d-inset rounded-2xl flex items-center gap-1.5 border border-[#402fb5]/30 bg-[#080614]">
               <button
-                onClick={() => setSliderPosition(10)}
+                onClick={() => setSliderPosition(90)}
                 className={`px-3.5 py-1.5 text-xs font-mono rounded-xl transition-all cursor-pointer ${
-                  sliderPosition <= 20
+                  sliderPosition >= 80
                     ? 'neu-3d-btn text-white font-bold'
                     : 'text-slate-400 hover:text-white'
                 }`}
@@ -75,9 +122,9 @@ export const BeforeAfterSlider: React.FC = () => {
                 Split View
               </button>
               <button
-                onClick={() => setSliderPosition(90)}
+                onClick={() => setSliderPosition(10)}
                 className={`px-3.5 py-1.5 text-xs font-mono rounded-xl transition-all cursor-pointer ${
-                  sliderPosition >= 80
+                  sliderPosition <= 20
                     ? 'neu-3d-btn text-white font-bold'
                     : 'text-slate-400 hover:text-white'
                 }`}
@@ -88,7 +135,7 @@ export const BeforeAfterSlider: React.FC = () => {
           </div>
         </div>
 
-        {/* Interactive Comparison Canvas in 3D Frame with Rotating Conic Glow */}
+        {/* Interactive Comparison Canvas in 3D Frame */}
         <div className="max-w-4xl mx-auto">
           <GlowCard alwaysGlow intensity="vibrant" rounded="rounded-3xl">
             <div className="bg-[#090714] liquid-glass-card p-2.5 sm:p-3 rounded-3xl">
@@ -99,45 +146,60 @@ export const BeforeAfterSlider: React.FC = () => {
                 onMouseLeave={handleMouseUp}
                 onMouseMove={handleMouseMove}
                 onTouchMove={handleTouchMove}
-                className="relative w-full h-[340px] sm:h-[420px] rounded-2xl overflow-hidden select-none border border-white/10 shadow-2xl cursor-ew-resize bg-black"
+                className="relative w-full h-[340px] sm:h-[420px] rounded-2xl overflow-hidden select-none border border-white/10 shadow-2xl cursor-ew-resize bg-[#06040d]"
               >
-                {/* AFTER: Modern Brand */}
-                <div className="absolute inset-0 w-full h-full">
-                  <img
-                    src={IMAGE_ASSETS.beforeAfter.afterRedesign}
-                    alt="After Redesign"
-                    className="w-full h-full object-cover"
+                {/* AFTER: Modern Brand (logo1p.png or high quality vector fallback) */}
+                <div className="absolute inset-0 w-full h-full flex items-center justify-center bg-gradient-to-br from-[#12081f] via-[#080612] to-[#1e0a2b]">
+                  {/* Subtle technical brand lines grid */}
+                  <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
+                  <RobustImage
+                    sources={[
+                      '/logo1p.png',
+                      './logo1p.png',
+                      'logo1p.png',
+                      IMAGE_ASSETS.beforeAfter.afterRedesign,
+                      'https://images.unsplash.com/photo-1608248597359-009947e45260?auto=format&fit=crop&w=1200&q=80'
+                    ]}
+                    isAfter={true}
+                    alt="After Transformed Logo"
+                    className="w-full h-full object-contain p-12 sm:p-16 z-10 transition-transform duration-500 hover:scale-105 drop-shadow-[0_12px_32px_rgba(207,48,170,0.35)]"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
 
-                  <div className="absolute top-4 right-4 px-3 py-1.5 rounded-xl bg-[#090714]/85 border border-[#cf30aa]/50 text-[#dfa2da] text-xs font-mono font-bold drop-shadow shadow-[0_0_15px_rgba(207,48,170,0.3)]">
-                    AFTER: Vector Identity (2026)
+                  <div className="absolute top-4 right-4 px-3 py-1.5 rounded-xl bg-[#090714]/85 border border-[#cf30aa]/50 text-[#dfa2da] text-xs font-mono font-bold drop-shadow shadow-[0_0_15px_rgba(207,48,170,0.3)] z-20">
+                    AFTER: Redesigned Vector Brand
                   </div>
                 </div>
 
-                {/* BEFORE: Legacy */}
+                {/* BEFORE: Legacy Brand (logo1.png or high quality legacy fallback) */}
                 <div
-                  className="absolute inset-y-0 left-0 overflow-hidden border-r-2 border-[#cf30aa]"
+                  className="absolute inset-y-0 left-0 overflow-hidden border-r-2 border-[#cf30aa] z-10"
                   style={{ width: `${sliderPosition}%` }}
                 >
                   <div
-                    className="absolute inset-0 h-full bg-[#18181B] flex flex-col items-center justify-center p-6 text-center"
+                    className="absolute inset-0 h-full bg-gradient-to-br from-[#180a0f] via-[#090712] to-[#12080c] flex items-center justify-center"
                     style={{
                       width: containerRef.current ? `${containerRef.current.clientWidth}px` : '100%',
                     }}
                   >
-                    <div className="absolute top-4 left-4 px-3 py-1.5 rounded-xl bg-red-950/80 backdrop-blur-md border border-red-500/30 text-red-300 text-xs font-mono font-bold shadow-md">
-                      BEFORE: Legacy Mark
-                    </div>
+                    {/* Retro architectural branding lines grid */}
+                    <div className="absolute inset-0 bg-[linear-gradient(rgba(239,68,68,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(239,68,68,0.015)_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none" />
+                    <RobustImage
+                      sources={[
+                        '/logo1.png',
+                        './logo1.png',
+                        'logo1.png',
+                        IMAGE_ASSETS.beforeAfter.beforeLegacy,
+                        'https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=1200&q=80'
+                      ]}
+                      isAfter={false}
+                      alt="Before Legacy Logo"
+                      className="w-full h-full object-contain p-12 sm:p-16 z-10 transition-transform duration-500 hover:scale-105 drop-shadow-[0_12px_32px_rgba(0,0,0,0.5)]"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
 
-                    <div className="flex flex-col items-center max-w-xs opacity-75">
-                      <span className="text-3xl mb-2">📉⚙️</span>
-                      <h3 className="text-xl font-serif text-slate-300 line-through">
-                        Nexus-Systems Co.
-                      </h3>
-                      <p className="text-[11px] text-red-300 font-mono mt-1">
-                        72 DPI Raster • Unscalable
-                      </p>
+                    <div className="absolute top-4 left-4 px-3 py-1.5 rounded-xl bg-red-950/85 backdrop-blur-md border border-red-500/30 text-red-300 text-xs font-mono font-bold shadow-md z-20">
+                      BEFORE: Legacy Original Mark
                     </div>
                   </div>
                 </div>
@@ -156,9 +218,9 @@ export const BeforeAfterSlider: React.FC = () => {
           </GlowCard>
 
           <div className="flex items-center justify-between mt-3 text-xs text-slate-500 font-mono px-1">
-            <span>← Slide left for Before</span>
-            <span className="text-[#dfa2da] font-semibold">Interactive Comparison</span>
-            <span>Slide right for After →</span>
+            <span>← Slide left to view Transformed logo1p.png</span>
+            <span className="text-[#dfa2da] font-semibold">Brand Transformation View</span>
+            <span>Slide right to view Original logo1.png →</span>
           </div>
         </div>
 

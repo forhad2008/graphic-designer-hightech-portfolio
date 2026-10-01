@@ -22,7 +22,8 @@ export const IMAGE_ASSETS = {
 
   // BEFORE & AFTER COMPARISON SLIDER
   beforeAfter: {
-    afterRedesign: 'https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=1200&q=80',
+    beforeLegacy: '/logo1.png',
+    afterRedesign: '/logo1p.png',
   },
 
   // DEFAULT SHOWCASE ARTWORK FALLBACKS
