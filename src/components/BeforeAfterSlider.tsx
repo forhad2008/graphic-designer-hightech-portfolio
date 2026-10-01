@@ -162,7 +162,7 @@ export const BeforeAfterSlider: React.FC = () => {
                     ]}
                     isAfter={true}
                     alt="After Transformed Logo"
-                    className="w-full h-full object-contain p-12 sm:p-16 z-10 transition-transform duration-500 hover:scale-105 drop-shadow-[0_12px_32px_rgba(207,48,170,0.35)]"
+                    className="w-full h-full object-cover z-10 transition-transform duration-500 hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
 
@@ -194,7 +194,7 @@ export const BeforeAfterSlider: React.FC = () => {
                       ]}
                       isAfter={false}
                       alt="Before Legacy Logo"
-                      className="w-full h-full object-contain p-12 sm:p-16 z-10 transition-transform duration-500 hover:scale-105 drop-shadow-[0_12px_32px_rgba(0,0,0,0.5)]"
+                      className="w-full h-full object-cover z-10 transition-transform duration-500 hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
 
