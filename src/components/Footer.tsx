@@ -1,6 +1,6 @@
 import React from 'react';
 import { ArrowUp, Mail, Phone, MessageCircle } from 'lucide-react';
-import { IMAGE_ASSETS } from '../data/imageAssets';
+import { ProfileAvatar } from './ProfileAvatar';
 
 interface FooterProps {
   onNavigate: (sectionId: string) => void;
@@ -23,16 +23,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           {/* Brand */}
           <div className="md:col-span-5 space-y-3">
             <div className="flex items-center gap-2.5">
-              <div className="relative w-8 h-8 rounded-xl overflow-hidden border border-[#cf30aa]/40 shadow-sm animated-border shrink-0 bg-[#0d1424]">
-                <img
-                  src={IMAGE_ASSETS.profilePhoto}
-                  alt="Abdullah Forhad"
-                  onError={(e) => {
-                    e.currentTarget.src = IMAGE_ASSETS.profilePhotoFallback;
-                  }}
-                  className="w-full h-full object-cover"
-                />
-              </div>
+              <ProfileAvatar sizeClassName="w-8 h-8 rounded-xl" textSizeClassName="text-xs" />
               <span className="text-base font-bold text-white font-display">Abdullah Forhad</span>
             </div>
             <p className="text-slate-300 max-w-sm leading-relaxed text-xs">

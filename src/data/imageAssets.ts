@@ -10,9 +10,8 @@
  */
 
 export const IMAGE_ASSETS = {
-  // USER PROFILE & DESIGNER PHOTO
+  // USER PROFILE & DESIGNER PHOTO (Replace with your photo URL or put photo.png in public folder)
   profilePhoto: '/photo.png',
-  profilePhotoFallback: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80',
 
   // HERO SHOWCASE SECTION TABS
   heroShowcase: {

@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import { GlowCard } from './GlowCard';
 import { IMAGE_ASSETS } from '../data/imageAssets';
+import { ProfileAvatar } from './ProfileAvatar';
 
 interface HeroProps {
   onExploreWork: () => void;
@@ -161,16 +162,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreWork, onBookProject, onOpen
                 {/* Header */}
                 <div className="flex items-center justify-between pb-3.5 border-b border-white/10 mb-4">
                   <div className="flex items-center gap-2.5">
-                    <div className="relative w-8 h-8 rounded-xl overflow-hidden border border-[#cf30aa]/40 shadow-sm animated-border shrink-0 bg-[#0d1424]">
-                      <img
-                        src={IMAGE_ASSETS.profilePhoto}
-                        alt="Abdullah Forhad"
-                        onError={(e) => {
-                          e.currentTarget.src = IMAGE_ASSETS.profilePhotoFallback;
-                        }}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
+                    <ProfileAvatar sizeClassName="w-8 h-8 rounded-xl" textSizeClassName="text-xs" />
                     <span className="text-xs font-bold text-white font-display tracking-wide">
                       Featured Case Studies
                     </span>

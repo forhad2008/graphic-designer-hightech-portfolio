@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Mail, Phone, MessageCircle, Send, CheckCircle2, Copy } from 'lucide-react';
-import { IMAGE_ASSETS } from '../data/imageAssets';
+import { ProfileAvatar } from './ProfileAvatar';
 
 interface ContactBookingProps {
   initialService?: string;
@@ -92,16 +92,7 @@ export const ContactBooking: React.FC<ContactBookingProps> = ({
             
             <div className="liquid-glass-card rounded-3xl p-6 sm:p-7 space-y-5">
               <div className="flex items-center gap-3">
-                <div className="relative w-12 h-12 rounded-2xl overflow-hidden border border-[#cf30aa]/50 shadow-[0_0_15px_rgba(207,48,170,0.5)] animated-border shrink-0 bg-[#0d1424]">
-                  <img
-                    src={IMAGE_ASSETS.profilePhoto}
-                    alt="Abdullah Forhad"
-                    onError={(e) => {
-                      e.currentTarget.src = IMAGE_ASSETS.profilePhotoFallback;
-                    }}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
+                <ProfileAvatar sizeClassName="w-12 h-12 rounded-2xl" textSizeClassName="text-lg" />
                 <div>
                   <h3 className="text-lg font-bold text-white font-display">Abdullah Forhad</h3>
                   <p className="text-xs text-[#dfa2da] font-mono font-bold drop-shadow">Brand &amp; Graphic Designer</p>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { MessageCircle, X, Send, Phone, Mail, ArrowUpRight, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { IMAGE_ASSETS } from '../data/imageAssets';
+import { ProfileAvatar } from './ProfileAvatar';
 
 export const FloatingChat: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -63,16 +63,7 @@ export const FloatingChat: React.FC = () => {
               <div className="p-4 bg-[#0d0a1f]/90 border-b border-white/10 flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <div className="relative">
-                    <div className="w-10 h-10 rounded-2xl overflow-hidden border border-[#cf30aa]/50 shadow-[0_0_12px_rgba(207,48,170,0.5)] animated-border shrink-0 bg-[#0d1424]">
-                      <img
-                        src={IMAGE_ASSETS.profilePhoto}
-                        alt="Abdullah Forhad"
-                        onError={(e) => {
-                          e.currentTarget.src = IMAGE_ASSETS.profilePhotoFallback;
-                        }}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
+                    <ProfileAvatar sizeClassName="w-10 h-10 rounded-2xl" textSizeClassName="text-sm" />
                     <span className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full bg-[#cf30aa] border-2 border-[#06090F] animate-pulse" />
                   </div>
                   <div>

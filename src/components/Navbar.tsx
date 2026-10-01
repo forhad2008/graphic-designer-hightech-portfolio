@@ -23,7 +23,7 @@ import {
 } from 'lucide-react';
 import { CommandPalette } from './CommandPalette';
 import { FIVERR_GIGS } from '../data/portfolioData';
-import { IMAGE_ASSETS } from '../data/imageAssets';
+import { ProfileAvatar } from './ProfileAvatar';
 
 interface NavbarProps {
   onNavigate: (sectionId: string) => void;
@@ -184,16 +184,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection: propA
                 }}
                 className="flex items-center gap-2.5 group focus:outline-none"
               >
-                <div className="relative w-8 h-8 rounded-xl overflow-hidden border border-[#cf30aa]/40 shadow-sm animated-border shrink-0 bg-[#0d1424]">
-                  <img
-                    src={IMAGE_ASSETS.profilePhoto}
-                    alt="Abdullah Forhad"
-                    onError={(e) => {
-                      e.currentTarget.src = IMAGE_ASSETS.profilePhotoFallback;
-                    }}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
+                <ProfileAvatar sizeClassName="w-8 h-8 rounded-xl" textSizeClassName="text-xs" />
                 <div className="flex flex-col">
                   <span className="text-sm sm:text-base font-bold text-white tracking-tight font-display group-hover:text-[#dfa2da] transition-colors leading-tight whitespace-nowrap">
                     Abdullah Forhad
