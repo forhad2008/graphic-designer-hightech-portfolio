@@ -67,7 +67,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection: propA
         setScrollProgress(progress);
       }
 
-      const sections = ['portfolio', 'services', 'pricing', 'estimator', 'process', 'reviews', 'social', 'contact', 'faq'];
+      const sections = ['portfolio', 'graphics-design', 'design-templates', 'services', 'pricing', 'estimator', 'process', 'reviews', 'social', 'contact', 'faq'];
       const scrollPosition = scrollY + 200;
 
       for (let i = sections.length - 1; i >= 0; i--) {
@@ -121,7 +121,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection: propA
 
   const portfolioCategories = [
     { label: 'Logo & Branding', desc: 'Original brand system designs', icon: Sparkles, sectionId: 'portfolio' },
-    { label: 'Graphics Design', desc: 'Packaging, SaaS branding, and print assets', icon: Layers, sectionId: 'graphics-design' },
+    { label: 'Graphics Design', desc: 'Packaging, SaaS branding, and print sets', icon: Layers, sectionId: 'graphics-design' },
+    { label: 'Design Templates', desc: 'Premium resource blueprints', icon: Layers, sectionId: 'design-templates' },
   ];
 
   return (
