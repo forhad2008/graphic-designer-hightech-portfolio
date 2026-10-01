@@ -1,0 +1,687 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-display: 'Syne', sans-serif;
+    --font-sans: 'Plus Jakarta Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+  
+  body {
+    font-family: var(--font-sans);
+    background-color: #04030a;
+    color: #F3F4F6;
+    overflow-x: hidden;
+    background-image: 
+      linear-gradient(to right, rgba(64, 47, 181, 0.07) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(207, 48, 170, 0.07) 1px, transparent 1px);
+    background-size: 2rem 2rem;
+    background-position: center center;
+  }
+  
+  h1, h2, h3, .font-display {
+    font-family: var(--font-display);
+  }
+
+  code, pre, .font-mono {
+    font-family: var(--font-mono);
+  }
+}
+
+/* Custom subtle scrollbar with purple-magenta glow */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #04030a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1d1b4b;
+  border-radius: 4px;
+  border: 1px solid rgba(207, 48, 170, 0.25);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #cf30aa 0%, #402fb5 100%);
+}
+
+/* ==========================================================================
+   UIVERSE.IO INSPIRED ROTATING CONIC-GRADIENT NEON GLOW (Purple & Magenta)
+   ========================================================================== */
+
+@property --border-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@keyframes borderAngleRotate {
+  0% {
+    --border-angle: 0deg;
+  }
+  100% {
+    --border-angle: 360deg;
+  }
+}
+
+@keyframes conicRotate {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes conicRotateReverse {
+  0% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+}
+
+/* Universal Animated Border Overlay for All Cards, Buttons, Inputs, Circular Icons & Containers */
+.animated-border,
+.animated-border-flow,
+[data-round-icon="true"],
+.neu-3d-card,
+.neu-raised,
+.neu-3d-raised-lg,
+.neu-raised-sm,
+.neu-3d-raised-sm,
+.neu-raised-interactive,
+.neu-3d-interactive,
+.neu-3d-btn,
+.neu-3d-btn-primary,
+.neu-btn-primary,
+.liquid-glass-btn,
+.liquid-glass-pill,
+.liquid-glass-card,
+.liquid-glass,
+.neu-inset,
+.neu-3d-inset,
+input,
+textarea,
+select {
+  position: relative;
+  isolation: isolate;
+}
+
+.animated-border::after,
+.animated-border-flow::after,
+[data-round-icon="true"]::after,
+.neu-3d-card::after,
+.neu-raised::after,
+.neu-3d-raised-lg::after,
+.neu-raised-sm::after,
+.neu-3d-raised-sm::after,
+.neu-raised-interactive::after,
+.neu-3d-interactive::after,
+.neu-3d-btn::after,
+.neu-3d-btn-primary::after,
+.neu-btn-primary::after,
+.liquid-glass-btn::after,
+.liquid-glass-pill::after,
+.liquid-glass-card::after,
+.liquid-glass::after,
+.neu-inset::after,
+.neu-3d-inset::after,
+input::after,
+textarea::after,
+select::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px;
+  background: conic-gradient(
+    from var(--border-angle),
+    #cf30aa 0%,
+    #dfa2da 20%,
+    #402fb5 45%,
+    #a099d8 70%,
+    #cf30aa 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: borderAngleRotate 3s linear infinite;
+  pointer-events: none;
+  z-index: 25;
+  opacity: 1;
+  transition: opacity 0.3s ease, padding 0.2s ease;
+}
+
+/* Enhanced Hover Pulse and Speedup for Interactive Elements */
+[data-round-icon="true"]:hover::after,
+.neu-raised-interactive:hover::after,
+.neu-3d-interactive:hover::after,
+.neu-3d-btn:hover::after,
+.neu-3d-btn-primary:hover::after,
+.neu-btn-primary:hover::after,
+.liquid-glass-btn:hover::after,
+input:focus::after,
+textarea:focus::after,
+select:focus::after {
+  opacity: 1;
+  padding: 2.5px;
+  animation-duration: 1.8s;
+}
+
+/* Conic Border Card (Every Box Glow Wrapper) */
+.uiverse-box {
+  position: relative;
+  isolation: isolate;
+}
+
+.uiverse-box::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 250%;
+  height: 250%;
+  transform: translate(-50%, -50%) rotate(0deg);
+  background-image: conic-gradient(
+    rgba(0, 0, 0, 0) 0%,
+    #402fb5 12%,
+    #a099d8 18%,
+    rgba(0, 0, 0, 0) 30%,
+    rgba(0, 0, 0, 0) 50%,
+    #cf30aa 65%,
+    #dfa2da 72%,
+    rgba(0, 0, 0, 0) 85%
+  );
+  animation: conicRotate 6s linear infinite;
+  z-index: -2;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+/* Fuzzy Outer Glow Aura */
+.uiverse-box::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 220%;
+  height: 220%;
+  transform: translate(-50%, -50%) rotate(0deg);
+  background-image: conic-gradient(
+    rgba(0, 0, 0, 0) 0%,
+    rgba(64, 47, 181, 0.8) 12%,
+    rgba(160, 153, 216, 0.6) 18%,
+    rgba(0, 0, 0, 0) 30%,
+    rgba(0, 0, 0, 0) 50%,
+    rgba(207, 48, 170, 0.8) 65%,
+    rgba(223, 162, 218, 0.6) 72%,
+    rgba(0, 0, 0, 0) 85%
+  );
+  animation: conicRotate 6s linear infinite;
+  filter: blur(28px);
+  opacity: 0.55;
+  z-index: -3;
+  pointer-events: none;
+}
+
+/* Interactive Hover Triggered Conic Box */
+.uiverse-box-hover {
+  position: relative;
+  isolation: isolate;
+  transition: transform 0.3s ease;
+}
+
+.uiverse-box-hover::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 250%;
+  height: 250%;
+  transform: translate(-50%, -50%) rotate(0deg);
+  background-image: conic-gradient(
+    rgba(0, 0, 0, 0) 0%,
+    #402fb5 12%,
+    #a099d8 18%,
+    rgba(0, 0, 0, 0) 30%,
+    rgba(0, 0, 0, 0) 50%,
+    #cf30aa 65%,
+    #dfa2da 72%,
+    rgba(0, 0, 0, 0) 85%
+  );
+  animation: conicRotate 8s linear infinite;
+  z-index: -2;
+  border-radius: inherit;
+  opacity: 0.35;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.uiverse-box-hover::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 220%;
+  height: 220%;
+  transform: translate(-50%, -50%) rotate(0deg);
+  background-image: conic-gradient(
+    rgba(0, 0, 0, 0) 0%,
+    rgba(64, 47, 181, 0.8) 12%,
+    rgba(160, 153, 216, 0.6) 18%,
+    rgba(0, 0, 0, 0) 30%,
+    rgba(0, 0, 0, 0) 50%,
+    rgba(207, 48, 170, 0.8) 65%,
+    rgba(223, 162, 218, 0.6) 72%,
+    rgba(0, 0, 0, 0) 85%
+  );
+  animation: conicRotate 8s linear infinite;
+  filter: blur(25px);
+  opacity: 0.2;
+  z-index: -3;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.uiverse-box-hover:hover::before {
+  opacity: 1;
+  animation-duration: 4s;
+}
+
+.uiverse-box-hover:hover::after {
+  opacity: 0.75;
+  animation-duration: 4s;
+}
+
+/* Custom Purple & Magenta Glow Effects */
+.purple-glow {
+  box-shadow: 0 0 35px -5px rgba(207, 48, 170, 0.35), 0 0 20px -3px rgba(64, 47, 181, 0.4);
+}
+
+.purple-border-glow {
+  box-shadow: 0 0 22px -3px rgba(207, 48, 170, 0.35), inset 0 0 15px -3px rgba(64, 47, 181, 0.2);
+}
+
+.text-gradient-purple-pink {
+  background: linear-gradient(135deg, #a099d8 0%, #dfa2da 30%, #cf30aa 65%, #402fb5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.btn-gradient-purple-pink {
+  background: linear-gradient(135deg, #cf30aa 0%, #8b5cf6 50%, #402fb5 100%);
+}
+
+/* ==========================================================================
+   AUTHENTIC 3D DARK NEOMORPHISM (Extruded 3D Soft UI with Physical Depth)
+   ========================================================================== */
+
+/* 3D Extruded Surfaces */
+.neu-3d-card,
+.neu-raised {
+  background: linear-gradient(145deg, #0d1424 0%, #060a12 100%);
+  box-shadow: 
+    8px 8px 24px rgba(0, 0, 0, 0.85),
+    -6px -6px 20px rgba(255, 255, 255, 0.04),
+    inset 1px 1px 1px rgba(255, 255, 255, 0.12),
+    inset -1px -1px 2px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-top-color: rgba(255, 255, 255, 0.18);
+  border-left-color: rgba(255, 255, 255, 0.12);
+}
+
+.neu-3d-raised-lg {
+  background: linear-gradient(150deg, #0e1728 0%, #050811 100%);
+  box-shadow: 
+    14px 14px 36px rgba(0, 0, 0, 0.9),
+    -8px -8px 28px rgba(255, 255, 255, 0.045),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.15),
+    inset -1px -1px 2px rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-top-color: rgba(255, 255, 255, 0.22);
+}
+
+.neu-raised-sm,
+.neu-3d-raised-sm {
+  background: linear-gradient(145deg, #0e1626 0%, #060a12 100%);
+  box-shadow: 
+    5px 5px 15px rgba(0, 0, 0, 0.8),
+    -3px -3px 10px rgba(255, 255, 255, 0.04),
+    inset 1px 1px 1px rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-top-color: rgba(255, 255, 255, 0.18);
+}
+
+/* 3D Interactive Hover Elements */
+.neu-raised-interactive,
+.neu-3d-interactive {
+  background: linear-gradient(145deg, #0e1728 0%, #060a12 100%);
+  box-shadow: 
+    6px 6px 18px rgba(0, 0, 0, 0.8),
+    -4px -4px 14px rgba(255, 255, 255, 0.04),
+    inset 1px 1px 1px rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-top-color: rgba(255, 255, 255, 0.18);
+  transition: all 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.neu-raised-interactive:hover,
+.neu-3d-interactive:hover {
+  transform: translateY(-3px) scale(1.008);
+  box-shadow: 
+    12px 14px 30px rgba(0, 0, 0, 0.92),
+    -6px -6px 18px rgba(255, 255, 255, 0.06),
+    0 0 24px rgba(207, 48, 170, 0.3),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.2);
+  border-color: rgba(207, 48, 170, 0.5);
+}
+
+.neu-raised-interactive:active,
+.neu-3d-interactive:active {
+  transform: translateY(2px) scale(0.995);
+  box-shadow: 
+    inset 4px 4px 12px rgba(0, 0, 0, 0.9),
+    inset -3px -3px 8px rgba(255, 255, 255, 0.03);
+}
+
+/* 3D Deep Sunken Sockets / Wells / Inset Grooves */
+.neu-inset,
+.neu-3d-inset {
+  background: #04060b;
+  box-shadow: 
+    inset 6px 6px 16px rgba(0, 0, 0, 0.95),
+    inset -4px -4px 12px rgba(255, 255, 255, 0.03),
+    0 1px 2px rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom-color: rgba(255, 255, 255, 0.09);
+}
+
+.neu-inset-focus:focus-within,
+.neu-inset-focus:focus {
+  box-shadow: 
+    inset 6px 6px 16px rgba(0, 0, 0, 0.95),
+    inset -4px -4px 12px rgba(255, 255, 255, 0.04),
+    inset 0 0 20px rgba(207, 48, 170, 0.25),
+    0 0 12px rgba(207, 48, 170, 0.2);
+  border-color: rgba(207, 48, 170, 0.6);
+}
+
+/* 3D Convex Dome Surface */
+.neu-convex,
+.neu-3d-convex {
+  background: radial-gradient(circle at 35% 30%, #121c2e 0%, #05080f 100%);
+  box-shadow: 
+    7px 7px 20px rgba(0, 0, 0, 0.8),
+    -4px -4px 14px rgba(255, 255, 255, 0.05),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-top-color: rgba(255, 255, 255, 0.22);
+}
+
+/* 3D Physical Pushable Tactile Buttons (With bottom extrusion ledge) */
+.neu-3d-btn {
+  background: linear-gradient(180deg, #131c2d 0%, #090e18 100%);
+  box-shadow: 
+    0 5px 0 #020407,
+    0 10px 22px rgba(0, 0, 0, 0.8),
+    -3px -3px 10px rgba(255, 255, 255, 0.04),
+    inset 0 1px 1px rgba(255, 255, 255, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-top-color: rgba(255, 255, 255, 0.25);
+  transition: all 0.16s ease-out;
+  cursor: pointer;
+}
+
+.neu-3d-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 7px 0 #020407,
+    0 15px 28px rgba(0, 0, 0, 0.85),
+    -4px -4px 12px rgba(255, 255, 255, 0.06),
+    0 0 20px rgba(207, 48, 170, 0.3),
+    inset 0 1px 2px rgba(255, 255, 255, 0.3);
+  border-color: rgba(207, 48, 170, 0.5);
+}
+
+.neu-3d-btn:active {
+  transform: translateY(4px);
+  box-shadow: 
+    0 1px 0 #020407,
+    0 3px 8px rgba(0, 0, 0, 0.9),
+    inset 2px 2px 8px rgba(0, 0, 0, 0.95),
+    inset -1px -1px 4px rgba(255, 255, 255, 0.04);
+}
+
+/* 3D Primary Button (Extruded Glowing Neon Magenta) */
+.neu-btn-primary,
+.neu-3d-btn-primary {
+  background: linear-gradient(180deg, #f060ce 0%, #cf30aa 45%, #911c75 100%);
+  color: #ffffff;
+  font-weight: 700;
+  box-shadow: 
+    0 5px 0 #5c104a,
+    0 12px 26px rgba(207, 48, 170, 0.45),
+    0 10px 24px rgba(0, 0, 0, 0.7),
+    inset 0 1px 2px rgba(255, 255, 255, 0.6),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  transition: all 0.16s ease-out;
+  cursor: pointer;
+}
+
+.neu-btn-primary:hover,
+.neu-3d-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 7px 0 #5c104a,
+    0 16px 32px rgba(207, 48, 170, 0.65),
+    0 14px 30px rgba(0, 0, 0, 0.8),
+    inset 0 1px 3px rgba(255, 255, 255, 0.8);
+}
+
+.neu-btn-primary:active,
+.neu-3d-btn-primary:active {
+  transform: translateY(4px);
+  box-shadow: 
+    0 1px 0 #5c104a,
+    0 4px 10px rgba(207, 48, 170, 0.4),
+    inset 0 3px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* 3D Neomorphic Dial & Knob */
+.neu-3d-dial {
+  background: radial-gradient(circle at 35% 30%, #152033 0%, #070c16 80%);
+  box-shadow: 
+    0 6px 14px rgba(0, 0, 0, 0.85),
+    -3px -3px 10px rgba(255, 255, 255, 0.05),
+    inset 2px 2px 3px rgba(255, 255, 255, 0.25),
+    inset -2px -2px 4px rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-top-color: rgba(255, 255, 255, 0.25);
+}
+
+.neu-3d-pill {
+  background: linear-gradient(180deg, #0c1422 0%, #050810 100%);
+  box-shadow: 
+    0 4px 10px rgba(0, 0, 0, 0.75),
+    -2px -2px 8px rgba(255, 255, 255, 0.04),
+    inset 0 1px 1px rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.neu-glow {
+  box-shadow: 
+    8px 8px 24px rgba(0, 0, 0, 0.85),
+    -6px -6px 20px rgba(255, 255, 255, 0.04),
+    0 0 30px -4px rgba(207, 48, 170, 0.4);
+}
+
+/* ==========================================================================
+   LIQUID GLASSMORPHISM (Fluid Refraction, Chromatic Sheen & Frosted Layers)
+   ========================================================================== */
+
+/* Translucent Liquid Glass Surface */
+.liquid-glass {
+  backdrop-filter: blur(24px) saturate(190%);
+  -webkit-backdrop-filter: blur(24px) saturate(190%);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(255, 255, 255, 0.03) 40%,
+    rgba(207, 48, 170, 0.12) 75%,
+    rgba(64, 47, 181, 0.15) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-top-color: rgba(255, 255, 255, 0.45);
+  border-left-color: rgba(255, 255, 255, 0.28);
+  box-shadow: 
+    0 16px 40px -8px rgba(0, 0, 0, 0.7),
+    inset 0 1px 2px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -1px 2px rgba(207, 48, 170, 0.2);
+}
+
+/* Liquid Glass Card with 3D Depth */
+.liquid-glass-card {
+  backdrop-filter: blur(26px) saturate(200%);
+  -webkit-backdrop-filter: blur(26px) saturate(200%);
+  background: linear-gradient(
+    140deg,
+    rgba(18, 28, 48, 0.75) 0%,
+    rgba(8, 14, 24, 0.85) 60%,
+    rgba(207, 48, 170, 0.1) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-top-color: rgba(255, 255, 255, 0.4);
+  border-left-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 
+    12px 16px 36px rgba(0, 0, 0, 0.85),
+    -8px -8px 24px rgba(255, 255, 255, 0.04),
+    inset 0 1px 2px rgba(255, 255, 255, 0.35),
+    inset 0 -1px 3px rgba(207, 48, 170, 0.2);
+}
+
+/* Liquid Glass Interactive / Pushable Button */
+.liquid-glass-btn {
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.18) 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(207, 48, 170, 0.15) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-top-color: rgba(255, 255, 255, 0.55);
+  box-shadow: 
+    0 5px 0 #020407,
+    0 10px 22px rgba(0, 0, 0, 0.8),
+    inset 0 1px 2px rgba(255, 255, 255, 0.4),
+    inset 0 -1px 2px rgba(207, 48, 170, 0.25);
+  transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+  cursor: pointer;
+}
+
+.liquid-glass-btn:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.26) 0%,
+    rgba(207, 48, 170, 0.2) 50%,
+    rgba(64, 47, 181, 0.25) 100%
+  );
+  border-color: rgba(207, 48, 170, 0.5);
+  border-top-color: rgba(255, 255, 255, 0.7);
+  box-shadow: 
+    0 7px 0 #020407,
+    0 16px 30px rgba(0, 0, 0, 0.85),
+    0 0 24px rgba(207, 48, 170, 0.4),
+    inset 0 1px 3px rgba(255, 255, 255, 0.6);
+}
+
+.liquid-glass-btn:active {
+  transform: translateY(3px);
+  box-shadow: 
+    0 1px 0 #020407,
+    0 4px 10px rgba(0, 0, 0, 0.9),
+    inset 0 2px 6px rgba(0, 0, 0, 0.8);
+}
+
+/* Liquid Glass Pill / Badge */
+.liquid-glass-pill {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.14) 0%,
+    rgba(255, 255, 255, 0.03) 60%,
+    rgba(207, 48, 170, 0.15) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-top-color: rgba(255, 255, 255, 0.45);
+  box-shadow: 
+    0 4px 14px rgba(0, 0, 0, 0.6),
+    inset 0 1px 1px rgba(255, 255, 255, 0.35);
+}
+
+/* Fluid Liquid Floating Blobs */
+@keyframes liquidFloat1 {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(35px, -30px) scale(1.1);
+  }
+  66% {
+    transform: translate(-25px, 20px) scale(0.95);
+  }
+}
+
+@keyframes liquidFloat2 {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(-40px, 25px) scale(1.08);
+  }
+  66% {
+    transform: translate(30px, -35px) scale(0.92);
+  }
+}
+
+.animate-liquid-blob-1 {
+  animation: liquidFloat1 16s ease-in-out infinite;
+}
+
+.animate-liquid-blob-2 {
+  animation: liquidFloat2 20s ease-in-out infinite;
+}
+
+.text-gradient-cyan {
+  background: linear-gradient(135deg, #dfa2da 0%, #cf30aa 40%, #a099d8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.btn-gradient-cyan {
+  background: linear-gradient(135deg, #cf30aa 0%, #402fb5 100%);
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.05);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 4s ease-in-out infinite;
+}
