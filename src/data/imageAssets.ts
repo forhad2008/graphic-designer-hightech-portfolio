@@ -10,8 +10,8 @@
  */
 
 export const IMAGE_ASSETS = {
-  // USER PROFILE & DESIGNER PHOTO (Replace with your photo URL or put photo.png in public folder)
-  profilePhoto: '/photo.png',
+  // USER PROFILE & DESIGNER PHOTO (Place 1p.jpg in public/ folder)
+  profilePhoto: './1p.jpg',
 
   // HERO SHOWCASE SECTION TABS
   heroShowcase: {

@@ -12,15 +12,36 @@ export const ProfileAvatar: React.FC<ProfileAvatarProps> = ({
   sizeClassName = 'w-8 h-8 rounded-xl',
   textSizeClassName = 'text-xs',
 }) => {
-  const [imgError, setImgError] = useState(false);
+  const [candidateIndex, setCandidateIndex] = useState(0);
+
+  // Candidate image paths for GitHub Pages subfolders, Vite static dist, and local dev
+  const photoCandidates = [
+    IMAGE_ASSETS.profilePhoto,
+    './1p.jpg',
+    '1p.jpg',
+    '/1p.jpg',
+    './photo.png',
+    'photo.png',
+    '/photo.png',
+  ].filter((src, idx, self) => Boolean(src) && self.indexOf(src) === idx);
+
+  const currentSrc = photoCandidates[candidateIndex];
+
+  const handleImgError = () => {
+    if (candidateIndex < photoCandidates.length - 1) {
+      setCandidateIndex((prev) => prev + 1);
+    } else {
+      setCandidateIndex(-1); // Show AF monogram fallback if photo fails or is 0 bytes
+    }
+  };
 
   return (
     <div className={`relative ${sizeClassName} overflow-hidden border border-[#cf30aa]/40 shadow-sm animated-border shrink-0 bg-[#0d1424] ${className}`}>
-      {!imgError ? (
+      {candidateIndex >= 0 && currentSrc ? (
         <img
-          src={IMAGE_ASSETS.profilePhoto}
+          src={currentSrc}
           alt="Abdullah Forhad"
-          onError={() => setImgError(true)}
+          onError={handleImgError}
           className="w-full h-full object-cover"
         />
       ) : (
