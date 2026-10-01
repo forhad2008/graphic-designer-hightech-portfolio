@@ -83,42 +83,50 @@ export const Portfolio: React.FC<PortfolioProps> = ({ onSelectItem, onOrderSimil
                 className="cursor-pointer"
               >
                 <GlowCard intensity="medium" rounded="rounded-3xl">
-                  <div className="group bg-[#090715]/95 liquid-glass-card rounded-3xl p-2.5 overflow-hidden transition-all duration-300 flex flex-col">
-                    {/* Image */}
-                    <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden bg-black neu-3d-inset border border-white/10">
+                  <div className="group relative w-full h-[380px] sm:h-[440px] rounded-3xl overflow-hidden transition-all duration-300 flex flex-col justify-end border border-white/10 bg-[#07060f]">
+                    
+                    {/* Background Full Image */}
+                    <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden">
                       <DesignArtwork
                         type={item.mockupType}
                         imageUrl={item.image}
                         altText={item.title}
+                        className="w-full h-full"
                       />
-
-                      {/* Hover overlay with liquid frosted glass */}
-                      <div className="absolute inset-0 bg-slate-950/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center gap-2 text-white text-xs font-bold font-mono">
-                        <span>View Case Study</span>
-                        <ArrowUpRight className="w-4 h-4 text-[#dfa2da]" />
-                      </div>
                     </div>
 
-                    {/* Body */}
-                    <div className="p-4 flex-1 flex flex-col justify-between space-y-3">
+                    {/* Dark gradient backdrop to protect legibility */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/45 to-transparent z-10 transition-opacity duration-300 group-hover:opacity-90" />
+
+                    {/* Liquid frosted glass hover cover overlay */}
+                    <div className="absolute inset-0 bg-black/55 backdrop-blur-[3px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-2 text-white text-sm font-bold font-mono z-20">
+                      <span className="tracking-wider">Explore Case Study</span>
+                      <ArrowUpRight className="w-5 h-5 text-[#dfa2da]" />
+                    </div>
+
+                    {/* Overlaid Card Info (Legible on Gradient) */}
+                    <div className="relative z-20 p-5 sm:p-6 flex flex-col justify-end space-y-3.5 pointer-events-none">
                       <div>
-                        <div className="flex items-center justify-between text-[11px] font-mono text-slate-400 mb-1.5">
-                          <span className="text-[#dfa2da] font-bold tracking-wide drop-shadow">{item.categoryLabel}</span>
-                          <span className="px-2 py-0.5 rounded-lg bg-white/5 border border-[#cf30aa]/30 text-[10px] text-slate-200">{item.clientCountry}</span>
+                        {/* Upper line */}
+                        <div className="flex items-center justify-between text-[11px] font-mono text-slate-200 mb-1.5">
+                          <span className="text-[#dfa2da] font-extrabold tracking-wider bg-black/40 backdrop-blur px-2.5 py-1 rounded-lg border border-white/5">{item.categoryLabel}</span>
+                          <span className="px-2.5 py-1 rounded-lg bg-black/40 backdrop-blur border border-white/5 text-[10px] text-slate-100 font-bold">{item.clientCountry}</span>
                         </div>
 
-                        <h3 className="text-base font-bold text-white font-display group-hover:text-[#dfa2da] transition-colors">
+                        {/* Title */}
+                        <h3 className="text-lg font-extrabold text-white font-display group-hover:text-[#dfa2da] transition-colors drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
                           {item.title}
                         </h3>
 
-                        <p className="text-xs text-slate-400 mt-1 line-clamp-2 leading-relaxed">
+                        {/* Description */}
+                        <p className="text-xs text-slate-300 mt-1 line-clamp-2 leading-relaxed drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
                           {item.description}
                         </p>
                       </div>
 
-                      {/* Footer */}
-                      <div className="pt-3 border-t border-white/10 flex items-center justify-between text-[11px] font-mono text-slate-400">
-                        <div className="flex items-center gap-1.5">
+                      {/* Card Footer */}
+                      <div className="pt-3.5 border-t border-white/15 flex items-center justify-between text-[11px] font-mono text-slate-300">
+                        <div className="flex items-center gap-1.5 bg-black/25 px-2 py-1 rounded-lg">
                           {item.colors.slice(0, 4).map((c, i) => (
                             <span
                               key={i}
@@ -127,11 +135,12 @@ export const Portfolio: React.FC<PortfolioProps> = ({ onSelectItem, onOrderSimil
                             />
                           ))}
                         </div>
-                        <span className="text-slate-300 group-hover:text-[#dfa2da] transition-colors font-semibold">
-                          Specs →
+                        <span className="text-[#dfa2da] group-hover:text-white transition-colors font-bold flex items-center gap-1">
+                          View Specs <ArrowUpRight className="w-3.5 h-3.5" />
                         </span>
                       </div>
                     </div>
+
                   </div>
                 </GlowCard>
               </motion.div>

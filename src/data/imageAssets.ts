@@ -39,51 +39,65 @@ export const IMAGE_ASSETS = {
   // PORTFOLIO CASE STUDY PROJECTS (MAIN COVER & GALLERY SLIDES)
   portfolio: {
     auraBotanicals: {
-      cover: 'https://images.unsplash.com/photo-1608248597359-009947e45260?auto=format&fit=crop&w=1200&q=80',
+      cover: '/brand1.png',
       gallery: [
-        'https://images.unsplash.com/photo-1608248597359-009947e45260?auto=format&fit=crop&w=1200&q=80',
-        'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1200&q=80',
-        'https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&w=1200&q=80'
+        '/brand1.png',
+        '/brand7.png',
+        '/brand7.1.png'
       ],
     },
     synapseAi: {
-      cover: 'https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=1200&q=80',
+      cover: '/brand2.png',
       gallery: [
-        'https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=1200&q=80',
-        'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80',
-        'https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&w=1200&q=80'
+        '/brand2.png',
+        '/brand7.2.png',
+        '/brand8.png'
       ],
     },
     veloCoffee: {
-      cover: 'https://images.unsplash.com/photo-1559525839-b184a4d698c7?auto=format&fit=crop&w=1200&q=80',
+      cover: '/brand3.png',
       gallery: [
-        'https://images.unsplash.com/photo-1559525839-b184a4d698c7?auto=format&fit=crop&w=1200&q=80',
-        'https://images.unsplash.com/photo-1589365278144-c9e705f843ba?auto=format&fit=crop&w=1200&q=80',
-        'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=1200&q=80'
+        '/brand3.png',
+        '/brand4.png',
+        '/brand5.png'
       ],
     },
     igniteStreetwear: {
-      cover: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=1200&q=80',
+      cover: '/brand4.png',
       gallery: [
-        'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=1200&q=80',
-        'https://images.unsplash.com/photo-1576995853123-5a10305d93c0?auto=format&fit=crop&w=1200&q=80',
-        'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80'
+        '/brand4.png',
+        '/brand5.png',
+        '/brand6.png'
       ],
     },
     apexGamingYoutube: {
-      cover: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=80',
+      cover: '/brand5.png',
       gallery: [
-        'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=80',
-        'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80',
-        'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1200&q=80'
+        '/brand5.png',
+        '/brand6.png',
+        '/brand7.png'
       ],
     },
     vaneCapitalPrint: {
-      cover: 'https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&w=1200&q=80',
+      cover: '/brand6.png',
       gallery: [
-        'https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&w=1200&q=80',
-        'https://images.unsplash.com/photo-1607344645866-009c320c5ab8?auto=format&fit=crop&w=1200&q=80',
-        'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=1200&q=80'
+        '/brand6.png',
+        '/brand8.png',
+        '/brand1.png'
+      ],
+    },
+    brand7System: {
+      cover: '/brand7.png',
+      gallery: [
+        '/brand7.png',
+        '/brand7.1.png',
+        '/brand7.2.png'
+      ],
+    },
+    brand8System: {
+      cover: '/brand8.png',
+      gallery: [
+        '/brand8.png'
       ],
     },
   },
