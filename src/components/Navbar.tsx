@@ -67,7 +67,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection: propA
         setScrollProgress(progress);
       }
 
-      const sections = ['portfolio', 'graphics-design', 'design-templates', 'services', 'pricing', 'estimator', 'process', 'reviews', 'social', 'contact', 'faq'];
+      const sections = ['portfolio', 'graphics-design', 'design-templates', 'pricing', 'estimator', 'process', 'reviews', 'social', 'contact', 'faq'];
       const scrollPosition = scrollY + 200;
 
       for (let i = sections.length - 1; i >= 0; i--) {
@@ -238,44 +238,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection: propA
                 )}
               </div>
 
-              {/* Services */}
-              <div
-                className="relative"
-                onMouseEnter={() => handleMouseEnterDropdown('services')}
-                onMouseLeave={handleMouseLeaveDropdown}
-              >
-                <button
-                  onClick={() => handleLinkClick('services')}
-                  className={`px-3 py-1.5 rounded-lg flex items-center gap-1 transition-all cursor-pointer ${
-                    activeSection === 'services'
-                      ? 'text-[#dfa2da] bg-[#cf30aa]/15 font-semibold'
-                      : 'text-slate-300 hover:text-white hover:bg-white/5'
-                  }`}
-                >
-                  <span>Services</span>
-                  <ChevronDown className="w-3 h-3 opacity-60" />
-                </button>
 
-                {activeDropdown === 'services' && (
-                  <div className="absolute top-full left-0 mt-1 w-80 bg-[#080C14] border border-white/10 rounded-2xl p-3 shadow-2xl animate-fadeIn z-50">
-                    <div className="space-y-1.5">
-                      {FIVERR_GIGS.map((gig) => (
-                        <button
-                          key={gig.id}
-                          onClick={() => handleLinkClick('services')}
-                          className="w-full text-left p-2 rounded-xl hover:bg-white/5 transition-all flex items-center justify-between cursor-pointer"
-                        >
-                          <div>
-                            <div className="text-xs font-semibold text-white">{gig.category}</div>
-                            <div className="text-[10px] text-slate-400">from ${gig.startingPrice} USD</div>
-                          </div>
-                          <span className="text-[10px] font-mono text-[#dfa2da]">5.0 ★</span>
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
 
               {/* Pricing */}
               <button
@@ -586,7 +549,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection: propA
                       Quick Navigator
                     </span>
                     <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-[#cf30aa]/20 text-[#dfa2da] border border-[#cf30aa]/30">
-                      8 Sections
+                      7 Sections
                     </span>
                   </div>
                   <button
@@ -619,24 +582,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection: propA
                   </button>
 
                   <button
-                    onClick={() => handleLinkClick('services')}
-                    className={`p-3 rounded-2xl text-left font-medium transition-all flex flex-col justify-between h-20.5 cursor-pointer ${
-                      activeSection === 'services'
-                        ? 'bg-[#cf30aa]/20 text-[#dfa2da] font-bold border border-[#cf30aa]/50 shadow-[0_0_16px_rgba(207,48,170,0.2)]'
-                        : 'bg-white/5 text-slate-200 hover:bg-white/10 hover:text-white border border-white/5'
-                    }`}
-                  >
-                    <div className="flex items-center justify-between w-full">
-                      <Layers className="w-4 h-4 text-[#dfa2da]" />
-                      <span className="text-[10px] font-mono text-slate-400">02</span>
-                    </div>
-                    <div>
-                      <div className="font-bold">Services</div>
-                      <div className="text-[10px] text-slate-400">Fiverr Pro Gigs</div>
-                    </div>
-                  </button>
-
-                  <button
                     onClick={() => handleLinkClick('pricing')}
                     className={`p-3 rounded-2xl text-left font-medium transition-all flex flex-col justify-between h-20.5 cursor-pointer ${
                       activeSection === 'pricing'
@@ -646,7 +591,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection: propA
                   >
                     <div className="flex items-center justify-between w-full">
                       <Calendar className="w-4 h-4 text-[#dfa2da]" />
-                      <span className="text-[10px] font-mono text-slate-400">03</span>
+                      <span className="text-[10px] font-mono text-slate-400">02</span>
                     </div>
                     <div>
                       <div className="font-bold">Pricing</div>
@@ -682,7 +627,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection: propA
                   >
                     <div className="flex items-center justify-between w-full">
                       <Workflow className="w-4 h-4 text-[#dfa2da]" />
-                      <span className="text-[10px] font-mono text-slate-400">04</span>
+                      <span className="text-[10px] font-mono text-slate-400">03</span>
                     </div>
                     <div>
                       <div className="font-bold">Process</div>
@@ -700,7 +645,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection: propA
                   >
                     <div className="flex items-center justify-between w-full">
                       <Star className="w-4 h-4 text-amber-400 fill-amber-400" />
-                      <span className="text-[10px] font-mono text-slate-400">05</span>
+                      <span className="text-[10px] font-mono text-slate-400">04</span>
                     </div>
                     <div>
                       <div className="font-bold">Reviews</div>
@@ -718,7 +663,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection: propA
                   >
                     <div className="flex items-center justify-between w-full">
                       <Globe className="w-4 h-4 text-[#dfa2da]" />
-                      <span className="text-[10px] font-mono text-slate-400">06</span>
+                      <span className="text-[10px] font-mono text-slate-400">05</span>
                     </div>
                     <div>
                       <div className="font-bold">Social</div>
@@ -736,7 +681,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection: propA
                   >
                     <div className="flex items-center justify-between w-full">
                       <HelpCircle className="w-4 h-4 text-[#dfa2da]" />
-                      <span className="text-[10px] font-mono text-slate-400">07</span>
+                      <span className="text-[10px] font-mono text-slate-400">06</span>
                     </div>
                     <div>
                       <div className="font-bold">FAQ</div>
@@ -827,25 +772,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection: propA
           )}
         </button>
 
-        {/* 2. Services */}
-        <button
-          onClick={() => handleLinkClick('services')}
-          className={`relative px-3 py-2 rounded-full flex flex-col items-center gap-0.5 transition-all cursor-pointer ${
-            activeSection === 'services'
-              ? 'text-[#dfa2da] font-bold'
-              : 'text-slate-400 hover:text-white'
-          }`}
-          title="Services"
-        >
-          <Layers className="w-4 h-4" />
-          <span className="text-[10px] font-medium leading-none">Services</span>
-          {activeSection === 'services' && (
-            <motion.span
-              layoutId="mobile-dock-dot"
-              className="absolute -bottom-0.5 w-1.5 h-1.5 rounded-full bg-[#cf30aa] shadow-[0_0_8px_#cf30aa]"
-            />
-          )}
-        </button>
+
 
         {/* 3. Estimator */}
         <button

@@ -6,7 +6,6 @@ import { Portfolio } from './components/Portfolio';
 import { GraphicsDesignShowcase } from './components/DesignShowcases';
 import { TemplatesShowcase } from './components/TemplatesShowcase';
 import { PortfolioModal } from './components/PortfolioModal';
-import { ServicesGigs } from './components/ServicesGigs';
 import { PricingTiers } from './components/PricingTiers';
 import { ProjectEstimator } from './components/ProjectEstimator';
 import { Reviews } from './components/Reviews';
@@ -46,10 +45,6 @@ export default function App() {
       notes: `Interested in the ${pkg.name} tier with ${pkg.revisions} and ${pkg.initialConcepts} initial concepts.`,
     });
     scrollToSection('contact');
-  };
-
-  const handleSelectGig = (gig: FiverrGig) => {
-    window.open(gig.fiverrUrl, '_blank');
   };
 
   const handleEstimatorPrefill = (briefData: {
@@ -120,11 +115,6 @@ export default function App() {
         <TemplatesShowcase
           onOrderSimilar={handleOrderSimilar}
         />
-      </ScrollSection>
-
-      {/* Fiverr Gigs & Specialized Services */}
-      <ScrollSection id="services" distance={40} duration={0.8}>
-        <ServicesGigs onSelectGig={handleSelectGig} />
       </ScrollSection>
 
       {/* Transparent Pricing Tiers */}

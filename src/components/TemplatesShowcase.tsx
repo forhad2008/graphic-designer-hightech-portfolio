@@ -19,111 +19,108 @@ interface TemplateItem {
 const TEMPLATE_ITEMS: TemplateItem[] = [
   {
     id: 'tem-1',
-    title: 'Aura Botanicals: Organic Skincare Identity Deck',
-    category: 'branding',
-    categoryLabel: 'Brand Identity',
-    format: 'Adobe Illustrator · Figma',
+    title: 'Thomas Shelby: Peaky Blinders Vintage Business Card',
+    category: 'print',
+    categoryLabel: 'Premium Business Card',
+    format: 'Adobe Photoshop · Adobe Illustrator',
     image: './tem1.webp',
-    description: 'A refined brand presentation layout featuring natural botanical patterns, leaf monograms, and luxurious dropper bottle dielines.',
-    gridRatio: '16:9 Landscape Layout',
+    description: 'A sophisticated, retro-inspired business card design featuring a dual-tone diagonal split in textured deep olive-bronze and warm champagne, highlighted by elegant metallic gold accents.',
+    gridRatio: '3.5:2 Vertical Layout',
     colors: [
-      { name: 'Deep Forest Green', hex: '#112C20' },
-      { name: 'Foliage Green', hex: '#305C33' },
-      { name: 'Warm Cream', hex: '#F3F4F1' },
-      { name: 'Pure White', hex: '#FFFFFF' }
+      { name: 'Bronze Brown', hex: '#4E4437' },
+      { name: 'Champagne Gold', hex: '#D7D3C5' },
+      { name: 'Accent Gold', hex: '#B88D3D' },
+      { name: 'Deep Charcoal', hex: '#1A1917' }
     ],
-    fonts: ['Modern Serif Display', 'Plus Jakarta Sans'],
-    deliverables: ['Primary Brand System Deck', 'Cosmetic Dropper Dieline', 'Luxe Card Design', 'Packaging Board Asset']
+    fonts: ['Cinzel Serif', 'Montserrat Sans'],
+    deliverables: ['Print-Ready Vector PDF', 'Fully Layered PSD Mockup', 'Adobe Illustrator Source File', 'High-Resolution JPEG Previews']
   },
   {
     id: 'tem-2',
-    title: 'Sleek SaaS Dashboard UI & Identity System',
-    category: 'tech',
-    categoryLabel: 'Tech Interface',
-    format: 'Figma · SVG',
+    title: 'Thomas Shelby: Golden Glitter Premium Identity Card',
+    category: 'print',
+    categoryLabel: 'Elegant Business Card',
+    format: 'Adobe Illustrator · Photoshop',
     image: './tem2.webp',
-    description: 'An ultra-modern, dark-themed dashboard template utilizing clean spatial geometry, high-contrast violet indicators, and neon telemetry plots.',
-    gridRatio: '1440px Grid Standard',
+    description: 'A sophisticated, textured business card design boasting a deep bronze-gold glitter finish, custom circular portrait placeholder, and luxury metallic accents.',
+    gridRatio: '3.5:2 Standard Card',
     colors: [
-      { name: 'Midnight Obsidian', hex: '#070B12' },
-      { name: 'Electric Violet', hex: '#8A2BE2' },
-      { name: 'Glacier Cyan', hex: '#00A2FF' },
-      { name: 'Deep Indigo', hex: '#1E0F35' }
+      { name: 'Deep Bronze', hex: '#383129' },
+      { name: 'Antique Gold', hex: '#987E4C' },
+      { name: 'Warm Taupe', hex: '#5A4F41' },
+      { name: 'Off-White', hex: '#E5E1DB' }
     ],
-    fonts: ['Space Grotesk', 'JetBrains Mono'],
-    deliverables: ['Web Application Workspace', 'UI Component Library', 'Vector Technical Icon Kit', 'Neon Indicator Suite']
+    fonts: ['Montserrat Sans', 'Cinzel Serif'],
+    deliverables: ['Print-Ready Vector Files', 'Double-Sided Layout Design', 'Customizable Photo Placeholder', 'High-Resolution Mockup']
   },
   {
     id: 'tem-3',
-    title: 'Geometric Brand Guidelines Master Layout',
-    category: 'branding',
-    categoryLabel: 'Editorial Design',
-    format: 'Adobe InDesign · PDF',
+    title: 'Thomas Shelby: Dark Bronze Metallic Hang Tag & Card',
+    category: 'print',
+    categoryLabel: 'Luxury Business Card',
+    format: 'Adobe Photoshop · Illustrator',
     image: './tem3.webp',
-    description: 'A high-contrast monochrome editorial layout with hairline borders, clean typography columns, and asymmetric margins.',
-    gridRatio: 'A4 Portrait Grid',
+    description: 'A luxury, textured business card and hangtag design showcasing a dark bronze-charcoal metallic finish accented by elegant gold typography and integrated portrait frame.',
+    gridRatio: '3.5 x 2 Card Grid',
     colors: [
-      { name: 'Absolute Charcoal', hex: '#0D0D0D' },
-      { name: 'Alabaster Silk', hex: '#EAE7E0' },
-      { name: 'Muted Bronze', hex: '#BCA374' },
-      { name: 'Sable Black', hex: '#1A1A1A' }
+      { name: 'Dark Bronze Charcoal', hex: '#343129' },
+      { name: 'Muted Gold', hex: '#B1966C' },
+      { name: 'Off-White Linen', hex: '#E1DFD9' }
     ],
-    fonts: ['Cinzel Display', 'Satoshi Sans'],
-    deliverables: ['24-Page Brand Style Guide', 'Grid Column Presets', 'Asymmetric Layout Grid', 'Print Bleed Layout']
+    fonts: ['Cinzel Serif', 'Montserrat Sans'],
+    deliverables: ['Fully Layered PSD Mockup', 'Print-Ready Vector Layout (AI/EPS)', 'High-Resolution PDF with Bleed Marks', 'Custom Gold Monogram Asset']
   },
   {
     id: 'tem-4',
-    title: 'YouTube Viral Thumbnail CTR Canvas',
-    category: 'social',
-    categoryLabel: 'Social Media',
-    format: 'Adobe Photoshop · PSD',
+    title: 'The Hunter: Rugged Vertical Linen Card Blueprint',
+    category: 'print',
+    categoryLabel: 'Vertical Business Card',
+    format: 'Adobe Illustrator · Adobe Photoshop',
     image: './tem4.webp',
-    description: 'A high-growth thumbnail creation canvas featuring aggressive red spotlights, chiseled 3D title text, and optimized focal zones.',
-    gridRatio: '1920x1080 FHD Standard',
+    description: 'A striking and rugged vertical business card design showcasing a detailed wolf head illustration alongside clean, structured typography on textured linen cardstock.',
+    gridRatio: '3.5 x 2 Vertical standard',
     colors: [
-      { name: 'High-CTR Crimson', hex: '#E60000' },
-      { name: 'Pure Dark Void', hex: '#0F0F0F' },
-      { name: 'Impact White', hex: '#F2F2F2' },
-      { name: 'Vibrant Amber', hex: '#FFBC00' }
+      { name: 'Textured Off-White', hex: '#E5E5E3' },
+      { name: 'Deep Steel Blue', hex: '#1A3E5C' },
+      { name: 'Ink Black', hex: '#111111' }
     ],
-    fonts: ['Impact Grunge Bold', 'Geometric Sans Display'],
-    deliverables: ['Layered .PSD Thumbnail', 'CTR Heatmap Overlay', 'Color Grading Lut Preset', 'Editable 3D Textures']
+    fonts: ['Montserrat Sans', 'Cinzel Serif'],
+    deliverables: ['Print-Ready Vector Template', 'High-Resolution Wolf Illustration', 'Layered PSD Mockup Asset', 'Customizable Layout with Bleeds']
   },
   {
     id: 'tem-5',
-    title: 'Luxury Stationery & Foil Dieline Pack',
+    title: 'Thomas Shelby: Charcoal Black & Gold Industrial Set',
     category: 'print',
-    categoryLabel: 'Luxe Print',
-    format: 'Adobe Illustrator · CMYK',
+    categoryLabel: 'Business Card & Hang Tag',
+    format: 'Adobe Photoshop · Illustrator',
     image: './tem5.webp',
-    description: 'Tactile print layouts optimized for specialty printing, with separate vectors for gold hot foil stamping, debossing, and spot UV coating.',
-    gridRatio: '300 DPI Press Ready',
+    description: 'A sophisticated, dark-themed business card and hang tag design featuring a textured charcoal black background, striking gold accents, and vintage industrial aesthetics.',
+    gridRatio: '3.5:2 Standard Layout',
     colors: [
-      { name: 'Matte Charcoal', hex: '#1C1C1E' },
-      { name: 'Foil Gold Accent', hex: '#D4AF37' },
-      { name: 'Heavy Linen Ivory', hex: '#F9F8F6' },
-      { name: 'Vivid Sangria Red', hex: '#800020' }
+      { name: 'Charcoal Black', hex: '#1E2022' },
+      { name: 'Classic Gold', hex: '#C59B51' },
+      { name: 'Muted Cream', hex: '#E6DCD0' }
     ],
-    fonts: ['Cabinet Grotesk', 'Lora Serif'],
-    deliverables: ['Foil Business Card Layout', 'Debossed Letterhead Set', 'Corporate Envelope Vector', 'Box Die-Cut Template']
+    fonts: ['Cinzel Serif', 'Montserrat Sans', 'Playfair Display'],
+    deliverables: ['Print-Ready Card Layout', 'Fully Layered PSD Source File', 'High-Resolution Realistic Mockup', 'Customizable Vector Assets']
   },
   {
     id: 'tem-6',
-    title: 'Apex Athletic Event Poster Design',
-    category: 'social',
-    categoryLabel: 'Sports & Event',
-    format: 'Adobe Photoshop · PSD',
+    title: 'Thomas Shelby: Vintage Taupe Personal Branding Card',
+    category: 'print',
+    categoryLabel: 'Personal Business Card',
+    format: 'Adobe Photoshop · Illustrator',
     image: './tem6.webp',
-    description: 'A high-octane, grit-textured sports promotion layout combining half-tone backgrounds with distressed brush typography and athletic energy.',
-    gridRatio: '18x24 Poster Ratio',
+    description: 'This sophisticated business card template features a vintage-inspired aesthetic with a rich taupe background, luxurious gold accents, and a distinctive circular portrait frame.',
+    gridRatio: '3.5 x 2 Standard Card',
     colors: [
-      { name: 'Adrenaline Red', hex: '#D32F2F' },
-      { name: 'Grit Black Texture', hex: '#0D0D0D' },
-      { name: 'Concrete Gray', hex: '#8C8C8C' },
-      { name: 'Steel Off-White', hex: '#E0E0E0' }
+      { name: 'Taupe Brown', hex: '#544A42' },
+      { name: 'Vintage Gold', hex: '#C59D57' },
+      { name: 'Soft Cream', hex: '#F0EBD9' },
+      { name: 'Deep Charcoal', hex: '#3C352F' }
     ],
-    fonts: ['Distressed Brush Display', 'Bold Sans Body'],
-    deliverables: ['Large-Format Event Poster', 'Instagram Story Poster Key', 'Direct Ticket Flyer Layout', 'Grit Texture Overlays']
+    fonts: ['Cinzel Serif', 'Montserrat Sans'],
+    deliverables: ['Fully Customizable PSD Template', 'High-Resolution Presentation Mockup', 'Print-Ready CMYK Files with Bleed', 'Organized Layers with Smart Objects']
   }
 ];
 
@@ -135,6 +132,7 @@ export const TemplatesShowcase: React.FC<TemplatesShowcaseProps> = ({ onOrderSim
   const [filter, setFilter] = useState<string>('all');
   const [selectedTemplate, setSelectedTemplate] = useState<TemplateItem | null>(null);
   const [copiedColor, setCopiedColor] = useState<string | null>(null);
+  const [hoveredTemplateId, setHoveredTemplateId] = useState<string | null>(null);
 
   const filteredItems = filter === 'all' 
     ? TEMPLATE_ITEMS 
@@ -147,8 +145,32 @@ export const TemplatesShowcase: React.FC<TemplatesShowcaseProps> = ({ onOrderSim
   };
 
   return (
-    <section id="design-templates" className="py-20 md:py-28 border-t border-white/5 bg-[#030208] relative">
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-8">
+    <section id="design-templates" className="py-20 md:py-28 border-t border-white/5 bg-[#030208] relative overflow-hidden transition-colors duration-1000">
+      
+      {/* 3. Full dynamic background for the entire templates section using the WebP mockup images */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 select-none">
+        {TEMPLATE_ITEMS.map((item) => (
+          <div
+            key={item.id}
+            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+              hoveredTemplateId === item.id || (hoveredTemplateId === null && item.id === 'tem-1')
+                ? 'opacity-[0.15]'
+                : 'opacity-0'
+            }`}
+          >
+            <img
+              src={item.image}
+              alt=""
+              className="w-full h-full object-cover filter blur-[80px] scale-110"
+              referrerPolicy="no-referrer"
+            />
+          </div>
+        ))}
+        {/* Deep visual gradient overlay to ensure outstanding section readability */}
+        <div className="absolute inset-0 bg-[#030208]/90 backdrop-blur-[2px]" />
+      </div>
+
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-8 relative z-10">
         
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
@@ -183,19 +205,21 @@ export const TemplatesShowcase: React.FC<TemplatesShowcaseProps> = ({ onOrderSim
           </div>
         </div>
 
-        {/* Templates Grid - Sophisticated single elevation design */}
+        {/* Templates Grid - 1 & 2. Full Background image box implementation */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredItems.map((item) => (
             <div
               key={item.id}
               onClick={() => setSelectedTemplate(item)}
-              className="cursor-pointer transition-all duration-300 hover:-translate-y-2 group"
+              onMouseEnter={() => setHoveredTemplateId(item.id)}
+              onMouseLeave={() => setHoveredTemplateId(null)}
+              className="cursor-pointer transition-all duration-300 hover:-translate-y-2 group relative rounded-3xl overflow-hidden min-h-[490px] flex flex-col justify-between"
             >
               <GlowCard intensity="subtle" rounded="rounded-3xl" customColors={item.colors.map(c => c.hex)}>
-                <div className="bg-[#07060f] border border-white/10 rounded-3xl overflow-hidden flex flex-col h-full relative">
+                <div className="relative w-full h-full flex flex-col justify-between p-4 min-h-[490px]">
                   
-                  {/* Aspect Ratio Container for Template Image */}
-                  <div className="relative aspect-[16/10] w-full overflow-hidden bg-black/40 border-b border-white/5">
+                  {/* Absolute Full Cover Image background - Completely bright with no dark overlays */}
+                  <div className="absolute inset-0 z-0">
                     <img
                       src={item.image}
                       alt={item.title}
@@ -203,40 +227,31 @@ export const TemplatesShowcase: React.FC<TemplatesShowcaseProps> = ({ onOrderSim
                       referrerPolicy="no-referrer"
                     />
                     
-                    {/* Linear contrast scrim */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-80" />
-                    
-                    {/* Floating Formats */}
-                    <div className="absolute top-4 left-4 flex items-center gap-1.5 z-10">
-                      <span className="text-[10px] font-mono font-bold bg-black/65 backdrop-blur border border-white/15 px-2.5 py-1 rounded-xl text-slate-100 uppercase">
-                        {item.categoryLabel}
-                      </span>
-                    </div>
-
-                    <div className="absolute top-4 right-4 z-10">
-                      <span className="text-[10px] font-mono font-bold bg-[#cf30aa]/40 backdrop-blur-md border border-[#cf30aa]/30 px-2.5 py-1 rounded-xl text-white">
-                        {item.gridRatio}
-                      </span>
-                    </div>
-
-                    {/* Interactive hover overlay */}
-                    <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-2 text-white text-xs font-semibold font-mono z-10">
-                      <span>Inspect Template Specifications</span>
-                      <ArrowUpRight className="w-4 h-4 text-[#dfa2da] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                    </div>
+                    {/* Clean glass reflection highlight on card boundary */}
+                    <div className="absolute inset-0 border border-white/10 rounded-3xl group-hover:border-[#cf30aa]/55 transition-colors" />
                   </div>
 
-                  {/* Information & Visual Identity Data */}
-                  <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
+                  {/* Header Metadata Container - Clean dark glass floating tags */}
+                  <div className="relative z-10 flex items-start justify-between">
+                    <span className="text-[10px] font-mono font-bold bg-black/80 backdrop-blur-md border border-white/15 px-2.5 py-1 rounded-xl text-slate-100 uppercase tracking-wider">
+                      {item.categoryLabel}
+                    </span>
+                    <span className="text-[10px] font-mono font-bold bg-[#cf30aa]/75 backdrop-blur-md border border-[#cf30aa]/35 px-2.5 py-1 rounded-xl text-white">
+                      {item.gridRatio}
+                    </span>
+                  </div>
+
+                  {/* Body Content Overlay - Contained in highly-opaque dark glass card for outstanding readability and WCAG AA compliance */}
+                  <div className="relative z-10 space-y-4 bg-black/90 backdrop-blur-md border border-white/15 p-5 rounded-2xl shadow-2xl mt-auto">
                     <div className="space-y-2">
-                      {/* Zero-Pill Unboxed Metadata with Bullet Separators */}
-                      <div className="flex items-center gap-2 text-[11px] font-mono text-slate-400 font-medium">
+                      {/* Zero-Pill Unboxed Format Metadata */}
+                      <div className="flex items-center gap-2 text-[10px] font-mono text-[#dfa2da]/90 font-medium">
                         <span>{item.format}</span>
                         <span aria-hidden="true" className="text-[#cf30aa]">·</span>
                         <span>Vector Master</span>
                       </div>
 
-                      <h3 className="text-lg font-bold text-white group-hover:text-[#dfa2da] transition-colors leading-snug font-display">
+                      <h3 className="text-base font-bold text-white group-hover:text-[#dfa2da] transition-colors leading-snug font-display">
                         {item.title}
                       </h3>
 
@@ -246,13 +261,13 @@ export const TemplatesShowcase: React.FC<TemplatesShowcaseProps> = ({ onOrderSim
                     </div>
 
                     {/* Color Palette Visualizer with click-to-copy Hex Codes */}
-                    <div className="pt-4 border-t border-white/5 space-y-2.5">
-                      <div className="flex items-center justify-between text-[10px] font-mono text-slate-400">
+                    <div className="pt-3 border-t border-white/10 space-y-2">
+                      <div className="flex items-center justify-between text-[9px] font-mono text-slate-400">
                         <span>COLOR SYSTEM</span>
                         <span>CLICK TO COPY HEX</span>
                       </div>
                       
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-1.5">
                         {item.colors.map((c, i) => (
                           <button
                             key={i}
@@ -261,10 +276,10 @@ export const TemplatesShowcase: React.FC<TemplatesShowcaseProps> = ({ onOrderSim
                               e.stopPropagation();
                               copyToClipboard(c.hex);
                             }}
-                            className="w-7 h-7 rounded-lg border border-white/10 shadow-md relative hover:scale-110 active:scale-95 transition-transform group/color cursor-pointer"
+                            className="w-7 h-7 rounded-lg border border-white/15 shadow-md relative hover:scale-110 active:scale-95 transition-transform group/color cursor-pointer"
                             style={{ backgroundColor: c.hex }}
                           >
-                            <span className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/color:opacity-100 transition-opacity bg-black/40 rounded-lg">
+                            <span className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/color:opacity-100 transition-opacity bg-black/50 rounded-lg">
                               {copiedColor === c.hex ? (
                                 <Check className="w-3.5 h-3.5 text-emerald-400" />
                               ) : (
@@ -276,14 +291,13 @@ export const TemplatesShowcase: React.FC<TemplatesShowcaseProps> = ({ onOrderSim
                       </div>
                     </div>
 
-                    {/* Primary Fonts & Specifications */}
-                    <div className="flex items-center justify-between text-[10px] font-mono text-slate-400 pt-1">
+                    {/* Primary Fonts & Affordance indicator */}
+                    <div className="flex items-center justify-between text-[9px] font-mono text-slate-400 pt-1 border-t border-white/5">
                       <span>FONTS: <span className="text-slate-200 font-semibold">{item.fonts.join(' / ')}</span></span>
                       <span className="text-[#dfa2da] font-bold group-hover:underline flex items-center gap-0.5">
                         Blueprint Specs <ChevronRight className="w-3 h-3" />
                       </span>
                     </div>
-
                   </div>
 
                 </div>
@@ -292,34 +306,49 @@ export const TemplatesShowcase: React.FC<TemplatesShowcaseProps> = ({ onOrderSim
           ))}
         </div>
 
-        {/* Extended Specs Detail Drawer Modal for Selected Template */}
+        {/* Extended Specs Detail Drawer Modal for Selected Template (The Window) */}
         {selectedTemplate && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fadeIn">
+          <div 
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fadeIn"
+            onClick={() => setSelectedTemplate(null)}
+          >
             <div
               onClick={(e) => e.stopPropagation()}
               className="relative w-full max-w-4xl bg-[#090714] border border-white/15 rounded-[32px] overflow-hidden shadow-2xl flex flex-col md:flex-row max-h-[90vh] md:max-h-[85vh]"
             >
               
-              {/* Left Side Preview */}
-              <div className="w-full md:w-1/2 aspect-video md:aspect-auto relative bg-black/40 border-b md:border-b-0 md:border-r border-white/5 overflow-hidden">
+              {/* 2. Full Background image of the Window covered by webp image with glass backdrop effects */}
+              <div className="absolute inset-0 z-0 select-none pointer-events-none">
+                <img
+                  src={selectedTemplate.image}
+                  alt=""
+                  className="w-full h-full object-cover filter blur-[20px] opacity-[0.35] scale-105"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute inset-0 bg-gradient-to-b md:bg-gradient-to-r from-black/85 via-[#090714]/95 to-[#090714]" />
+              </div>
+
+              {/* Left Side Preview Container - Mockup fully bright, no dark overlay */}
+              <div className="w-full md:w-1/2 aspect-video md:aspect-auto relative bg-black/20 border-b md:border-b-0 md:border-r border-white/5 overflow-hidden z-10 flex flex-col justify-end">
                 <img
                   src={selectedTemplate.image}
                   alt={selectedTemplate.title}
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-90" />
-                <div className="absolute bottom-6 left-6 right-6">
-                  <span className="text-[10px] font-mono bg-[#cf30aa]/40 text-white border border-[#cf30aa]/30 px-3 py-1 rounded-full uppercase font-bold tracking-wider mb-2.5 inline-block">
+                
+                {/* Title overlay in a high-contrast dark glass container */}
+                <div className="absolute bottom-4 left-4 right-4 bg-black/80 backdrop-blur-md border border-white/10 p-4 rounded-2xl">
+                  <span className="text-[10px] font-mono bg-[#cf30aa]/60 text-white border border-[#cf30aa]/30 px-2.5 py-0.5 rounded-full uppercase font-bold tracking-wider mb-2 inline-block">
                     {selectedTemplate.categoryLabel} Blueprint
                   </span>
-                  <h4 className="text-xl font-bold text-white font-display leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
+                  <h4 className="text-base font-bold text-white font-display leading-tight">
                     {selectedTemplate.title}
                   </h4>
                 </div>
               </div>
 
-              {/* Right Side Specifications */}
-              <div className="w-full md:w-1/2 p-6 sm:p-8 overflow-y-auto flex flex-col justify-between space-y-6">
+              {/* Right Side Specifications (Elevated via z-10 to sit above blurred background) */}
+              <div className="w-full md:w-1/2 p-6 sm:p-8 overflow-y-auto flex flex-col justify-between space-y-6 z-10">
                 <div>
                   <div className="flex items-center justify-between mb-4">
                     <span className="text-xs font-mono text-slate-400">TEMPLATE BLUEPRINT SPECS</span>
@@ -338,7 +367,7 @@ export const TemplatesShowcase: React.FC<TemplatesShowcaseProps> = ({ onOrderSim
                   {/* Specifications details */}
                   <div className="space-y-4">
                     
-                    <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/5">
+                    <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/5 backdrop-blur-sm">
                       <div className="text-[10px] font-mono text-slate-400 mb-2 uppercase font-bold tracking-wider">Master Deliverables Included</div>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                         {selectedTemplate.deliverables.map((d, i) => (
@@ -351,21 +380,21 @@ export const TemplatesShowcase: React.FC<TemplatesShowcaseProps> = ({ onOrderSim
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
-                      <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/5 space-y-1">
+                      <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/5 backdrop-blur-sm space-y-1">
                         <span className="text-[10px] font-mono text-slate-400 uppercase font-bold block">File Types</span>
                         <span className="text-xs text-white font-bold font-mono">{selectedTemplate.format}</span>
                       </div>
-                      <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/5 space-y-1">
+                      <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/5 backdrop-blur-sm space-y-1">
                         <span className="text-[10px] font-mono text-slate-400 uppercase font-bold block">Grid Ratio</span>
                         <span className="text-xs text-white font-bold font-mono">{selectedTemplate.gridRatio}</span>
                       </div>
                     </div>
 
-                    <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/5 space-y-2">
+                    <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/5 backdrop-blur-sm space-y-2">
                       <span className="text-[10px] font-mono text-slate-400 uppercase font-bold block">Corporate Color Scheme</span>
                       <div className="flex flex-wrap items-center gap-3">
                         {selectedTemplate.colors.map((c, i) => (
-                          <div key={i} className="flex items-center gap-1.5 bg-black/30 p-1.5 rounded-xl border border-white/5 pr-3">
+                          <div key={i} className="flex items-center gap-1.5 bg-black/45 p-1.5 rounded-xl border border-white/5 pr-3">
                             <span className="w-4 h-4 rounded-md border border-white/20" style={{ backgroundColor: c.hex }} />
                             <div className="text-[10px] font-mono">
                               <span className="text-slate-100 block font-bold leading-none">{c.hex}</span>
