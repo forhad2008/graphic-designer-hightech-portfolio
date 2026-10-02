@@ -12,11 +12,21 @@ export const FloatingChat: React.FC = () => {
   useEffect(() => {
     const checkModals = () => {
       const modals = document.querySelectorAll('[data-modal="true"], [role="dialog"]');
-      setIsModalOpen(modals.length > 0);
+      const otherModals = Array.from(modals).filter(m => {
+        const ariaLabel = m.getAttribute('aria-label') || '';
+        return !ariaLabel.includes('Message and Project Inquiry Window');
+      });
+      const hasOther = otherModals.length > 0;
+      setIsModalOpen(hasOther);
+      if (hasOther) {
+        setIsOpen(false);
+      }
     };
-    const interval = setInterval(checkModals, 100);
+
+    const observer = new MutationObserver(checkModals);
+    observer.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['data-modal', 'role'] });
     checkModals();
-    return () => clearInterval(interval);
+    return () => observer.disconnect();
   }, []);
 
   const quickPrompts = [
@@ -40,7 +50,9 @@ export const FloatingChat: React.FC = () => {
   };
 
   return (
-    <div className="fixed bottom-5 right-5 z-40 flex flex-col items-end transition-all duration-300">
+    <div className={`fixed bottom-5 right-5 z-40 flex flex-col items-end transition-all duration-300 ${
+      isModalOpen ? 'opacity-0 pointer-events-none translate-y-24 scale-75' : 'opacity-100 translate-y-0 scale-100'
+    }`}>
       
       {/* Animated Chat & Work Process Inquiry Drawer */}
       <AnimatePresence>

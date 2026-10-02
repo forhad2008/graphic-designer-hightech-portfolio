@@ -1,7 +1,30 @@
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { Sparkles, ArrowUpRight, Copy, Check, Sliders, ChevronRight, FileCode, CheckCircle2, X, MessageCircle } from 'lucide-react';
 import { GlowCard } from './GlowCard';
 import { DesignArtwork } from './DesignArtworks';
+
+const getSafeAccent = (hexes: string[]): string => {
+  for (const hex of hexes) {
+    if (!hex || !hex.startsWith('#')) continue;
+    const clean = hex.replace('#', '');
+    let r = 0, g = 0, b = 0;
+    if (clean.length === 3) {
+      r = parseInt(clean[0] + clean[0], 16);
+      g = parseInt(clean[1] + clean[1], 16);
+      b = parseInt(clean[2] + clean[2], 16);
+    } else if (clean.length === 6) {
+      r = parseInt(clean.substring(0, 2), 16);
+      g = parseInt(clean.substring(2, 4), 16);
+      b = parseInt(clean.substring(4, 6), 16);
+    }
+    const lum = 0.299 * r + 0.587 * g + 0.114 * b;
+    if (lum >= 40 && lum <= 215) {
+      return hex;
+    }
+  }
+  return '#cf30aa';
+};
 
 interface TemplateItem {
   id: string;
@@ -299,11 +322,11 @@ export const TemplatesShowcase: React.FC<TemplatesShowcaseProps> = ({ onOrderSim
         </div>
 
         {/* Extended Specs Detail Drawer Modal for Selected Template (The 2nd Window Style) */}
-        {selectedTemplate && (() => {
+        {selectedTemplate && createPortal((() => {
           const hexes = selectedTemplate.colors ? selectedTemplate.colors.map(c => c.hex) : ['#402fb5', '#cf30aa'];
           const c1 = hexes[0] || '#402fb5';
           const c2 = hexes[1] || c1 || '#a099d8';
-          const c3 = hexes[2] || c2 || c1 || '#cf30aa';
+          const c3 = getSafeAccent(hexes);
           const c4 = hexes[3] || c3 || c2 || c1 || '#dfa2da';
           const conicBackground = `conic-gradient(rgba(0,0,0,0) 0%, ${c1} 12%, ${c2} 22%, rgba(0,0,0,0) 35%, rgba(0,0,0,0) 50%, ${c3} 65%, ${c4} 75%, rgba(0,0,0,0) 90%)`;
 
@@ -445,14 +468,14 @@ export const TemplatesShowcase: React.FC<TemplatesShowcaseProps> = ({ onOrderSim
                   </div>
 
                   {/* Footer */}
-                  <div className="px-6 py-4 bg-[#0d0a1f] border-t border-white/10 flex items-center justify-between gap-3">
+                  <div className="px-6 py-4 bg-[#0a0718]/95 border-t border-white/10 flex items-center justify-between gap-3 shrink-0">
                     <a
                       href="https://wa.me/8801342900364"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-4 py-2 text-xs font-semibold text-slate-300 hover:text-white flex items-center gap-1.5"
+                      className="px-4 py-2.5 rounded-xl border border-white/15 bg-white/[0.04] hover:bg-[#25D366]/20 hover:border-[#25D366]/50 text-xs font-bold text-slate-200 hover:text-white flex items-center gap-2 transition-all cursor-pointer group shadow-sm"
                     >
-                      <MessageCircle className="w-4 h-4" style={{ color: c3 }} />
+                      <MessageCircle className="w-4 h-4 text-[#25D366] group-hover:scale-110 transition-transform" />
                       <span>WhatsApp</span>
                     </a>
 
@@ -462,14 +485,12 @@ export const TemplatesShowcase: React.FC<TemplatesShowcaseProps> = ({ onOrderSim
                         setSelectedTemplate(null);
                         onOrderSimilar(`Template: ${title}`);
                       }}
-                      className="px-5 py-2 text-xs font-extrabold text-white rounded-xl flex items-center gap-1.5 cursor-pointer transition-all hover:scale-105 active:scale-95"
-                      style={{
-                        backgroundColor: c3,
-                        boxShadow: `0 0 20px ${c3}60`,
-                      }}
+                      className="neu-3d-btn-primary px-5 sm:px-6 py-2.5 text-xs sm:text-sm font-extrabold text-white rounded-xl flex items-center gap-2 cursor-pointer transition-all shadow-[0_0_24px_rgba(207,48,170,0.5)] hover:shadow-[0_0_32px_rgba(207,48,170,0.75)] hover:scale-[1.03] active:scale-[0.97]"
                     >
-                      <span>Use This Template Identity</span>
-                      <ArrowUpRight className="w-4 h-4" />
+                      <span className="text-white drop-shadow font-extrabold tracking-wide">
+                        Use This Template Identity
+                      </span>
+                      <ArrowUpRight className="w-4 h-4 stroke-[2.5] text-white" />
                     </button>
                   </div>
 
@@ -477,7 +498,7 @@ export const TemplatesShowcase: React.FC<TemplatesShowcaseProps> = ({ onOrderSim
               </div>
             </div>
           );
-        })()}
+        })(), document.body)}
 
       </div>
     </section>

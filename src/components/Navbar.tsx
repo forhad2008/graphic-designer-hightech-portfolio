@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   ArrowUpRight,
@@ -45,14 +46,19 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection: propA
       const modals = document.querySelectorAll('[data-modal="true"], [role="dialog"]');
       const otherModals = Array.from(modals).filter(m => {
         const ariaLabel = m.getAttribute('aria-label') || '';
-        return !ariaLabel.includes('Site Navigation Menu');
+        return !ariaLabel.includes('Site Navigation Menu') && !ariaLabel.includes('Navbar Submenu') && !ariaLabel.includes('Menu Toggle Window');
       });
       setIsAnyModalOpen(otherModals.length > 0);
     };
-    const interval = setInterval(checkModals, 100);
+
+    const observer = new MutationObserver(checkModals);
+    observer.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['data-modal', 'role'] });
     checkModals();
-    return () => clearInterval(interval);
+    return () => observer.disconnect();
   }, []);
+
+  // Truly active state for any window/modal: hides both top navbar and bottom dock
+  const isAnyWindowActive = isAnyModalOpen || mobileMenuOpen || commandPaletteOpen;
 
   // Hover states for the circular symbolic buttons
   const [hoveredButton, setHoveredButton] = useState<'search' | 'whatsapp' | 'book' | 'menu' | null>(null);
@@ -120,7 +126,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection: propA
   const handleLinkClick = (id: string) => {
     setMobileMenuOpen(false);
     setActiveDropdown(null);
-    onNavigate(id);
+    setTimeout(() => {
+      onNavigate(id);
+    }, 60);
   };
 
   const handleMouseEnterDropdown = (menu: string) => {
@@ -143,7 +151,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection: propA
 
   return (
     <>
-      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isAnyModalOpen ? 'opacity-0 pointer-events-none -translate-y-full' : 'opacity-100 translate-y-0'}`}>
+      <header className={`fixed top-0 left-0 right-0 z-[99998] transition-all duration-300 ${isAnyModalOpen ? 'opacity-0 pointer-events-none -translate-y-full' : 'opacity-100 translate-y-0'}`}>
         
         {/* Top Minimal Notice Bar */}
         {showTopNotice && (
@@ -465,7 +473,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection: propA
                 transition={{ type: 'spring', stiffness: 400, damping: 28 }}
                 className={`relative h-9.5 rounded-full flex items-center overflow-hidden cursor-pointer select-none transition-all shrink-0 ${
                   mobileMenuOpen
-                    ? 'bg-[#cf30aa]/20 border border-[#cf30aa] text-[#dfa2da] shadow-[0_0_16px_rgba(207,48,170,0.3)]'
+                    ? 'bg-[#cf30aa]/25 border border-[#cf30aa] text-[#dfa2da] shadow-[0_0_18px_rgba(207,48,170,0.5)] ring-1 ring-[#cf30aa]/60'
                     : 'bg-white/[0.04] hover:bg-white/[0.08] active:bg-white/[0.12] border border-white/10 hover:border-white/30 text-slate-300 hover:text-white'
                 }`}
                 style={{
@@ -473,8 +481,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection: propA
                   paddingRight: '0.65rem',
                 }}
                 aria-expanded={mobileMenuOpen}
-                aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
-                title={mobileMenuOpen ? 'Close Menu (Esc)' : 'Open Quick Menu'}
+                aria-label={mobileMenuOpen ? 'Close navigation submenu' : 'Open navigation submenu'}
+                title={mobileMenuOpen ? 'Close Menu (Esc)' : 'Open Navbar Submenu'}
               >
                 <div className="w-5 h-5 flex items-center justify-center shrink-0">
                   <AnimatePresence mode="wait" initial={false}>
@@ -534,224 +542,236 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection: propA
 
       </header>
 
-      {/* All-Device Supported Menu Drawer & Modal Window (Directly at root viewport for unconstrained stacking) */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <div 
+      {/* All-Device Supported Visual Submenu Window anchored under Navbar (Keeps the Navbar Elements from Image 2) */}
+      {mobileMenuOpen && typeof document !== 'undefined' && createPortal(
+        <div
+          data-no-butterfly="true"
+          data-visual-window="true"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Menu Toggle Window"
+          className="fixed inset-0 z-[99995] flex items-start justify-center sm:justify-end pt-20 sm:pt-24 px-3 sm:px-6 md:px-10 pb-8 bg-black/80 backdrop-blur-xl animate-fadeIn visual-window modal-window no-butterfly"
+          onClick={() => setMobileMenuOpen(false)}
+        >
+          {/* Floating Visual Submenu Window */}
+          <div
             data-no-butterfly="true"
             data-visual-window="true"
-            data-modal="true"
-            role="dialog"
-            aria-modal="true"
-            aria-label="Site Navigation Menu"
-            className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-5 md:p-6 bg-black/85 backdrop-blur-xl overflow-hidden animate-fadeIn visual-window modal-window no-butterfly select-none"
-            onClick={() => setMobileMenuOpen(false)}
+            className="relative w-full sm:w-[440px] max-w-[460px] max-h-[calc(100dvh-6.5rem)] p-[2.5px] rounded-2xl overflow-hidden flex flex-col z-10 visual-window no-butterfly shadow-[0_0_60px_rgba(207,48,170,0.5),0_0_35px_rgba(64,47,181,0.7)] animate-modalIn"
+            style={{ isolation: 'isolate' }}
+            onClick={(e) => e.stopPropagation()}
           >
-            {/* Backdrop Click Dismiss */}
-            <div className="fixed inset-0" onClick={() => setMobileMenuOpen(false)} />
+            {/* Outer Rotating Conic Glow */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300%] h-[300%] animate-[conicRotate_6s_linear_infinite] bg-[conic-gradient(rgba(0,0,0,0)_0%,#402fb5_12%,#a099d8_20%,rgba(0,0,0,0)_35%,rgba(0,0,0,0)_50%,#cf30aa_65%,#dfa2da_75%,rgba(0,0,0,0)_90%)] filter blur-[18px] opacity-80 pointer-events-none will-change-transform -z-20" />
+            
+            {/* Crisp Concentrated Rotating Conic Border */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300%] h-[300%] animate-[conicRotate_6s_linear_infinite] bg-[conic-gradient(rgba(0,0,0,0)_0%,#402fb5_12%,#a099d8_18%,rgba(0,0,0,0)_30%,rgba(0,0,0,0)_50%,#cf30aa_65%,#dfa2da_72%,rgba(0,0,0,0)_85%)] opacity-100 pointer-events-none will-change-transform -z-10" />
 
-            {/* Uiverse Glow Rotating Conic Border Wrapper with Stacking Isolation */}
-            <div 
-              data-no-butterfly="true"
-              data-visual-window="true"
-              className="relative w-full max-w-3xl p-[2px] rounded-[26px] overflow-hidden my-auto max-h-[92vh] flex flex-col z-10 visual-window no-butterfly shadow-[0_0_60px_rgba(207,48,170,0.35),0_0_35px_rgba(64,47,181,0.5)] transition-all duration-300"
-              style={{ isolation: 'isolate' }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Outer Diffuse Rotating Conic Glow */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300%] h-[300%] animate-[conicRotate_6s_linear_infinite] bg-[conic-gradient(rgba(0,0,0,0)_0%,#402fb5_12%,#a099d8_20%,rgba(0,0,0,0)_35%,rgba(0,0,0,0)_50%,#cf30aa_65%,#dfa2da_75%,rgba(0,0,0,0)_90%)] filter blur-[18px] opacity-75 pointer-events-none will-change-transform -z-20" />
+            {/* Submenu Core Card */}
+            <div className="relative z-10 w-full bg-[#080712]/98 backdrop-blur-2xl rounded-[14px] overflow-hidden flex flex-col max-h-[calc(100dvh-7rem)] shadow-2xl border border-white/10">
               
-              {/* Crisp Concentrated Rotating Conic Border */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300%] h-[300%] animate-[conicRotate_6s_linear_infinite] bg-[conic-gradient(rgba(0,0,0,0)_0%,#402fb5_12%,#a099d8_18%,rgba(0,0,0,0)_30%,rgba(0,0,0,0)_50%,#cf30aa_65%,#dfa2da_72%,rgba(0,0,0,0)_85%)] opacity-100 pointer-events-none will-change-transform -z-10" />
+              {/* Header Bar */}
+              <div className="px-4 py-3.5 bg-[#0d0a1d]/95 border-b border-white/10 flex items-center justify-between shrink-0">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-lg bg-[#cf30aa]/20 border border-[#cf30aa]/40 flex items-center justify-center text-[#dfa2da] shadow-sm">
+                    <Workflow className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm font-bold text-white font-display">Menu Toggle Window</span>
+                      <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-[#cf30aa]/25 text-[#dfa2da] border border-[#cf30aa]/40 font-bold">
+                        6 Sections
+                      </span>
+                    </div>
+                    <p className="text-[11px] text-slate-400 font-mono">
+                      Submenu directory for all device sizes
+                    </p>
+                  </div>
+                </div>
 
-              {/* Modal Core Window */}
-              <div className="relative z-10 w-full bg-[#080712] rounded-[24px] overflow-hidden flex flex-col max-h-[90vh] shadow-2xl border border-white/10">
+                <div className="flex items-center gap-2">
+                  <span className="text-[10px] font-mono text-slate-400 px-2 py-0.5 rounded bg-white/5 border border-white/10">
+                    ESC
+                  </span>
+                  <button
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="w-8 h-8 rounded-lg bg-white/5 hover:bg-[#cf30aa] border border-white/15 hover:border-[#cf30aa] text-slate-300 hover:text-white flex items-center justify-center transition-all cursor-pointer"
+                    title="Close Window (Esc)"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Submenu Body: The Exact 6 Navbar Elements from Image 2 */}
+              <div className="overflow-y-auto p-3.5 space-y-2.5 custom-scrollbar flex-1 min-h-0">
                 
-                {/* 1. Pinned Dedicated Window Header Bar (Zero Overlap with Content) */}
-                <div className="px-4 sm:px-6 py-3.5 bg-[#0d0a1d]/95 backdrop-blur-xl border-b border-white/10 flex items-center justify-between shrink-0">
-                  <div className="flex items-center gap-3">
-                    <ProfileAvatar sizeClassName="w-9 h-9 rounded-xl shadow-md ring-1 ring-white/15" textSizeClassName="text-xs" />
-                    <div className="flex flex-col">
-                      <div className="flex items-center gap-2">
-                        <span className="text-sm font-bold text-white font-display">Abdullah Forhad</span>
-                        <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-[#cf30aa]/20 text-[#dfa2da] border border-[#cf30aa]/40">
-                          Navigator
-                        </span>
-                      </div>
-                      <p className="text-[11px] font-mono text-slate-400 flex items-center gap-1.5 mt-0.5">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                        <span>Available for Q2 Projects</span>
-                      </p>
+                {/* 1. Work (with expandable subcategories matching Image 2) */}
+                <div className="rounded-xl border border-white/10 bg-white/[0.03] p-2.5 space-y-2">
+                  <button
+                    onClick={() => handleLinkClick('portfolio')}
+                    className={`w-full flex items-center justify-between p-2.5 rounded-lg transition-all cursor-pointer ${
+                      activeSection === 'portfolio'
+                        ? 'neu-3d-btn-primary text-white font-bold'
+                        : 'hover:bg-white/10 text-slate-200 hover:text-white'
+                    }`}
+                  >
+                    <div className="flex items-center gap-2.5">
+                      <Briefcase className="w-4 h-4 text-[#dfa2da]" />
+                      <span className="text-xs sm:text-sm font-bold font-display">Work</span>
+                      <ChevronDown className="w-3.5 h-3.5 opacity-70" />
                     </div>
-                  </div>
-
-                  <div className="flex items-center gap-2">
-                    <span className="hidden sm:inline-flex items-center gap-1 px-2 py-1 text-[10px] font-mono text-slate-400 bg-white/5 border border-white/10 rounded-lg">
-                      <span>ESC</span>
+                    <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-black/50 text-[#dfa2da] border border-white/10">
+                      Portfolio
                     </span>
-                    <button
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="w-8 h-8 rounded-full bg-white/5 hover:bg-[#cf30aa] border border-white/15 hover:border-[#cf30aa] text-slate-300 hover:text-white flex items-center justify-center transition-all cursor-pointer shadow-sm group"
-                      aria-label="Close navigation menu"
-                      title="Close Menu (Esc)"
-                    >
-                      <X className="w-4 h-4 group-hover:rotate-90 transition-transform duration-200" />
-                    </button>
+                  </button>
+
+                  {/* Sub-categories */}
+                  <div className="grid grid-cols-2 gap-1.5 pl-1">
+                    {portfolioCategories.map((cat, i) => (
+                      <button
+                        key={i}
+                        onClick={() => handleLinkClick(cat.sectionId)}
+                        className="text-left px-2.5 py-2 rounded-lg bg-white/[0.03] hover:bg-[#cf30aa]/20 border border-white/5 hover:border-[#cf30aa]/40 text-slate-300 hover:text-white transition-all cursor-pointer flex items-center justify-between group"
+                      >
+                        <span className="text-[11px] font-medium group-hover:text-[#dfa2da] truncate">{cat.label}</span>
+                        <ArrowUpRight className="w-3 h-3 text-slate-500 group-hover:text-[#dfa2da] shrink-0" />
+                      </button>
+                    ))}
                   </div>
                 </div>
 
-                {/* 2. Scrollable Body with Clean Single Scrollbar */}
-                <div className="overflow-y-auto flex-1 p-4 sm:p-5 md:p-6 space-y-4 custom-scrollbar bg-[#05040d]">
-                  
-                  {/* Studio Overview Status Bar */}
-                  <div className="p-3 sm:p-3.5 rounded-2xl bg-gradient-to-r from-[#120e29]/90 via-[#0d0a1f]/90 to-[#120e29]/90 border border-white/10 flex flex-wrap items-center justify-between gap-2.5 text-xs">
-                    <div className="flex items-center gap-2 text-slate-300">
-                      <span className="text-[#dfa2da] font-bold">● Studio Directory</span>
-                      <span className="text-slate-600">|</span>
-                      <span className="text-[11px] text-slate-400 font-mono">11 Sections · Instant Jump</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-[11px] font-mono">
-                      <span className="text-emerald-400 flex items-center gap-1">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                        100% On-Time
-                      </span>
-                      <span className="text-slate-600">·</span>
-                      <span className="text-[#dfa2da] flex items-center gap-0.5">
-                        <Star className="w-3 h-3 fill-[#dfa2da]" />
-                        5.0★ (120+ Reviews)
-                      </span>
-                    </div>
+                {/* 2. Pricing */}
+                <button
+                  onClick={() => handleLinkClick('pricing')}
+                  className={`w-full flex items-center justify-between p-3 rounded-xl border transition-all cursor-pointer ${
+                    activeSection === 'pricing'
+                      ? 'bg-[#cf30aa]/20 text-white border-[#cf30aa] shadow-[0_0_12px_rgba(207,48,170,0.3)]'
+                      : 'border-white/10 hover:border-white/20 bg-white/[0.02] hover:bg-white/10 text-slate-200 hover:text-white'
+                  }`}
+                >
+                  <div className="flex items-center gap-2.5">
+                    <Calendar className="w-4 h-4 text-[#dfa2da]" />
+                    <span className="text-xs sm:text-sm font-bold font-display">Pricing</span>
                   </div>
+                  <span className="text-[11px] font-mono text-slate-400">Tiers &amp; Packages</span>
+                </button>
 
-                  {/* Primary Navigation Grid with Elemental Cards (No clipping, rich layout) */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 text-xs">
-                    {[
-                      { id: 'portfolio', title: 'Featured Work & Portfolio', desc: 'Brand identity, original logo marks & SaaS UI systems', icon: Briefcase, tag: '01 Work' },
-                      { id: 'graphics-design', title: 'Graphics & Visual Design', desc: 'Packaging dielines, apparel, print & brand assets', icon: Layers, tag: '02 Graphics' },
-                      { id: 'design-templates', title: 'Design Templates Blueprint', desc: 'Premium Figma, Photoshop & vector resource sets', icon: Layers, tag: '03 Templates' },
-                      { id: 'social-banners', title: 'Social & Visual Banners', desc: 'Gritty sports posters & luxury corporate ad campaigns', icon: Globe, tag: '04 Social' },
-                      { id: 'services', title: 'Specialized Freelance Gigs', desc: 'Verified Fiverr Pro design services & rapid delivery', icon: Zap, tag: '05 Services' },
-                      { id: 'pricing', title: 'Transparent Pricing Tiers', desc: 'Starter, Pro & Enterprise blueprints with deliverables', icon: Calendar, tag: '06 Pricing' },
-                      { id: 'estimator', title: 'Project Cost Estimator', desc: 'Interactive scope calculator with real-time quote generation', icon: Sliders, tag: '07 Estimator' },
-                      { id: 'process', title: '4-Step Design Pipeline', desc: 'Discovery, concept drafting, iterative polish & final handoff', icon: Workflow, tag: '08 Process' },
-                      { id: 'reviews', title: 'Verified Client Reviews', desc: '5.0-star ratings and testimonials from 120+ founders', icon: Star, tag: '09 Reviews' },
-                      { id: 'contact', title: 'Direct Client Booking & Quote', desc: 'Schedule your project, customize deliverables & start work', icon: Send, tag: '10 Booking' },
-                      { id: 'faq', title: 'Frequently Asked Questions', desc: 'Turnaround speed, vector source files, revisions & copyright', icon: HelpCircle, tag: '11 FAQ' },
-                    ].map((item) => {
-                      const IconComponent = item.icon;
-                      const isActive = activeSection === item.id;
-                      return (
-                        <button
-                          key={item.id}
-                          onClick={() => {
-                            setMobileMenuOpen(false);
-                            handleLinkClick(item.id);
-                          }}
-                          className={`p-3 sm:p-3.5 rounded-2xl text-left transition-all duration-200 flex items-start gap-3 cursor-pointer group border ${
-                            isActive
-                              ? 'bg-[#cf30aa]/20 text-white border-[#cf30aa]/70 shadow-[0_0_20px_rgba(207,48,170,0.3)] ring-1 ring-[#cf30aa]/50'
-                              : 'bg-[#0c091d]/85 text-slate-200 hover:bg-[#151033] hover:text-white border-white/10 hover:border-[#cf30aa]/50 hover:shadow-[0_4px_16px_rgba(0,0,0,0.4)]'
-                          }`}
-                        >
-                          <div className={`p-2.5 rounded-xl border group-hover:scale-105 transition-transform shrink-0 ${
-                            isActive 
-                              ? 'bg-[#cf30aa]/30 border-[#cf30aa]/60 text-white shadow-[0_0_10px_#cf30aa]' 
-                              : 'bg-black/40 border-white/10 text-[#dfa2da] group-hover:border-[#cf30aa]/40'
-                          }`}>
-                            <IconComponent className="w-4 h-4" />
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-center justify-between gap-1.5 mb-1">
-                              <span className="font-bold text-white font-display text-[13px] group-hover:text-[#dfa2da] transition-colors leading-tight">
-                                {item.title}
-                              </span>
-                              <span className={`text-[9px] font-mono px-1.5 py-0.5 rounded shrink-0 border ${
-                                isActive 
-                                  ? 'bg-[#cf30aa]/40 text-white border-[#cf30aa]' 
-                                  : 'bg-black/50 text-[#dfa2da] border-white/10'
-                              }`}>
-                                {item.tag}
-                              </span>
-                            </div>
-                            <p className="text-[11px] text-slate-400 group-hover:text-slate-300 transition-colors line-clamp-2 leading-snug">
-                              {item.desc}
-                            </p>
-                          </div>
-                        </button>
-                      );
-                    })}
+                {/* 3. Estimator (with Tool badge from Image 2!) */}
+                <button
+                  onClick={() => handleLinkClick('estimator')}
+                  className={`w-full flex items-center justify-between p-3 rounded-xl border transition-all cursor-pointer ${
+                    activeSection === 'estimator'
+                      ? 'bg-[#cf30aa]/20 text-white border-[#cf30aa] shadow-[0_0_12px_rgba(207,48,170,0.3)]'
+                      : 'border-white/10 hover:border-white/20 bg-white/[0.02] hover:bg-white/10 text-slate-200 hover:text-white'
+                  }`}
+                >
+                  <div className="flex items-center gap-2.5">
+                    <Zap className="w-4 h-4 text-[#dfa2da]" />
+                    <span className="text-xs sm:text-sm font-bold font-display">Estimator</span>
+                    <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-[#cf30aa]/20 text-[#dfa2da] font-bold border border-[#cf30aa]/40">
+                      Tool
+                    </span>
                   </div>
+                  <span className="text-[11px] font-mono text-slate-400">Interactive Scope</span>
+                </button>
 
-                </div>
-
-                {/* 3. Pinned Window Bottom Action Suite & Contact Bar */}
-                <div className="p-3.5 sm:p-4 bg-[#0a0718]/95 backdrop-blur-xl border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 shrink-0">
-                  
-                  {/* Direct Communication Channels */}
-                  <div className="flex items-center gap-4 text-[11px] text-slate-400">
-                    <a
-                      href="mailto:contact@abdullahforhad.com"
-                      className="flex items-center gap-1.5 hover:text-[#dfa2da] transition-colors"
-                    >
-                      <Mail className="w-3.5 h-3.5 text-[#dfa2da]" />
-                      <span className="font-mono">contact@abdullahforhad.com</span>
-                    </a>
-                    <span className="text-slate-700 hidden sm:inline">|</span>
-                    <a
-                      href="tel:+8801342900364"
-                      className="flex items-center gap-1.5 hover:text-[#dfa2da] transition-colors"
-                    >
-                      <Phone className="w-3.5 h-3.5 text-[#dfa2da]" />
-                      <span className="font-mono">+880 1342 900364</span>
-                    </a>
+                {/* 4. Process */}
+                <button
+                  onClick={() => handleLinkClick('process')}
+                  className={`w-full flex items-center justify-between p-3 rounded-xl border transition-all cursor-pointer ${
+                    activeSection === 'process'
+                      ? 'bg-[#cf30aa]/20 text-white border-[#cf30aa] shadow-[0_0_12px_rgba(207,48,170,0.3)]'
+                      : 'border-white/10 hover:border-white/20 bg-white/[0.02] hover:bg-white/10 text-slate-200 hover:text-white'
+                  }`}
+                >
+                  <div className="flex items-center gap-2.5">
+                    <Workflow className="w-4 h-4 text-[#dfa2da]" />
+                    <span className="text-xs sm:text-sm font-bold font-display">Process</span>
                   </div>
+                  <span className="text-[11px] font-mono text-slate-400">4-Step Pipeline</span>
+                </button>
 
-                  {/* 3 Quick Action Buttons */}
-                  <div className="flex items-center gap-2 w-full sm:w-auto">
-                    <button
-                      onClick={() => {
-                        setMobileMenuOpen(false);
-                        setCommandPaletteOpen(true);
-                      }}
-                      className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-semibold text-slate-200 bg-white/5 hover:bg-white/10 border border-white/15 rounded-xl transition-all cursor-pointer"
-                    >
-                      <Search className="w-3.5 h-3.5 text-[#dfa2da]" />
-                      <span>Search</span>
-                      <span className="text-[10px] font-mono text-slate-400">⌘K</span>
-                    </button>
-
-                    <a
-                      href="https://wa.me/8801342900364"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-bold text-[#dfa2da] bg-[#cf30aa]/15 hover:bg-[#cf30aa]/25 border border-[#cf30aa]/40 rounded-xl transition-all"
-                    >
-                      <MessageCircle className="w-3.5 h-3.5 text-[#dfa2da]" />
-                      <span>WhatsApp</span>
-                    </a>
-
-                    <button
-                      onClick={() => handleLinkClick('contact')}
-                      className="flex-1 sm:flex-initial px-3.5 py-2 text-xs font-bold text-white neu-3d-btn-primary rounded-xl flex items-center justify-center gap-1.5 shadow-md transition-all cursor-pointer"
-                    >
-                      <Sparkles className="w-3.5 h-3.5 stroke-[2.5]" />
-                      <span>Book Project</span>
-                    </button>
+                {/* 5. Reviews */}
+                <button
+                  onClick={() => handleLinkClick('reviews')}
+                  className={`w-full flex items-center justify-between p-3 rounded-xl border transition-all cursor-pointer ${
+                    activeSection === 'reviews'
+                      ? 'bg-[#cf30aa]/20 text-white border-[#cf30aa] shadow-[0_0_12px_rgba(207,48,170,0.3)]'
+                      : 'border-white/10 hover:border-white/20 bg-white/[0.02] hover:bg-white/10 text-slate-200 hover:text-white'
+                  }`}
+                >
+                  <div className="flex items-center gap-2.5">
+                    <Star className="w-4 h-4 text-[#dfa2da]" />
+                    <span className="text-xs sm:text-sm font-bold font-display">Reviews</span>
                   </div>
+                  <span className="text-[11px] font-mono text-emerald-400 font-semibold">5.0★ (120+ Reviews)</span>
+                </button>
 
-                </div>
+                {/* 6. FAQ */}
+                <button
+                  onClick={() => handleLinkClick('faq')}
+                  className={`w-full flex items-center justify-between p-3 rounded-xl border transition-all cursor-pointer ${
+                    activeSection === 'faq'
+                      ? 'bg-[#cf30aa]/20 text-white border-[#cf30aa] shadow-[0_0_12px_rgba(207,48,170,0.3)]'
+                      : 'border-white/10 hover:border-white/20 bg-white/[0.02] hover:bg-white/10 text-slate-200 hover:text-white'
+                  }`}
+                >
+                  <div className="flex items-center gap-2.5">
+                    <HelpCircle className="w-4 h-4 text-[#dfa2da]" />
+                    <span className="text-xs sm:text-sm font-bold font-display">FAQ</span>
+                  </div>
+                  <span className="text-[11px] font-mono text-slate-400">Turnaround &amp; Files</span>
+                </button>
 
               </div>
+
+              {/* Bottom Quick Action Suite */}
+              <div className="p-3.5 bg-[#0a0718]/95 border-t border-white/10 flex items-center justify-between gap-2 shrink-0">
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    setCommandPaletteOpen(true);
+                  }}
+                  className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-semibold text-slate-200 bg-white/5 hover:bg-white/10 border border-white/15 rounded-xl transition-all cursor-pointer"
+                >
+                  <Search className="w-3.5 h-3.5 text-[#dfa2da]" />
+                  <span>Search</span>
+                  <span className="text-[10px] font-mono text-slate-400">⌘K</span>
+                </button>
+
+                <a
+                  href="https://wa.me/8801342900364"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-bold text-[#dfa2da] bg-[#cf30aa]/15 hover:bg-[#cf30aa]/25 border border-[#cf30aa]/40 rounded-xl transition-all"
+                >
+                  <MessageCircle className="w-3.5 h-3.5 text-[#dfa2da]" />
+                  <span>WhatsApp</span>
+                </a>
+
+                <button
+                  onClick={() => handleLinkClick('contact')}
+                  className="flex-1 px-3 py-2 text-xs font-bold text-white neu-3d-btn-primary rounded-xl flex items-center justify-center gap-1 shadow-md transition-all cursor-pointer"
+                >
+                  <Sparkles className="w-3.5 h-3.5 stroke-[2.5]" />
+                  <span>Book</span>
+                </button>
+              </div>
+
             </div>
           </div>
-        )}
-      </AnimatePresence>
+        </div>,
+        document.body
+      )}
 
       {/* Modern Floating Mobile Bottom Navigation Dock (1-thumb touch navigation) */}
       <nav
         aria-label="Mobile Navigation Dock"
         data-no-butterfly="true"
-        className="md:hidden fixed bottom-3 inset-x-3 z-40 max-w-sm mx-auto bg-[#070B13]/90 backdrop-blur-2xl border border-white/15 rounded-full p-1.5 shadow-[0_12px_36px_rgba(0,0,0,0.7)] flex items-center justify-around"
+        className={`md:hidden fixed bottom-3 inset-x-3 z-40 max-w-sm mx-auto bg-[#070B13]/90 backdrop-blur-2xl border border-white/15 rounded-full p-1.5 shadow-[0_12px_36px_rgba(0,0,0,0.7)] flex items-center justify-around transition-all duration-300 ${
+          isAnyWindowActive ? 'opacity-0 pointer-events-none translate-y-28 scale-90' : 'opacity-100 translate-y-0 scale-100'
+        }`}
       >
         {/* 1. Work */}
         <button

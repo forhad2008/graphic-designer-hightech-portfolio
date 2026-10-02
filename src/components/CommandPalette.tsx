@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import {
   Search,
   X,
@@ -227,7 +228,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
 
   if (!isOpen) return null;
 
-  return (
+  return createPortal(
     <div
       data-no-butterfly="true"
       data-visual-window="true"
@@ -338,6 +339,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
 
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
