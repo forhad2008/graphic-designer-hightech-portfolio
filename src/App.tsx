@@ -14,6 +14,7 @@ import { Reviews } from './components/Reviews';
 import { SocialVisibility } from './components/SocialVisibility';
 import { DesignProcess } from './components/DesignProcess';
 import { ContactBooking } from './components/ContactBooking';
+import { AiAssistantSection } from './components/AiAssistantSection';
 import { FAQ } from './components/FAQ';
 import { Footer } from './components/Footer';
 import { FloatingChat } from './components/FloatingChat';
@@ -169,6 +170,11 @@ export default function App() {
           initialDeliverables={bookingPrefill.deliverables}
           initialNotes={bookingPrefill.notes}
         />
+      </ScrollSection>
+
+      {/* Gemini AI Assistant Section */}
+      <ScrollSection id="ai-intelligence" distance={45} duration={0.8}>
+        <AiAssistantSection />
       </ScrollSection>
 
       {/* FAQ Accordion */}
