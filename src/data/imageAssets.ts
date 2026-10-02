@@ -87,12 +87,12 @@ export const IMAGE_ASSETS = {
     whatsApp: './brand3.png',
   },
 
-  // VERIFIED CLIENT REVIEW AVATARS
+  // VERIFIED CLIENT REVIEW AVATARS (Distinct professional client headshots from around the world)
   clientAvatars: {
-    sarahJenkins: './1p.jpg',
-    oliverSmith: './1p.jpg',
-    lukasMeyer: './1p.jpg',
-    alexandreDupont: './1p.jpg',
-    fatimaAlSayed: './1p.jpg',
+    sarahJenkins: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=256&h=256&q=80',
+    oliverSmith: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=256&h=256&q=80',
+    lukasMeyer: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=256&h=256&q=80',
+    alexandreDupont: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=256&h=256&q=80',
+    fatimaAlSayed: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=256&h=256&q=80',
   },
 };

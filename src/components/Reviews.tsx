@@ -54,7 +54,11 @@ export const Reviews: React.FC = () => {
                       <img
                         src={rev.avatarUrl}
                         alt={rev.clientName}
-                        className="w-9 h-9 rounded-xl object-cover border border-white/20 shadow-sm"
+                        className="w-9 h-9 rounded-xl object-cover border border-white/20 shadow-sm shrink-0"
+                        loading="lazy"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src = `https://ui-avatars.com/api/?name=${encodeURIComponent(rev.clientName)}&background=cf30aa&color=fff&size=128`;
+                        }}
                       />
                     )}
                     <div>

@@ -16,6 +16,7 @@ import { ContactBooking } from './components/ContactBooking';
 import { FAQ } from './components/FAQ';
 import { Footer } from './components/Footer';
 import { FloatingChat } from './components/FloatingChat';
+import { BackToTop } from './components/BackToTop';
 import { ButterflyCursor } from './components/ButterflyCursor';
 import { ScrollSection } from './components/ScrollSection';
 import { PortfolioItem, PricingPackage, FiverrGig } from './types';
@@ -180,6 +181,9 @@ export default function App() {
 
       {/* Animated Bottom Corner Chat Feature with Icon Morphing */}
       <FloatingChat />
+
+      {/* Floating Back to Top Button with Dynamic Scroll Progress */}
+      <BackToTop />
     </div>
   );
 }
