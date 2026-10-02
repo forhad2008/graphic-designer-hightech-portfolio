@@ -43,7 +43,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection: propA
   useEffect(() => {
     const checkModals = () => {
       const modals = document.querySelectorAll('[data-modal="true"], [role="dialog"]');
-      setIsAnyModalOpen(modals.length > 0);
+      const otherModals = Array.from(modals).filter(m => {
+        const ariaLabel = m.getAttribute('aria-label') || '';
+        return !ariaLabel.includes('Site Navigation Menu');
+      });
+      setIsAnyModalOpen(otherModals.length > 0);
     };
     const interval = setInterval(checkModals, 100);
     checkModals();
@@ -139,7 +143,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection: propA
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isAnyModalOpen ? 'opacity-0 pointer-events-none -translate-y-full' : 'opacity-100 translate-y-0'}`}>
         
         {/* Top Minimal Notice Bar */}
         {showTopNotice && (
