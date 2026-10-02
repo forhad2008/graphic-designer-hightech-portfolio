@@ -13,6 +13,7 @@ import {
 import { GlowCard } from './GlowCard';
 import { IMAGE_ASSETS } from '../data/imageAssets';
 import { ProfileAvatar } from './ProfileAvatar';
+import { VeoCinematicVideo } from './VeoCinematicVideo';
 
 interface HeroProps {
   onExploreWork: () => void;
@@ -22,7 +23,7 @@ interface HeroProps {
 
 export const Hero: React.FC<HeroProps> = ({ onExploreWork, onBookProject, onOpenEstimator }) => {
   const [copiedHex, setCopiedHex] = useState<string | null>(null);
-  const [activeShowcaseTab, setActiveShowcaseTab] = useState<'brand' | 'packaging' | 'social'>('brand');
+  const [activeShowcaseTab, setActiveShowcaseTab] = useState<'brand' | 'packaging' | 'social' | 'veo'>('brand');
 
   const showcaseItems = {
     brand: {
@@ -170,25 +171,30 @@ export const Hero: React.FC<HeroProps> = ({ onExploreWork, onBookProject, onOpen
                   </div>
 
                   {/* Tabs inside 3D sunken socket */}
-                  <div className="flex items-center gap-1.5 p-1.5 neu-3d-inset rounded-2xl border border-white/5">
-                    {(['brand', 'packaging', 'social'] as const).map((tab) => (
+                  <div className="flex items-center gap-1 p-1.5 neu-3d-inset rounded-2xl border border-white/5">
+                    {(['brand', 'packaging', 'social', 'veo'] as const).map((tab) => (
                       <button
                         key={tab}
                         onClick={() => setActiveShowcaseTab(tab)}
-                        className={`px-3.5 py-1.5 text-[11px] font-mono uppercase rounded-xl transition-all cursor-pointer ${
+                        className={`px-3 py-1.5 text-[11px] font-mono uppercase rounded-xl transition-all cursor-pointer ${
                           activeShowcaseTab === tab
                             ? 'btn-gradient-purple-pink text-white font-bold shadow-[0_0_12px_rgba(207,48,170,0.4)]'
                             : 'text-slate-400 hover:text-white'
                         }`}
                       >
-                        {tab}
+                        {tab === 'veo' ? 'Veo Video' : tab}
                       </button>
                     ))}
                   </div>
                 </div>
 
                 {/* Showcase Grid */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+                {activeShowcaseTab === 'veo' ? (
+                  <div className="w-full">
+                    <VeoCinematicVideo />
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
                   
                   {/* Image Card (8 cols) */}
                   <div className="lg:col-span-8 rounded-2xl neu-3d-inset relative overflow-hidden group min-h-[260px] p-1.5 border border-white/10">
@@ -267,6 +273,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreWork, onBookProject, onOpen
                   </div>
 
                 </div>
+                )}
 
               </div>
             </GlowCard>

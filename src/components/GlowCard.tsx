@@ -28,7 +28,7 @@ export const GlowCard: React.FC<GlowCardProps> = ({
 
   const conicBackground = customColors && customColors.length > 0
     ? `conic-gradient(rgba(0,0,0,0) 0%, ${customColors[0]} 12%, ${customColors[1] || customColors[0]} 20%, rgba(0,0,0,0) 35%, rgba(0,0,0,0) 50%, ${customColors[2] || customColors[0]} 65%, ${customColors[3] || customColors[1] || customColors[0]} 75%, rgba(0,0,0,0) 90%)`
-    : undefined;
+    : `conic-gradient(rgba(0,0,0,0) 0%, #402fb5 12%, #a099d8 20%, rgba(0,0,0,0) 35%, rgba(0,0,0,0) 50%, #cf30aa 65%, #dfa2da 75%, rgba(0,0,0,0) 90%)`;
 
   return (
     <div
