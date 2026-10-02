@@ -5,11 +5,13 @@ import { BeforeAfterSlider } from './components/BeforeAfterSlider';
 import { Portfolio } from './components/Portfolio';
 import { GraphicsDesignShowcase } from './components/DesignShowcases';
 import { TemplatesShowcase } from './components/TemplatesShowcase';
+import { SocialMediaCovers } from './components/SocialMediaCovers';
 import { ServicesGigs } from './components/ServicesGigs';
 import { PortfolioModal } from './components/PortfolioModal';
 import { PricingTiers } from './components/PricingTiers';
 import { ProjectEstimator } from './components/ProjectEstimator';
 import { Reviews } from './components/Reviews';
+import { SocialVisibility } from './components/SocialVisibility';
 import { DesignProcess } from './components/DesignProcess';
 import { ContactBooking } from './components/ContactBooking';
 import { FAQ } from './components/FAQ';
@@ -118,6 +120,14 @@ export default function App() {
         />
       </ScrollSection>
 
+      {/* Social Media Covers & Banners Showcase */}
+      <ScrollSection id="social-covers" distance={45} duration={0.8}>
+        <SocialMediaCovers
+          onSelectItem={(item) => setSelectedPortfolioItem(item)}
+          onOrderSimilar={handleOrderSimilar}
+        />
+      </ScrollSection>
+
       {/* Specialized Services Gigs Section */}
       <ScrollSection id="services" distance={45} duration={0.8}>
         <ServicesGigs
@@ -143,6 +153,11 @@ export default function App() {
       {/* Client Reviews & Fiverr Testimonials */}
       <ScrollSection id="reviews" distance={40} duration={0.8}>
         <Reviews />
+      </ScrollSection>
+
+      {/* Social Media Covers & Network Visibility */}
+      <ScrollSection id="socials" distance={40} duration={0.8}>
+        <SocialVisibility />
       </ScrollSection>
 
       {/* Client Booking & Contact Form */}

@@ -50,7 +50,7 @@ export const FloatingChat: React.FC = () => {
   };
 
   return (
-    <div className={`fixed bottom-20 right-3.5 sm:bottom-22 sm:right-6 md:bottom-5 md:right-5 z-40 flex flex-col items-end transition-all duration-300 ${
+    <div className={`fixed bottom-4 right-3.5 sm:bottom-5 sm:right-5 md:bottom-5 md:right-5 z-40 flex flex-col items-end transition-all duration-300 ${
       isModalOpen ? 'opacity-0 pointer-events-none translate-y-24 scale-75' : 'opacity-100 translate-y-0 scale-100'
     }`}>
       

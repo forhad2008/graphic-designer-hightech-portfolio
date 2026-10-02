@@ -64,7 +64,7 @@ export const BackToTop: React.FC = () => {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.6, y: 20 }}
           transition={{ type: 'spring', damping: 24, stiffness: 350 }}
-          className="fixed bottom-[142px] sm:bottom-[82px] right-3.5 sm:right-6 z-30 flex items-center gap-2 pointer-events-auto"
+          className="fixed bottom-20 sm:bottom-[76px] right-3.5 sm:right-6 z-30 flex items-center gap-2 pointer-events-auto"
         >
           {/* Tooltip on hover */}
           <AnimatePresence>

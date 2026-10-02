@@ -20,7 +20,8 @@ import {
   Sliders,
   Workflow,
   Phone,
-  Mail
+  Mail,
+  Share2
 } from 'lucide-react';
 import { CommandPalette } from './CommandPalette';
 import { FIVERR_GIGS } from '../data/portfolioData';
@@ -88,7 +89,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection: propA
         setScrollProgress(progress);
       }
 
-      const sections = ['portfolio', 'graphics-design', 'design-templates', 'services', 'pricing', 'estimator', 'process', 'reviews', 'contact', 'faq'];
+      const sections = ['portfolio', 'graphics-design', 'design-templates', 'social-covers', 'services', 'pricing', 'estimator', 'process', 'reviews', 'contact', 'faq'];
       const scrollPosition = scrollY + 200;
 
       for (let i = sections.length - 1; i >= 0; i--) {
@@ -146,6 +147,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection: propA
     { label: 'Logo & Branding', desc: 'Original brand system designs', icon: Sparkles, sectionId: 'portfolio' },
     { label: 'Graphics Design', desc: 'Campaign, editorial, and commercial designs', icon: Layers, sectionId: 'graphics-design' },
     { label: 'Design Templates', desc: 'Print blueprints & identity mockups', icon: Layers, sectionId: 'design-templates' },
+    { label: 'Social Media Covers', desc: 'YouTube, Instagram & LinkedIn Banners', icon: Share2, sectionId: 'social-covers' },
   ];
 
   return (
@@ -549,14 +551,14 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection: propA
           role="dialog"
           aria-modal="true"
           aria-label="Menu Toggle Window"
-          className="fixed inset-0 z-[99995] flex items-center sm:items-start justify-center sm:justify-end pt-16 sm:pt-24 px-3 sm:px-6 md:px-10 pb-20 sm:pb-8 bg-black/80 backdrop-blur-xl animate-fadeIn visual-window modal-window no-butterfly"
+          className="fixed inset-0 z-[99995] flex items-center justify-center p-3 sm:items-start sm:pt-24 sm:justify-end sm:px-6 md:px-10 pb-4 bg-black/80 backdrop-blur-xl animate-fadeIn visual-window modal-window no-butterfly"
           onClick={() => setMobileMenuOpen(false)}
         >
           {/* Floating Visual Submenu Window */}
           <div
             data-no-butterfly="true"
             data-visual-window="true"
-            className="relative w-full sm:w-[440px] max-w-[460px] max-h-[85vh] sm:max-h-[calc(100dvh-6.5rem)] p-[2.5px] rounded-2xl overflow-hidden flex flex-col z-10 visual-window no-butterfly shadow-[0_0_60px_rgba(207,48,170,0.5),0_0_35px_rgba(64,47,181,0.7)] animate-modalIn"
+            className="relative w-full sm:w-[440px] max-w-[460px] max-h-[94vh] sm:max-h-[calc(100dvh-5rem)] p-[2.5px] rounded-2xl overflow-hidden flex flex-col z-10 visual-window no-butterfly shadow-[0_0_60px_rgba(207,48,170,0.5),0_0_35px_rgba(64,47,181,0.7)] animate-modalIn"
             style={{ isolation: 'isolate' }}
             onClick={(e) => e.stopPropagation()}
           >
@@ -567,7 +569,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection: propA
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300%] h-[300%] animate-[conicRotate_6s_linear_infinite] bg-[conic-gradient(rgba(0,0,0,0)_0%,#402fb5_12%,#a099d8_18%,rgba(0,0,0,0)_30%,rgba(0,0,0,0)_50%,#cf30aa_65%,#dfa2da_72%,rgba(0,0,0,0)_85%)] opacity-100 pointer-events-none will-change-transform -z-10" />
 
             {/* Submenu Core Card */}
-            <div className="relative z-10 w-full bg-[#080712]/98 backdrop-blur-2xl rounded-[14px] overflow-hidden flex flex-col max-h-[calc(100dvh-7rem)] shadow-2xl border border-white/10">
+            <div className="relative z-10 w-full bg-[#080712]/98 backdrop-blur-2xl rounded-[14px] overflow-hidden flex flex-col max-h-[94vh] sm:max-h-[calc(100dvh-5.5rem)] shadow-2xl border border-white/10">
               
               {/* Header Bar */}
               <div className="px-4 py-3.5 bg-[#0d0a1d]/95 border-b border-white/10 flex items-center justify-between shrink-0">
@@ -766,106 +768,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection: propA
       )}
 
       {/* Modern Floating Mobile Bottom Navigation Dock (1-thumb touch navigation) */}
-      <nav
-        aria-label="Mobile Navigation Dock"
-        data-no-butterfly="true"
-        className={`md:hidden fixed bottom-3 inset-x-3 mb-safe z-40 max-w-sm mx-auto bg-[#070B13]/90 backdrop-blur-2xl border border-white/15 rounded-full p-1.5 shadow-[0_12px_36px_rgba(0,0,0,0.7)] flex items-center justify-around transition-all duration-300 ${
-          isAnyWindowActive ? 'opacity-0 pointer-events-none translate-y-28 scale-90' : 'opacity-100 translate-y-0 scale-100'
-        }`}
-      >
-        {/* 1. Work */}
-        <button
-          onClick={() => handleLinkClick('portfolio')}
-          className={`relative px-2.5 py-2 rounded-full flex flex-col items-center gap-0.5 transition-all cursor-pointer ${
-            activeSection === 'portfolio'
-              ? 'text-[#dfa2da] font-bold'
-              : 'text-slate-400 hover:text-white'
-          }`}
-          title="Work"
-        >
-          <Briefcase className="w-4 h-4" />
-          <span className="text-[10px] font-medium leading-none">Work</span>
-          {activeSection === 'portfolio' && (
-            <motion.span
-              layoutId="mobile-dock-dot"
-              className="absolute -bottom-0.5 w-1.5 h-1.5 rounded-full bg-[#cf30aa] shadow-[0_0_8px_#cf30aa]"
-            />
-          )}
-        </button>
-
-        {/* 2. Pricing */}
-        <button
-          onClick={() => handleLinkClick('pricing')}
-          className={`relative px-2.5 py-2 rounded-full flex flex-col items-center gap-0.5 transition-all cursor-pointer ${
-            activeSection === 'pricing'
-              ? 'text-[#dfa2da] font-bold'
-              : 'text-slate-400 hover:text-white'
-          }`}
-          title="Pricing"
-        >
-          <Calendar className="w-4 h-4" />
-          <span className="text-[10px] font-medium leading-none">Pricing</span>
-          {activeSection === 'pricing' && (
-            <motion.span
-              layoutId="mobile-dock-dot"
-              className="absolute -bottom-0.5 w-1.5 h-1.5 rounded-full bg-[#cf30aa] shadow-[0_0_8px_#cf30aa]"
-            />
-          )}
-        </button>
-
-        {/* 3. Estimator */}
-        <button
-          onClick={() => handleLinkClick('estimator')}
-          className={`relative px-2.5 py-2 rounded-full flex flex-col items-center gap-0.5 transition-all cursor-pointer ${
-            activeSection === 'estimator'
-              ? 'text-[#dfa2da] font-bold'
-              : 'text-slate-400 hover:text-white'
-          }`}
-          title="Price Estimator"
-        >
-          <div className="relative">
-            <Zap className="w-4 h-4 text-[#dfa2da]" />
-            <span className="absolute -top-1 -right-2 w-2 h-2 rounded-full bg-[#cf30aa] animate-ping" />
-          </div>
-          <span className="text-[10px] font-medium leading-none text-[#dfa2da]">Estimate</span>
-          {activeSection === 'estimator' && (
-            <motion.span
-              layoutId="mobile-dock-dot"
-              className="absolute -bottom-0.5 w-1.5 h-1.5 rounded-full bg-[#cf30aa] shadow-[0_0_8px_#cf30aa]"
-            />
-          )}
-        </button>
-
-        {/* 4. WhatsApp */}
-        <a
-          href="https://wa.me/8801342900364"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="relative px-2.5 py-2 rounded-full flex flex-col items-center gap-0.5 text-[#dfa2da] hover:text-white transition-all cursor-pointer"
-          title="WhatsApp"
-        >
-          <div className="relative">
-            <MessageCircle className="w-4 h-4" />
-            <span className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 rounded-full bg-[#cf30aa] animate-pulse" />
-          </div>
-          <span className="text-[10px] font-medium leading-none">Chat</span>
-        </a>
-
-        {/* 5. Menu / More */}
-        <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className={`relative px-2.5 py-2 rounded-full flex flex-col items-center gap-0.5 transition-all cursor-pointer ${
-            mobileMenuOpen
-              ? 'text-[#dfa2da] font-bold'
-              : 'text-slate-400 hover:text-white'
-          }`}
-          title="More Sections"
-        >
-          {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
-          <span className="text-[10px] font-medium leading-none">{mobileMenuOpen ? 'Close' : 'Menu'}</span>
-        </button>
-      </nav>
-
       <CommandPalette
         isOpen={commandPaletteOpen}
         onClose={() => setCommandPaletteOpen(false)}
