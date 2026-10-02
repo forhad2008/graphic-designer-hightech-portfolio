@@ -375,7 +375,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection: propA
                 onMouseLeave={() => setHoveredButton(null)}
                 whileTap={{ scale: 0.94 }}
                 transition={{ type: 'spring', stiffness: 400, damping: 28 }}
-                className="relative h-9.5 rounded-full bg-[#cf30aa]/15 hover:bg-[#cf30aa]/25 active:bg-[#cf30aa]/35 border border-[#cf30aa]/40 hover:border-[#dfa2da]/60 flex items-center overflow-hidden cursor-pointer shadow-sm group select-none transition-all shrink-0"
+                className="hidden sm:flex relative h-9.5 rounded-full bg-[#cf30aa]/15 hover:bg-[#cf30aa]/25 active:bg-[#cf30aa]/35 border border-[#cf30aa]/40 hover:border-[#dfa2da]/60 items-center overflow-hidden cursor-pointer shadow-sm group select-none transition-all shrink-0"
                 style={{
                   paddingLeft: '0.65rem',
                   paddingRight: '0.65rem',
