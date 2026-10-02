@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Sparkles, ArrowUpRight, Copy, Check, Sliders, ChevronRight, FileCode, CheckCircle2, X, MessageCircle } from 'lucide-react';
 import { GlowCard } from './GlowCard';
 import { DesignArtwork } from './DesignArtworks';
@@ -135,6 +135,17 @@ export const TemplatesShowcase: React.FC<TemplatesShowcaseProps> = ({ onOrderSim
   const [copiedColor, setCopiedColor] = useState<string | null>(null);
   const [hoveredTemplateId, setHoveredTemplateId] = useState<string | null>(null);
   const [isCloseHovered, setIsCloseHovered] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (selectedTemplate) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [selectedTemplate]);
 
   const filteredItems = filter === 'all' 
     ? TEMPLATE_ITEMS 

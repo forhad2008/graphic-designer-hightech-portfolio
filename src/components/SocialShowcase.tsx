@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Sparkles, ArrowUpRight, Copy, Check, ChevronRight, CheckCircle2, X, MessageCircle } from 'lucide-react';
 import { GlowCard } from './GlowCard';
 import { DesignArtwork } from './DesignArtworks';
@@ -122,6 +122,17 @@ export const SocialShowcase: React.FC<SocialShowcaseProps> = ({ onOrderSimilar }
   const [copiedColor, setCopiedColor] = useState<string | null>(null);
   const [hoveredSocialId, setHoveredSocialId] = useState<string | null>(null);
   const [isCloseHovered, setIsCloseHovered] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (selectedSocial) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [selectedSocial]);
 
   const filteredItems = filter === 'all' 
     ? SOCIAL_ITEMS 
