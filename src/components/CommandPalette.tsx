@@ -64,6 +64,24 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
       badge: 'Featured'
     },
     {
+      id: 'sec-graphics-design',
+      title: 'Graphics Design Showcase',
+      subtitle: 'Commercial ads, movie posters & campaigns',
+      category: 'Section',
+      icon: Sparkles,
+      action: () => { onNavigate('graphics-design'); onClose(); },
+      badge: '12 Works'
+    },
+    {
+      id: 'sec-design-templates',
+      title: 'Design Templates & Blueprints',
+      subtitle: 'Print-ready business cards & brand stationery',
+      category: 'Section',
+      icon: Layers,
+      action: () => { onNavigate('design-templates'); onClose(); },
+      badge: 'Blueprints'
+    },
+    {
       id: 'sec-services',
       title: 'Fiverr Gigs',
       subtitle: '5.0-star services starting from $25',
@@ -266,7 +284,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search projects, services, pricing..."
-              className="w-full bg-transparent text-sm sm:text-base text-white placeholder-slate-400 focus:outline-none font-medium"
+              className="w-full bg-transparent text-[16px] sm:text-base text-white placeholder-slate-400 focus:outline-none font-medium"
             />
             {query && (
               <button

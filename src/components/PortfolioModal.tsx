@@ -121,7 +121,7 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({ item, onClose, o
             onMouseEnter={() => setIsCloseHovered(true)}
             onMouseLeave={() => setIsCloseHovered(false)}
             onClick={onClose}
-            className="absolute top-4 right-4 z-50 p-2.5 rounded-full bg-black/80 text-white border border-white/20 hover:scale-105 active:scale-95 transition-all shadow-[0_4px_16px_rgba(0,0,0,0.7)] backdrop-blur-xl cursor-pointer"
+            className="absolute top-3 right-3 sm:top-4 sm:right-4 z-50 w-11 h-11 rounded-full bg-black/80 text-white border border-white/20 hover:scale-105 active:scale-95 transition-all shadow-[0_4px_16px_rgba(0,0,0,0.7)] backdrop-blur-xl flex items-center justify-center cursor-pointer"
             style={isCloseHovered ? { backgroundColor: c3, borderColor: 'transparent', color: '#fff' } : {}}
             aria-label="Close modal"
           >
@@ -145,7 +145,7 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({ item, onClose, o
             </div>
 
             {/* Description, Specs, Palette (Padded Area) */}
-            <div className="p-6 sm:p-8 space-y-6">
+            <div className="p-4 sm:p-8 space-y-5 sm:space-y-6">
               
               {/* Title & Description */}
               <div className="space-y-2">
@@ -232,12 +232,12 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({ item, onClose, o
           </div>
 
           {/* Footer */}
-          <div className="px-6 py-4 bg-[#0a0718]/95 border-t border-white/10 flex items-center justify-between gap-3 shrink-0">
+          <div className="px-4 sm:px-6 py-3 sm:py-4 bg-[#0a0718]/95 border-t border-white/10 flex items-center justify-between gap-3 shrink-0">
             <a
               href="https://wa.me/8801342900364"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-2.5 rounded-xl border border-white/15 bg-white/[0.04] hover:bg-[#25D366]/20 hover:border-[#25D366]/50 text-xs font-bold text-slate-200 hover:text-white flex items-center gap-2 transition-all cursor-pointer group shadow-sm"
+              className="px-4 py-2.5 min-h-[44px] rounded-xl border border-white/15 bg-white/[0.04] hover:bg-[#25D366]/20 hover:border-[#25D366]/50 text-xs font-bold text-slate-200 hover:text-white flex items-center gap-2 transition-all cursor-pointer group shadow-sm active:scale-95"
             >
               <MessageCircle className="w-4 h-4 text-[#25D366] group-hover:scale-110 transition-transform" />
               <span>WhatsApp</span>
@@ -248,7 +248,7 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({ item, onClose, o
                 onClose();
                 onBookSimilar(item.title);
               }}
-              className="neu-3d-btn-primary px-5 sm:px-6 py-2.5 text-xs sm:text-sm font-extrabold text-white rounded-xl flex items-center gap-2 cursor-pointer transition-all shadow-[0_0_24px_rgba(207,48,170,0.5)] hover:shadow-[0_0_32px_rgba(207,48,170,0.75)] hover:scale-[1.03] active:scale-[0.97]"
+              className="neu-3d-btn-primary px-5 sm:px-6 py-2.5 min-h-[44px] text-xs sm:text-sm font-extrabold text-white rounded-xl flex items-center gap-2 cursor-pointer transition-all shadow-[0_0_24px_rgba(207,48,170,0.5)] hover:shadow-[0_0_32px_rgba(207,48,170,0.75)] active:scale-[0.97]"
             >
               <span className="text-white drop-shadow font-extrabold tracking-wide">
                 Order Similar

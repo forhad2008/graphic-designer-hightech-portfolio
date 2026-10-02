@@ -28,9 +28,9 @@ export const IMAGE_ASSETS = {
     brand: './brand1.png',
     saas: './brand4.png',
     packaging: './brand6.png',
-    social: './social2.png',
+    social: './design1.webp',
     youtube: './design3.webp',
-    print: './tem1.webp',
+    print: './brand8.png',
   },
 
   // PORTFOLIO CASE STUDY PROJECTS

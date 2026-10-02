@@ -89,7 +89,7 @@ export const ServicesGigs: React.FC<ServicesGigsProps> = ({ onSelectGig }) => {
                 </div>
 
                 {/* Price & Action */}
-                <div className="p-4 mt-2 neu-3d-inset rounded-2xl flex items-center justify-between border border-white/5 bg-[#0b0818]">
+                <div className="p-3.5 sm:p-4 mt-2 neu-3d-inset rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 border border-white/5 bg-[#0b0818]">
                   <div>
                     <span className="text-[10px] font-mono text-slate-400 block uppercase font-bold">From</span>
                     <p className="text-2xl font-bold text-white font-mono">
@@ -99,7 +99,7 @@ export const ServicesGigs: React.FC<ServicesGigsProps> = ({ onSelectGig }) => {
 
                   <button
                     onClick={() => onSelectGig(gig)}
-                    className="px-5 py-2.5 text-xs font-black text-white btn-gradient-purple-pink rounded-xl transition-all flex items-center gap-1.5 cursor-pointer shadow-[0_0_15px_rgba(207,48,170,0.4)] hover:shadow-[0_0_24px_rgba(207,48,170,0.65)]"
+                    className="w-full sm:w-auto px-5 py-3 min-h-[44px] text-xs font-black text-white btn-gradient-purple-pink rounded-xl transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-[0_0_15px_rgba(207,48,170,0.4)] hover:shadow-[0_0_24px_rgba(207,48,170,0.65)] active:scale-95"
                   >
                     <span>Order on Fiverr</span>
                     <ExternalLink className="w-3.5 h-3.5" />

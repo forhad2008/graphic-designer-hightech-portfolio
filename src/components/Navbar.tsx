@@ -88,7 +88,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection: propA
         setScrollProgress(progress);
       }
 
-      const sections = ['portfolio', 'graphics-design', 'design-templates', 'social-banners', 'pricing', 'estimator', 'process', 'reviews', 'contact', 'faq'];
+      const sections = ['portfolio', 'graphics-design', 'design-templates', 'services', 'pricing', 'estimator', 'process', 'reviews', 'contact', 'faq'];
       const scrollPosition = scrollY + 200;
 
       for (let i = sections.length - 1; i >= 0; i--) {
@@ -144,9 +144,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection: propA
 
   const portfolioCategories = [
     { label: 'Logo & Branding', desc: 'Original brand system designs', icon: Sparkles, sectionId: 'portfolio' },
-    { label: 'Graphics Design', desc: 'Packaging, SaaS branding, and print sets', icon: Layers, sectionId: 'graphics-design' },
-    { label: 'Design Templates', desc: 'Premium resource blueprints', icon: Layers, sectionId: 'design-templates' },
-    { label: 'Social Headers', desc: 'Gritty sports & luxury corporate banners', icon: Layers, sectionId: 'social-banners' },
+    { label: 'Graphics Design', desc: 'Campaign, editorial, and commercial designs', icon: Layers, sectionId: 'graphics-design' },
+    { label: 'Design Templates', desc: 'Print blueprints & identity mockups', icon: Layers, sectionId: 'design-templates' },
   ];
 
   return (
@@ -590,15 +589,16 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection: propA
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <span className="text-[10px] font-mono text-slate-400 px-2 py-0.5 rounded bg-white/5 border border-white/10">
+                  <span className="hidden sm:inline-block text-[10px] font-mono text-slate-400 px-2 py-0.5 rounded bg-white/5 border border-white/10">
                     ESC
                   </span>
                   <button
                     onClick={() => setMobileMenuOpen(false)}
-                    className="w-8 h-8 rounded-lg bg-white/5 hover:bg-[#cf30aa] border border-white/15 hover:border-[#cf30aa] text-slate-300 hover:text-white flex items-center justify-center transition-all cursor-pointer"
+                    className="w-10 h-10 min-w-[44px] min-h-[44px] rounded-xl bg-white/5 hover:bg-[#cf30aa] border border-white/15 hover:border-[#cf30aa] text-slate-300 hover:text-white flex items-center justify-center transition-all cursor-pointer"
                     title="Close Window (Esc)"
+                    aria-label="Close menu"
                   >
-                    <X className="w-4 h-4" />
+                    <X className="w-5 h-5" />
                   </button>
                 </div>
               </div>
@@ -769,7 +769,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection: propA
       <nav
         aria-label="Mobile Navigation Dock"
         data-no-butterfly="true"
-        className={`md:hidden fixed bottom-3 inset-x-3 z-40 max-w-sm mx-auto bg-[#070B13]/90 backdrop-blur-2xl border border-white/15 rounded-full p-1.5 shadow-[0_12px_36px_rgba(0,0,0,0.7)] flex items-center justify-around transition-all duration-300 ${
+        className={`md:hidden fixed bottom-3 inset-x-3 mb-safe z-40 max-w-sm mx-auto bg-[#070B13]/90 backdrop-blur-2xl border border-white/15 rounded-full p-1.5 shadow-[0_12px_36px_rgba(0,0,0,0.7)] flex items-center justify-around transition-all duration-300 ${
           isAnyWindowActive ? 'opacity-0 pointer-events-none translate-y-28 scale-90' : 'opacity-100 translate-y-0 scale-100'
         }`}
       >

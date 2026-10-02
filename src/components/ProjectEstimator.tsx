@@ -251,7 +251,7 @@ Abdullah Forhad (+8801342900364 / forhadalpha08@gmail.com)`;
             <div className="space-y-2 text-xs text-slate-300 neu-3d-inset p-4 rounded-2xl font-mono">
               <div className="flex justify-between">
                 <span className="text-slate-400">Scope:</span>
-                <span className="text-white font-semibold truncate max-w-[160px]">{currentService.name}</span>
+                <span className="text-white font-semibold truncate max-w-[180px] sm:max-w-xs">{currentService.name}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-slate-400">Concepts:</span>
@@ -266,7 +266,7 @@ Abdullah Forhad (+8801342900364 / forhadalpha08@gmail.com)`;
             <div className="space-y-2.5 pt-1">
               <button
                 onClick={handleProceedToBooking}
-                className="w-full py-4 px-4 text-xs font-black text-white neu-3d-btn-primary rounded-2xl flex items-center justify-center gap-2 cursor-pointer shadow-[0_0_15px_rgba(207,48,170,0.5)]"
+                className="w-full py-4 px-4 min-h-[48px] text-xs font-black text-white neu-3d-btn-primary rounded-2xl flex items-center justify-center gap-2 cursor-pointer shadow-[0_0_15px_rgba(207,48,170,0.5)] active:scale-[0.98]"
               >
                 <span>Book This Scope</span>
                 <ArrowUpRight className="w-4 h-4 stroke-[3]" />
@@ -274,7 +274,7 @@ Abdullah Forhad (+8801342900364 / forhadalpha08@gmail.com)`;
 
               <button
                 onClick={handleCopyBrief}
-                className="w-full py-3.5 px-4 text-xs font-bold text-white neu-3d-btn rounded-2xl flex items-center justify-center gap-2 cursor-pointer"
+                className="w-full py-3.5 px-4 min-h-[44px] text-xs font-bold text-white neu-3d-btn rounded-2xl flex items-center justify-center gap-2 cursor-pointer active:scale-[0.98]"
               >
                 {copiedBrief ? (
                   <>

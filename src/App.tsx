@@ -5,7 +5,6 @@ import { BeforeAfterSlider } from './components/BeforeAfterSlider';
 import { Portfolio } from './components/Portfolio';
 import { GraphicsDesignShowcase } from './components/DesignShowcases';
 import { TemplatesShowcase } from './components/TemplatesShowcase';
-import { SocialShowcase } from './components/SocialShowcase';
 import { ServicesGigs } from './components/ServicesGigs';
 import { PortfolioModal } from './components/PortfolioModal';
 import { PricingTiers } from './components/PricingTiers';
@@ -17,7 +16,6 @@ import { FAQ } from './components/FAQ';
 import { Footer } from './components/Footer';
 import { FloatingChat } from './components/FloatingChat';
 import { BackToTop } from './components/BackToTop';
-import { ButterflyCursor } from './components/ButterflyCursor';
 import { ScrollSection } from './components/ScrollSection';
 import { PortfolioItem, PricingPackage, FiverrGig } from './types';
 
@@ -78,9 +76,6 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#04030a] text-[#F3F4F6] relative overflow-x-hidden flex flex-col font-sans selection:bg-[#cf30aa]/30 selection:text-[#dfa2da]">
-      {/* Real Animated Butterfly Cursor Avatar */}
-      <ButterflyCursor />
-
       {/* Navigation */}
       <Navbar onNavigate={scrollToSection} />
 
@@ -115,13 +110,6 @@ export default function App() {
       {/* Premium Design Templates Blueprint Showcase */}
       <ScrollSection id="design-templates" distance={45} duration={0.8}>
         <TemplatesShowcase
-          onOrderSimilar={handleOrderSimilar}
-        />
-      </ScrollSection>
-
-      {/* Social Media Headers & Visual Banners Showcase Section */}
-      <ScrollSection id="social-banners" distance={45} duration={0.8}>
-        <SocialShowcase
           onOrderSimilar={handleOrderSimilar}
         />
       </ScrollSection>

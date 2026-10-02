@@ -207,7 +207,7 @@ export const ContactBooking: React.FC<ContactBookingProps> = ({
                       placeholder="Alex / Brand Name"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full px-3.5 py-3 rounded-2xl neu-inset neu-inset-focus text-white text-xs focus:outline-none focus:border-[#cf30aa]"
+                      className="w-full px-3.5 py-3 min-h-[46px] rounded-2xl neu-inset neu-inset-focus text-white text-[16px] sm:text-xs focus:outline-none focus:border-[#cf30aa]"
                     />
                   </div>
 
@@ -219,7 +219,7 @@ export const ContactBooking: React.FC<ContactBookingProps> = ({
                       placeholder="alex@company.com"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full px-3.5 py-3 rounded-2xl neu-inset neu-inset-focus text-white text-xs focus:outline-none focus:border-[#cf30aa]"
+                      className="w-full px-3.5 py-3 min-h-[46px] rounded-2xl neu-inset neu-inset-focus text-white text-[16px] sm:text-xs focus:outline-none focus:border-[#cf30aa]"
                     />
                   </div>
                 </div>
@@ -230,7 +230,7 @@ export const ContactBooking: React.FC<ContactBookingProps> = ({
                     <select
                       value={formData.serviceType}
                       onChange={(e) => setFormData({ ...formData, serviceType: e.target.value })}
-                      className="w-full px-3.5 py-3 rounded-2xl neu-inset neu-inset-focus text-white text-xs focus:outline-none bg-[#04070d]"
+                      className="w-full px-3.5 py-3 min-h-[46px] rounded-2xl neu-inset neu-inset-focus text-white text-[16px] sm:text-xs focus:outline-none bg-[#04070d]"
                     >
                       <option value="Logo & Brand Identity">Logo & Brand Identity</option>
                       <option value="Social Media Ads Kit">Social Media Ads Kit</option>
@@ -246,7 +246,7 @@ export const ContactBooking: React.FC<ContactBookingProps> = ({
                     <select
                       value={formData.budget}
                       onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-                      className="w-full px-3.5 py-3 rounded-2xl neu-inset neu-inset-focus text-white text-xs focus:outline-none bg-[#04070d]"
+                      className="w-full px-3.5 py-3 min-h-[46px] rounded-2xl neu-inset neu-inset-focus text-white text-[16px] sm:text-xs focus:outline-none bg-[#04070d]"
                     >
                       <option value="$45 USD (Starter)">$45 USD (Starter)</option>
                       <option value="$120 USD (Standard Pro)">$120 USD (Standard Pro)</option>
@@ -264,14 +264,14 @@ export const ContactBooking: React.FC<ContactBookingProps> = ({
                     placeholder="Describe your brand vision, colors, deliverables, and text requirements..."
                     value={formData.projectDescription}
                     onChange={(e) => setFormData({ ...formData, projectDescription: e.target.value })}
-                    className="w-full px-3.5 py-3 rounded-2xl neu-inset neu-inset-focus text-white text-xs focus:outline-none resize-none focus:border-[#cf30aa]"
+                    className="w-full px-3.5 py-3 rounded-2xl neu-inset neu-inset-focus text-white text-[16px] sm:text-xs focus:outline-none resize-none focus:border-[#cf30aa]"
                   />
                 </div>
 
                 <div className="flex items-center gap-3 pt-1">
                   <button
                     type="submit"
-                    className="flex-1 py-3.5 px-4 rounded-2xl neu-3d-btn-primary text-white font-extrabold text-xs transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-95 shadow-[0_0_15px_rgba(207,48,170,0.5)]"
+                    className="flex-1 py-4 px-4 min-h-[48px] rounded-2xl neu-3d-btn-primary text-white font-extrabold text-xs transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-95 shadow-[0_0_15px_rgba(207,48,170,0.5)]"
                   >
                     <span>Send Brief</span>
                     <Send className="w-3.5 h-3.5" />
@@ -281,7 +281,7 @@ export const ContactBooking: React.FC<ContactBookingProps> = ({
                     href={`https://wa.me/8801342900364?text=${getFormattedMessage()}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="py-3.5 px-4 rounded-2xl neu-raised-interactive text-[#dfa2da] text-xs flex items-center gap-2 font-semibold border border-[#cf30aa]/30"
+                    className="py-4 px-4 min-h-[48px] rounded-2xl neu-raised-interactive text-[#dfa2da] text-xs flex items-center gap-2 font-semibold border border-[#cf30aa]/30 active:scale-95"
                   >
                     <MessageCircle className="w-4 h-4 text-[#dfa2da]" />
                     <span>WhatsApp</span>

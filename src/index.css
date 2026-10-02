@@ -12,11 +12,36 @@
     background-color: #04030a;
     color: #F3F4F6;
     overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-overflow-scrolling: touch;
     background-image: 
       linear-gradient(to right, rgba(64, 47, 181, 0.07) 1px, transparent 1px),
       linear-gradient(to bottom, rgba(207, 48, 170, 0.07) 1px, transparent 1px);
     background-size: 2rem 2rem;
     background-position: center center;
+  }
+  
+  html {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* Prevent iOS Safari automatic viewport zoom-in on input focus */
+  @media screen and (max-width: 640px) {
+    input:not([type="checkbox"]):not([type="radio"]),
+    textarea,
+    select {
+      font-size: 16px !important;
+    }
+  }
+
+  /* Touch ergonomics and responsive manipulation */
+  button, a, input, select, textarea, [role="button"] {
+    touch-action: manipulation;
   }
   
   h1, h2, h3, .font-display {
@@ -706,5 +731,16 @@ select:focus::after {
 
 .animate-modalIn {
   animation: modalScaleIn 0.24s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Safe area insets for notched and buttonless mobile screens */
+.pb-safe {
+  padding-bottom: max(env(safe-area-inset-bottom, 0px), 0.75rem);
+}
+.mb-safe {
+  margin-bottom: max(env(safe-area-inset-bottom, 0px), 0.75rem);
+}
+.pt-safe {
+  padding-top: max(env(safe-area-inset-top, 0px), 0.75rem);
 }
 

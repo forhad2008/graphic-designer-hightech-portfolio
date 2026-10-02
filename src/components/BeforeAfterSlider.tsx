@@ -63,8 +63,9 @@ export const BeforeAfterSlider: React.FC = () => {
     setSliderPosition(percent);
   }, []);
 
-  const handleMouseDown = () => {
+  const handleMouseDown = (e: React.MouseEvent) => {
     isDragging.current = true;
+    handleMove(e.clientX);
   };
 
   const handleMouseUp = () => {
@@ -77,8 +78,21 @@ export const BeforeAfterSlider: React.FC = () => {
     }
   };
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    isDragging.current = true;
+    if (e.touches[0]) {
+      handleMove(e.touches[0].clientX);
+    }
+  };
+
+  const handleTouchEnd = () => {
+    isDragging.current = false;
+  };
+
   const handleTouchMove = (e: React.TouchEvent) => {
-    handleMove(e.touches[0].clientX);
+    if (isDragging.current && e.touches[0]) {
+      handleMove(e.touches[0].clientX);
+    }
   };
 
   return (
@@ -145,8 +159,11 @@ export const BeforeAfterSlider: React.FC = () => {
                 onMouseUp={handleMouseUp}
                 onMouseLeave={handleMouseUp}
                 onMouseMove={handleMouseMove}
+                onTouchStart={handleTouchStart}
+                onTouchEnd={handleTouchEnd}
+                onTouchCancel={handleTouchEnd}
                 onTouchMove={handleTouchMove}
-                className="relative w-full h-[340px] sm:h-[420px] rounded-2xl overflow-hidden select-none border border-white/10 shadow-2xl cursor-ew-resize bg-[#06040d]"
+                className="relative w-full h-[300px] sm:h-[420px] rounded-2xl overflow-hidden select-none border border-white/10 shadow-2xl cursor-ew-resize bg-[#06040d] touch-none"
               >
                 {/* AFTER: Modern Brand (brand6.png showcase) */}
                 <div className="absolute inset-0 w-full h-full flex items-center justify-center bg-gradient-to-br from-[#12081f] via-[#080612] to-[#1e0a2b]">
@@ -167,8 +184,9 @@ export const BeforeAfterSlider: React.FC = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
 
-                  <div className="absolute top-4 right-4 px-3 py-1.5 rounded-xl bg-emerald-950/85 backdrop-blur-md border border-emerald-500/30 text-emerald-300 text-xs font-mono font-bold drop-shadow shadow-[0_0_15px_rgba(16,185,129,0.3)] z-20">
-                    AFTER: Aura Botanicals Packaging
+                  <div className="absolute top-3 right-3 sm:top-4 sm:right-4 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl bg-emerald-950/85 backdrop-blur-md border border-emerald-500/30 text-emerald-300 text-[11px] sm:text-xs font-mono font-bold drop-shadow shadow-[0_0_15px_rgba(16,185,129,0.3)] z-20">
+                    <span>AFTER</span>
+                    <span className="hidden sm:inline">: Aura Botanicals</span>
                   </div>
                 </div>
 
@@ -199,8 +217,9 @@ export const BeforeAfterSlider: React.FC = () => {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
 
-                    <div className="absolute top-4 left-4 px-3 py-1.5 rounded-xl bg-slate-900/85 backdrop-blur-md border border-slate-700/50 text-slate-300 text-xs font-mono font-bold shadow-md z-20">
-                      BEFORE: Legacy Design Draft
+                    <div className="absolute top-3 left-3 sm:top-4 sm:left-4 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl bg-slate-900/85 backdrop-blur-md border border-slate-700/50 text-slate-300 text-[11px] sm:text-xs font-mono font-bold shadow-md z-20">
+                      <span>BEFORE</span>
+                      <span className="hidden sm:inline">: Legacy Concept</span>
                     </div>
                   </div>
                 </div>
@@ -210,7 +229,7 @@ export const BeforeAfterSlider: React.FC = () => {
                   className="absolute top-0 bottom-0 w-1 bg-gradient-to-b from-[#cf30aa] to-[#402fb5] shadow-[0_0_18px_#cf30aa] z-30 pointer-events-none"
                   style={{ left: `${sliderPosition}%` }}
                 >
-                  <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-10 h-10 rounded-full btn-gradient-purple-pink flex items-center justify-center pointer-events-auto cursor-grab active:cursor-grabbing shadow-[0_0_20px_rgba(207,48,170,0.6)]">
+                  <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-11 h-11 sm:w-10 sm:h-10 rounded-full btn-gradient-purple-pink flex items-center justify-center pointer-events-auto cursor-grab active:cursor-grabbing shadow-[0_0_20px_rgba(207,48,170,0.6)] touch-none select-none">
                     <ArrowLeftRight className="w-4 h-4 stroke-[3] text-white" />
                   </div>
                 </div>
@@ -218,10 +237,10 @@ export const BeforeAfterSlider: React.FC = () => {
             </div>
           </GlowCard>
 
-          <div className="flex items-center justify-between mt-3 text-xs text-slate-500 font-mono px-1">
-            <span>← Slide left to view Transformed Aura Botanicals</span>
-            <span className="text-[#dfa2da] font-semibold">Case Study Comparison</span>
-            <span>Slide right to view Original Concept →</span>
+          <div className="flex flex-col sm:flex-row items-center justify-between mt-3 text-[11px] text-slate-400 font-mono px-1 gap-1 text-center sm:text-left">
+            <span>← Slide left to view Transformed Brand</span>
+            <span className="text-[#dfa2da] font-semibold">Touch &amp; Drag to Compare</span>
+            <span>Slide right to view Original Draft →</span>
           </div>
         </div>
 

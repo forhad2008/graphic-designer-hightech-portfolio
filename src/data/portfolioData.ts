@@ -432,38 +432,6 @@ export const GRAPHICS_DESIGN_ITEMS: PortfolioItem[] = [
     }
   },
   {
-    id: 'design-6',
-    title: 'Internal Psycho Film Poster',
-    client: 'Internal Psycho',
-    clientCountry: 'India',
-    category: 'youtube',
-    categoryLabel: 'Cinematic Film Poster',
-    year: '2026',
-    views: '9.2k',
-    likes: '1250',
-    image: './design6.webp',
-    gallery: ['./design6.webp'],
-    description: 'This cinematic film poster features a psychological thriller aesthetic, utilizing intense lighting and double exposure to convey a complex mental state. The composition emphasizes duality, balancing the protagonist\'s portrait with a dramatic urban silhouette against a dark, moody backdrop.',
-    challenge: 'The challenge was to visually represent the psychological fragmentation and \'inner\' turmoil of the character using a cohesive, high-contrast dark palette.',
-    solution: 'We utilized a bold, distressed \'brushed\' typeface paired with a deep crimson and charcoal color scheme to evoke a sense of impending psychological intensity.',
-    deliverables: ['High-Resolution Film Poster', 'Social Media Promo Banner', 'YouTube Video Thumbnail', 'Digital Marketing Teaser'],
-    formats: ['.AI', '.PSD', '.PDF', '.PNG'],
-    colors: [
-      { name: 'Crimson Red', hex: '#D32F2F' },
-      { name: 'Charcoal Black', hex: '#0D0D0D' },
-      { name: 'Off-White Smoke', hex: '#E0E0E0' }
-    ],
-    fonts: ['Distressed Brush Serif', 'Clean Geometric Sans-Serif'],
-    mockupType: 'youtube',
-    featured: false,
-    testimonial: {
-      quote: 'A bold cinematic piece with highly emotional visual depth.',
-      author: 'Vikram Sen',
-      company: 'Film Director',
-      rating: 5
-    }
-  },
-  {
     id: 'design-7',
     title: 'WE FLY Premium Sneaker Campaign',
     client: 'Abdullah Psychotic',
@@ -525,70 +493,6 @@ export const GRAPHICS_DESIGN_ITEMS: PortfolioItem[] = [
       quote: 'Highly Appetite stimulating! Outstanding balance of colors and text.',
       author: 'Owner, Grill House',
       company: 'The Grill House',
-      rating: 5
-    }
-  },
-  {
-    id: 'design-9',
-    title: 'Apex Fighting League Achievement Certificate',
-    client: 'Apex Fighting League',
-    clientCountry: 'United States',
-    category: 'print',
-    categoryLabel: 'Premium Combat Sports Achievement Certificate',
-    year: '2026',
-    views: '9.2k',
-    likes: '1120',
-    image: './design9.webp',
-    gallery: ['./design9.webp'],
-    description: 'A high-impact, dark-themed achievement certificate designed for an elite combat sports league. The layout expertly blends dramatic black-and-white portrait photography with bold, red-accented typography to convey prestige and athletic intensity.',
-    challenge: 'The challenge was to create a commemorative document that feels both official and aggressive, moving away from traditional, sterile corporate certificate aesthetics.',
-    solution: 'The design utilizes a high-contrast dark aesthetic combined with clean, elegant script typography and bold serif headers to strike a balance between professional validation and gritty combat-sport identity.',
-    deliverables: ['High-resolution Print Certificate', 'Digital Award Graphic', 'Social Media Recognition Asset', 'League Identity Seal'],
-    formats: ['.AI', '.PSD', '.PDF', '.PNG'],
-    colors: [
-      { name: 'Pitch Black', hex: '#0D0D0D' },
-      { name: 'Champion Red', hex: '#B41416' },
-      { name: 'Off-White Mist', hex: '#E0E0E0' }
-    ],
-    fonts: ['Modern Serif Display', 'Signature Script'],
-    mockupType: 'print',
-    featured: false,
-    testimonial: {
-      quote: 'Prestige, honor and raw energy. Absolute masterpiece.',
-      author: 'Mark Hunt',
-      company: 'League Admin, AFL',
-      rating: 5
-    }
-  },
-  {
-    id: 'design-10',
-    title: 'Annual Athletics Championship Event Poster',
-    client: 'Apex Sports',
-    clientCountry: 'Bangladesh',
-    category: 'print',
-    categoryLabel: 'Sports Event Promotional Poster',
-    year: '2025',
-    views: '8.2k',
-    likes: '1140',
-    image: './design10.webp',
-    gallery: ['./design10.webp'],
-    description: 'This dynamic promotional poster captures the raw intensity of a competitive track event with a high-contrast, professional athlete-focused visual. The bold, gritty typography and energetic color palette effectively communicate the urgency and prestige of the upcoming annual sports championship.',
-    challenge: 'The challenge was to translate the raw energy and high-stakes environment of a stadium athletics competition into a cohesive, readable visual layout for a large-format event poster.',
-    solution: 'We utilized a dramatic low-angle photography perspective paired with a distressed, heavy-weight typography system and a high-contrast black and gold color scheme to create a sense of movement and athletic determination.',
-    deliverables: ['Event Poster', 'Social Media Teaser', 'Digital Banner Ad', 'Event Flyer'],
-    formats: ['.AI', '.PSD', '.PDF', '.PNG'],
-    colors: [
-      { name: 'Deep Black', hex: '#0D0D0D' },
-      { name: 'Goldenrod', hex: '#D4A31D' },
-      { name: 'Off-White', hex: '#F2F2F2' }
-    ],
-    fonts: ['Distressed Display Sans-Serif', 'Modern Geometric Sans-Serif', 'Calligraphic Script'],
-    mockupType: 'print',
-    featured: false,
-    testimonial: {
-      quote: 'Captured our athletic championship\'s momentum and power flawlessly.',
-      author: 'Sajib Al-Hasan',
-      company: 'Director, Apex Sports',
       rating: 5
     }
   },
@@ -717,38 +621,6 @@ export const GRAPHICS_DESIGN_ITEMS: PortfolioItem[] = [
       quote: 'A stunning surreal poster design that intrigued all art collectors.',
       author: 'Emma Watson',
       company: 'Curator, Ingoude Art',
-      rating: 5
-    }
-  },
-  {
-    id: 'design-15',
-    title: 'PODCAST TIME: Hear The Sound, Get The Meaning',
-    client: 'ABDULLAH PSYCHOTIC',
-    clientCountry: 'United Arab Emirates',
-    category: 'social',
-    categoryLabel: 'Podcast Promotional Social Media Graphic',
-    year: '2026',
-    views: '9.2k',
-    likes: '1240',
-    image: './design15.webp',
-    gallery: ['./design15.webp'],
-    description: 'This high-energy promotional poster features a bold, street-art inspired aesthetic designed to command attention for a lifestyle and mindset podcast. It utilizes aggressive typography and a high-contrast red and black palette to emphasize the power of spoken word and persuasive messaging.',
-    challenge: 'The challenge was to distill complex brand pillars like business, mindset, and motivation into a single, punchy visual that captures the raw intensity of the podcast\'s content.',
-    solution: 'We utilized a gritty, halftone-textured visual style with a dominant red megaphone graphic to anchor the design, ensuring the messaging jumps off the page with a sense of urgency and authoritative personality.',
-    deliverables: ['Instagram Feed Post', 'Podcast Episode Announcement Graphic', 'Story Promotion Asset', 'Brand Identity Poster'],
-    formats: ['.AI', '.PSD', '.PDF', '.PNG'],
-    colors: [
-      { name: 'Fire Engine Red', hex: '#E62E25' },
-      { name: 'Off-White Paper', hex: '#F2F2F2' },
-      { name: 'Pitch Black', hex: '#0D0D0D' }
-    ],
-    fonts: ['Impact Grunge', 'Modern Bold Sans'],
-    mockupType: 'social',
-    featured: false,
-    testimonial: {
-      quote: 'Absolute authority and motivation printed in high contrast.',
-      author: 'Forhad Admin',
-      company: 'Psychotic Podcast',
       rating: 5
     }
   },

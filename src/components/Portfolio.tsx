@@ -144,7 +144,7 @@ export const Portfolio: React.FC<PortfolioProps> = ({ onSelectItem, onOrderSimil
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Filter by title or keyword (e.g. Zeora, Tech, Packaging)..."
                 data-no-butterfly="true"
-                className="w-full pl-10 pr-24 py-2.5 rounded-2xl bg-[#090715]/90 border border-white/15 focus:border-[#cf30aa] focus:ring-2 focus:ring-[#cf30aa]/30 text-white placeholder-slate-400 text-xs sm:text-sm font-sans transition-all outline-none backdrop-blur-md shadow-inner no-butterfly"
+                className="w-full pl-10 pr-24 py-3 sm:py-2.5 min-h-[44px] rounded-2xl bg-[#090715]/90 border border-white/15 focus:border-[#cf30aa] focus:ring-2 focus:ring-[#cf30aa]/30 text-white placeholder-slate-400 text-[16px] sm:text-sm font-sans transition-all outline-none backdrop-blur-md shadow-inner no-butterfly"
               />
               <div className="absolute inset-y-0 right-0 pr-2.5 flex items-center gap-1.5">
                 {searchQuery ? (
@@ -171,7 +171,7 @@ export const Portfolio: React.FC<PortfolioProps> = ({ onSelectItem, onOrderSimil
         </div>
 
         {/* Quick Filter Keyword Tags */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-3 mb-8 custom-scrollbar no-scrollbar text-xs">
+        <div className="flex items-center gap-2 overflow-x-auto pb-3 mb-8 custom-scrollbar no-scrollbar text-xs touch-pan-x overscroll-x-contain">
           <div className="flex items-center gap-1 text-[11px] font-mono text-slate-400 mr-1 shrink-0">
             <SlidersHorizontal className="w-3 h-3 text-[#cf30aa]" />
             <span>Filter:</span>
@@ -182,7 +182,7 @@ export const Portfolio: React.FC<PortfolioProps> = ({ onSelectItem, onOrderSimil
               type="button"
               onClick={() => setSelectedCategory(tag.id)}
               data-no-butterfly="true"
-              className={`px-3 py-1.5 rounded-xl font-mono text-xs whitespace-nowrap transition-all cursor-pointer no-butterfly shrink-0 flex items-center gap-1.5 ${
+              className={`px-3.5 py-2 min-h-[40px] rounded-xl font-mono text-xs whitespace-nowrap transition-all cursor-pointer no-butterfly shrink-0 flex items-center gap-1.5 active:scale-95 ${
                 selectedCategory === tag.id
                   ? 'bg-gradient-to-r from-[#402fb5] to-[#cf30aa] text-white font-bold shadow-[0_0_15px_rgba(207,48,170,0.4)] border border-transparent'
                   : 'bg-white/[0.04] text-slate-300 hover:text-white hover:bg-white/[0.08] border border-white/10'
@@ -199,7 +199,7 @@ export const Portfolio: React.FC<PortfolioProps> = ({ onSelectItem, onOrderSimil
               type="button"
               onClick={handleReset}
               data-no-butterfly="true"
-              className="px-2.5 py-1.5 rounded-xl font-mono text-xs text-rose-400 hover:text-rose-300 bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/25 transition-all cursor-pointer no-butterfly shrink-0 flex items-center gap-1"
+              className="px-3 py-2 min-h-[40px] rounded-xl font-mono text-xs text-rose-400 hover:text-rose-300 bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/25 transition-all cursor-pointer no-butterfly shrink-0 flex items-center gap-1 active:scale-95"
               title="Reset all filters"
             >
               <X className="w-3 h-3" />

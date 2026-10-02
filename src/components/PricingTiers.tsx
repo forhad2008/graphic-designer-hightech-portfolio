@@ -142,7 +142,7 @@ export const PricingTiers: React.FC<PricingTiersProps> = ({ onSelectPackage }) =
 
                 <button
                   onClick={() => onSelectPackage(pkg)}
-                  className={`w-full py-3.5 px-4 rounded-2xl text-xs font-black transition-all flex items-center justify-center gap-2 cursor-pointer ${
+                  className={`w-full py-4 px-4 min-h-[48px] rounded-2xl text-xs font-black transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-[0.98] ${
                     pkg.popular
                       ? 'btn-gradient-purple-pink text-white shadow-[0_0_20px_rgba(207,48,170,0.5)]'
                       : 'neu-3d-btn text-white hover:text-[#dfa2da]'

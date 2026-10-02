@@ -20,18 +20,18 @@ export const GraphicsDesignShowcase: React.FC<ShowcaseProps> = ({ onSelectItem, 
           <div>
             <div className="inline-flex items-center gap-2 text-xs font-mono text-[#dfa2da] mb-1.5 font-bold">
               <Sparkles className="w-3.5 h-3.5 text-[#cf30aa]" />
-              <span>GRAPHICS DESIGN PORTFOLIO Showcase</span>
+              <span>GRAPHICS DESIGN PORTFOLIO</span>
             </div>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-white font-display tracking-tight">
               Graphics Design
             </h2>
             <p className="text-slate-400 text-sm mt-1">
-              A comprehensive curation of packaging dielines, modern SaaS branding, viral YouTube media, and luxury fashion print sets.
+              A curated showcase of commercial advertisements, editorial campaigns, theatrical posters, and luxury fashion visual assets.
             </p>
           </div>
         </div>
 
-        {/* 16-Item Unified Grid */}
+        {/* 12-Item Curated Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {GRAPHICS_DESIGN_ITEMS.map((item) => {
             const hexes = item.colors ? item.colors.map((c) => c.hex) : [];

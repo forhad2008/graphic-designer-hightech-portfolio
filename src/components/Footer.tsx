@@ -41,7 +41,17 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <ul className="space-y-1.5">
               <li>
                 <button onClick={() => onNavigate('portfolio')} className="hover:text-[#dfa2da] transition-colors cursor-pointer">
-                  Work
+                  Logo &amp; Branding
+                </button>
+              </li>
+              <li>
+                <button onClick={() => onNavigate('graphics-design')} className="hover:text-[#dfa2da] transition-colors cursor-pointer">
+                  Graphics Design
+                </button>
+              </li>
+              <li>
+                <button onClick={() => onNavigate('design-templates')} className="hover:text-[#dfa2da] transition-colors cursor-pointer">
+                  Design Templates
                 </button>
               </li>
               <li>
@@ -67,6 +77,11 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               <li>
                 <button onClick={() => onNavigate('reviews')} className="hover:text-[#dfa2da] transition-colors cursor-pointer">
                   Reviews
+                </button>
+              </li>
+              <li>
+                <button onClick={() => onNavigate('contact')} className="hover:text-[#dfa2da] transition-colors cursor-pointer">
+                  Book Project
                 </button>
               </li>
             </ul>
