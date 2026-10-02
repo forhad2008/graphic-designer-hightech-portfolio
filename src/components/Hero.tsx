@@ -110,25 +110,25 @@ export const Hero: React.FC<HeroProps> = ({ onExploreWork, onBookProject, onOpen
             {/* 4 Minimal Metric Badges with Rotating Conic Glow */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-1 text-xs">
               <GlowCard intensity="subtle" rounded="rounded-2xl">
-                <div className="p-3 bg-[#090714] neu-3d-raised-sm">
+                <div className="p-3">
                   <span className="text-[#dfa2da] font-mono block font-bold text-sm drop-shadow-[0_2px_8px_rgba(207,48,170,0.5)]">100%</span>
                   <span className="text-[11px] text-slate-300 font-medium">On-Time</span>
                 </div>
               </GlowCard>
               <GlowCard intensity="subtle" rounded="rounded-2xl">
-                <div className="p-3 bg-[#090714] neu-3d-raised-sm">
+                <div className="p-3">
                   <span className="text-[#dfa2da] font-mono block font-bold text-sm drop-shadow-[0_2px_8px_rgba(207,48,170,0.5)]">24-48h</span>
                   <span className="text-[11px] text-slate-300 font-medium">Turnaround</span>
                 </div>
               </GlowCard>
               <GlowCard intensity="subtle" rounded="rounded-2xl">
-                <div className="p-3 bg-[#090714] neu-3d-raised-sm">
+                <div className="p-3">
                   <span className="text-[#dfa2da] font-mono block font-bold text-sm drop-shadow-[0_2px_8px_rgba(207,48,170,0.5)]">Vector</span>
                   <span className="text-[11px] text-slate-300 font-medium">Master Files</span>
                 </div>
               </GlowCard>
               <GlowCard intensity="subtle" rounded="rounded-2xl">
-                <div className="p-3 bg-[#090714] neu-3d-raised-sm">
+                <div className="p-3">
                   <span className="text-[#dfa2da] font-mono block font-bold text-sm drop-shadow-[0_2px_8px_rgba(207,48,170,0.5)]">Full Rights</span>
                   <span className="text-[11px] text-slate-300 font-medium">Commercial</span>
                 </div>

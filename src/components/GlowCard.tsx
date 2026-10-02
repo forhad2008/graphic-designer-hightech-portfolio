@@ -32,21 +32,21 @@ export const GlowCard: React.FC<GlowCardProps> = ({
 
   return (
     <div
-      className={`relative group isolation-auto ${rounded} p-[1.5px] transition-all duration-300 ${className}`}
+      className={`relative group isolation-auto ${rounded} overflow-hidden transition-all duration-300 ${className}`}
     >
       {/* Outer Rotating Conic Glow Aura */}
       <div
-        className={`absolute -inset-[3px] ${rounded} overflow-hidden pointer-events-none -z-20 filter blur-[18px] transition-opacity duration-500 ${
+        className={`absolute -inset-[6px] ${rounded} overflow-hidden pointer-events-none -z-20 filter blur-[18px] transition-opacity duration-500 ${
           alwaysGlow ? 'opacity-85' : glowOpacity
         }`}
       >
         <div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300%] h-[300%] animate-[conicRotate_5s_linear_infinite]"
-          style={conicBackground ? { backgroundImage: conicBackground } : {}}
+          style={{ backgroundImage: conicBackground }}
         />
       </div>
 
-      {/* Crisp Rotating Conic Border Sweep */}
+      {/* Crisp Rotating Conic Border Sweep Background */}
       <div
         className={`absolute inset-0 ${rounded} overflow-hidden pointer-events-none -z-10 transition-opacity duration-300 ${
           alwaysGlow ? 'opacity-100' : 'opacity-75 group-hover:opacity-100'
@@ -54,12 +54,17 @@ export const GlowCard: React.FC<GlowCardProps> = ({
       >
         <div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300%] h-[300%] animate-[conicRotate_4s_linear_infinite]"
-          style={conicBackground ? { backgroundImage: conicBackground } : {}}
+          style={{ backgroundImage: conicBackground }}
         />
       </div>
 
-      {/* Inner Card Surface */}
-      <div className={`relative z-10 w-full h-full ${rounded} overflow-hidden`}>
+      {/* Inner Card Surface - Absolute Inset [1.5px] to cover 100% of corners with zero gaps */}
+      <div className={`absolute inset-[1.5px] z-10 ${rounded} bg-[#080712] overflow-hidden flex flex-col`}>
+        {children}
+      </div>
+
+      {/* Invisible spacer to maintain correct outer height based on children */}
+      <div className="invisible pointer-events-none">
         {children}
       </div>
     </div>
