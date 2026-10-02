@@ -25,7 +25,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreWork, onBookProject, onOpen
   const [copiedHex, setCopiedHex] = useState<string | null>(null);
   const [activeShowcaseTab, setActiveShowcaseTab] = useState<'brand' | 'packaging' | 'social' | 'veo'>('brand');
 
-  const showcaseItems = {
+  const showcaseItems: Record<'brand' | 'packaging' | 'social', { title: string; category: string; image: string; tag: string; font: string; colors: { hex: string; name: string }[] }> = {
     brand: {
       title: 'Aura Botanicals',
       category: 'Brand Identity',
@@ -73,7 +73,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreWork, onBookProject, onOpen
     setTimeout(() => setCopiedHex(null), 1800);
   };
 
-  const activeItem = showcaseItems[activeShowcaseTab];
+  const activeItem = activeShowcaseTab !== 'veo' ? showcaseItems[activeShowcaseTab as keyof typeof showcaseItems] : showcaseItems.brand;
 
   return (
     <section className="relative pt-32 pb-14 md:pt-36 md:pb-24 overflow-hidden">
@@ -232,7 +232,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreWork, onBookProject, onOpen
                         <span className="text-[9px] text-[#dfa2da] font-semibold">Click to copy</span>
                       </div>
                       <div className="grid grid-cols-4 gap-2">
-                        {activeItem.colors.map((c) => (
+                        {activeItem.colors.map((c: { hex: string; name: string }) => (
                           <button
                             key={c.hex}
                             onClick={() => copyHex(c.hex)}

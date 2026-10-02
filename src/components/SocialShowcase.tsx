@@ -301,7 +301,7 @@ export const SocialShowcase: React.FC<SocialShowcaseProps> = ({ onOrderSimilar }
               data-modal="true"
               role="dialog"
               aria-modal="true"
-              className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-xl overflow-y-auto animate-fadeIn visual-window modal-window no-butterfly"
+              className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-xl overflow-hidden animate-fadeIn visual-window modal-window no-butterfly"
               onClick={() => setSelectedSocial(null)}
             >
               <div className="fixed inset-0" onClick={() => setSelectedSocial(null)} />
@@ -313,18 +313,19 @@ export const SocialShowcase: React.FC<SocialShowcaseProps> = ({ onOrderSimilar }
                 className="relative w-full max-w-5xl p-[2px] rounded-3xl overflow-hidden my-auto max-h-[92vh] flex flex-col z-10 visual-window no-butterfly transition-all duration-500"
                 style={{
                   boxShadow: `0 0 50px ${c3}30, 0 0 30px ${c1}40`,
+                  isolation: 'isolate',
                 }}
                 onClick={(e) => e.stopPropagation()}
               >
                 {/* Outer Rotating Conic Glow */}
                 <div 
-                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300%] h-[300%] animate-[conicRotate_6s_linear_infinite] filter blur-[18px] opacity-75 pointer-events-none -z-20"
+                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300%] h-[300%] animate-[conicRotate_6s_linear_infinite] filter blur-[18px] opacity-75 pointer-events-none will-change-transform -z-20"
                   style={{ backgroundImage: conicBackground }}
                 />
                 
                 {/* Crisp Rotating Conic Border */}
                 <div 
-                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300%] h-[300%] animate-[conicRotate_6s_linear_infinite] opacity-100 pointer-events-none -z-10"
+                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300%] h-[300%] animate-[conicRotate_6s_linear_infinite] opacity-100 pointer-events-none will-change-transform -z-10"
                   style={{ backgroundImage: conicBackground }}
                 />
 
@@ -336,11 +337,11 @@ export const SocialShowcase: React.FC<SocialShowcaseProps> = ({ onOrderSimilar }
                     onMouseEnter={() => setIsCloseHovered(true)}
                     onMouseLeave={() => setIsCloseHovered(false)}
                     onClick={() => setSelectedSocial(null)}
-                    className="absolute top-4 right-4 z-50 p-2 rounded-full bg-black/60 text-white/90 border border-white/10 hover:scale-105 active:scale-95 transition-all shadow-[0_4px_12px_rgba(0,0,0,0.5)] backdrop-blur-md cursor-pointer"
+                    className="absolute top-4 right-4 z-50 p-2.5 rounded-full bg-black/80 text-white border border-white/20 hover:scale-105 active:scale-95 transition-all shadow-[0_4px_16px_rgba(0,0,0,0.7)] backdrop-blur-xl cursor-pointer"
                     style={isCloseHovered ? { backgroundColor: c3, borderColor: 'transparent', color: '#fff' } : {}}
                     aria-label="Close modal"
                   >
-                    <X className="w-5 h-5" />
+                    <X className="w-5 h-5 stroke-[2.5]" />
                   </button>
 
                   {/* Content Wrapper (Scrollable) */}

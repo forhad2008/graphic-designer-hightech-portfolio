@@ -36,7 +36,7 @@ export const VeoCinematicVideo: React.FC = () => {
           playsInline
           className="w-full h-full object-cover filter brightness-[0.8] contrast-[1.12] scale-105 transition-transform duration-1000 group-hover:scale-100"
           src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
-          poster="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop"
+          poster="./design1.webp"
         />
         {/* Cinematic Vignette & Gradient Overlays */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#04030a] via-[#04030a]/40 to-transparent" />

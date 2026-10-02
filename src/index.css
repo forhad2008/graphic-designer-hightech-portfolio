@@ -104,10 +104,7 @@
 .liquid-glass-card,
 .liquid-glass,
 .neu-inset,
-.neu-3d-inset,
-input,
-textarea,
-select {
+.neu-3d-inset {
   position: relative;
   isolation: isolate;
 }
@@ -130,10 +127,7 @@ select {
 .liquid-glass-card::after,
 .liquid-glass::after,
 .neu-inset::after,
-.neu-3d-inset::after,
-input::after,
-textarea::after,
-select::after {
+.neu-3d-inset::after {
   content: "";
   position: absolute;
   inset: 0;

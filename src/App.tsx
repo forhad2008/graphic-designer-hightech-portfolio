@@ -6,6 +6,7 @@ import { Portfolio } from './components/Portfolio';
 import { GraphicsDesignShowcase } from './components/DesignShowcases';
 import { TemplatesShowcase } from './components/TemplatesShowcase';
 import { SocialShowcase } from './components/SocialShowcase';
+import { ServicesGigs } from './components/ServicesGigs';
 import { PortfolioModal } from './components/PortfolioModal';
 import { PricingTiers } from './components/PricingTiers';
 import { ProjectEstimator } from './components/ProjectEstimator';
@@ -121,6 +122,13 @@ export default function App() {
       <ScrollSection id="social-banners" distance={45} duration={0.8}>
         <SocialShowcase
           onOrderSimilar={handleOrderSimilar}
+        />
+      </ScrollSection>
+
+      {/* Specialized Services Gigs Section */}
+      <ScrollSection id="services" distance={45} duration={0.8}>
+        <ServicesGigs
+          onSelectGig={(gig) => window.open(gig.fiverrUrl, '_blank')}
         />
       </ScrollSection>
 

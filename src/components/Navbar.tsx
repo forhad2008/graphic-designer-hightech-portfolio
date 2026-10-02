@@ -254,8 +254,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection: propA
                 )}
               </div>
 
-
-
               {/* Pricing */}
               <button
                 onClick={() => handleLinkClick('pricing')}
@@ -534,165 +532,220 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection: propA
 
         </div>
 
-        {/* All-Device Supported Menu Drawer & Modal Window */}
-        <AnimatePresence>
-          {mobileMenuOpen && (
+      </header>
+
+      {/* All-Device Supported Menu Drawer & Modal Window (Directly at root viewport for unconstrained stacking) */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <div 
+            data-no-butterfly="true"
+            data-visual-window="true"
+            data-modal="true"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Site Navigation Menu"
+            className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-5 md:p-6 bg-black/85 backdrop-blur-xl overflow-hidden animate-fadeIn visual-window modal-window no-butterfly select-none"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            {/* Backdrop Click Dismiss */}
+            <div className="fixed inset-0" onClick={() => setMobileMenuOpen(false)} />
+
+            {/* Uiverse Glow Rotating Conic Border Wrapper with Stacking Isolation */}
             <div 
               data-no-butterfly="true"
               data-visual-window="true"
-              data-modal="true"
-              role="dialog"
-              aria-modal="true"
-              aria-label="Site Navigation Menu"
-              className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-xl overflow-y-auto animate-fadeIn visual-window modal-window no-butterfly"
-              onClick={() => setMobileMenuOpen(false)}
+              className="relative w-full max-w-3xl p-[2px] rounded-[26px] overflow-hidden my-auto max-h-[92vh] flex flex-col z-10 visual-window no-butterfly shadow-[0_0_60px_rgba(207,48,170,0.35),0_0_35px_rgba(64,47,181,0.5)] transition-all duration-300"
+              style={{ isolation: 'isolate' }}
+              onClick={(e) => e.stopPropagation()}
             >
-              <div className="fixed inset-0" onClick={() => setMobileMenuOpen(false)} />
+              {/* Outer Diffuse Rotating Conic Glow */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300%] h-[300%] animate-[conicRotate_6s_linear_infinite] bg-[conic-gradient(rgba(0,0,0,0)_0%,#402fb5_12%,#a099d8_20%,rgba(0,0,0,0)_35%,rgba(0,0,0,0)_50%,#cf30aa_65%,#dfa2da_75%,rgba(0,0,0,0)_90%)] filter blur-[18px] opacity-75 pointer-events-none will-change-transform -z-20" />
+              
+              {/* Crisp Concentrated Rotating Conic Border */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300%] h-[300%] animate-[conicRotate_6s_linear_infinite] bg-[conic-gradient(rgba(0,0,0,0)_0%,#402fb5_12%,#a099d8_18%,rgba(0,0,0,0)_30%,rgba(0,0,0,0)_50%,#cf30aa_65%,#dfa2da_72%,rgba(0,0,0,0)_85%)] opacity-100 pointer-events-none will-change-transform -z-10" />
 
-              {/* Uiverse Glow Rotating Conic Border Wrapper */}
-              <div 
-                data-no-butterfly="true"
-                data-visual-window="true"
-                className="relative w-full max-w-2xl p-[2px] rounded-3xl overflow-hidden my-auto max-h-[92vh] flex flex-col z-10 visual-window no-butterfly transition-all duration-500 shadow-[0_0_50px_rgba(207,48,170,0.35),0_0_30px_rgba(64,47,181,0.5)]"
-                onClick={(e) => e.stopPropagation()}
-              >
-                {/* Outer Rotating Conic Glow */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300%] h-[300%] animate-[conicRotate_6s_linear_infinite] bg-[conic-gradient(rgba(0,0,0,0)_0%,#402fb5_12%,#a099d8_20%,rgba(0,0,0,0)_35%,rgba(0,0,0,0)_50%,#cf30aa_65%,#dfa2da_75%,rgba(0,0,0,0)_90%)] filter blur-[18px] opacity-75 pointer-events-none -z-20" />
+              {/* Modal Core Window */}
+              <div className="relative z-10 w-full bg-[#080712] rounded-[24px] overflow-hidden flex flex-col max-h-[90vh] shadow-2xl border border-white/10">
                 
-                {/* Crisp Rotating Conic Border */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300%] h-[300%] animate-[conicRotate_6s_linear_infinite] bg-[conic-gradient(rgba(0,0,0,0)_0%,#402fb5_12%,#a099d8_18%,rgba(0,0,0,0)_30%,rgba(0,0,0,0)_50%,#cf30aa_65%,#dfa2da_72%,rgba(0,0,0,0)_85%)] opacity-100 pointer-events-none -z-10" />
-
-                {/* Modal Core Window */}
-                <div className="relative w-full bg-[#080712] rounded-[22px] overflow-hidden flex flex-col max-h-[90vh]">
-                  
-                  {/* Floating Absolute Close Button */}
-                  <button
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="absolute top-4 right-4 z-50 p-2 rounded-full bg-black/60 text-white/90 border border-white/10 hover:bg-[#cf30aa] hover:border-transparent transition-all shadow-[0_4px_12px_rgba(0,0,0,0.5)] backdrop-blur-md cursor-pointer"
-                    aria-label="Close menu"
-                  >
-                    <X className="w-5 h-5" />
-                  </button>
-
-                  {/* Content Wrapper */}
-                  <div className="overflow-y-auto flex-1 p-5 sm:p-6 space-y-4 custom-scrollbar bg-[#05040d]">
-                    
-                    {/* Header Studio Profile Card inside Window */}
-                    <div className="p-4 rounded-2xl neu-3d-raised-sm bg-[#0d0a1f] border border-white/10 flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <ProfileAvatar sizeClassName="w-10 h-10 rounded-xl" textSizeClassName="text-sm" />
-                        <div>
-                          <h4 className="text-sm font-bold text-white font-display">Abdullah Forhad</h4>
-                          <p className="text-[10px] font-mono text-[#dfa2da] flex items-center gap-1">
-                            <span>● Studio Quick Navigator</span>
-                            <span className="text-slate-400">· 8 Sections</span>
-                          </p>
-                        </div>
+                {/* 1. Pinned Dedicated Window Header Bar (Zero Overlap with Content) */}
+                <div className="px-4 sm:px-6 py-3.5 bg-[#0d0a1d]/95 backdrop-blur-xl border-b border-white/10 flex items-center justify-between shrink-0">
+                  <div className="flex items-center gap-3">
+                    <ProfileAvatar sizeClassName="w-9 h-9 rounded-xl shadow-md ring-1 ring-white/15" textSizeClassName="text-xs" />
+                    <div className="flex flex-col">
+                      <div className="flex items-center gap-2">
+                        <span className="text-sm font-bold text-white font-display">Abdullah Forhad</span>
+                        <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-[#cf30aa]/20 text-[#dfa2da] border border-[#cf30aa]/40">
+                          Navigator
+                        </span>
                       </div>
-                      <span className="text-[10px] font-mono px-2.5 py-1 rounded-xl bg-[#cf30aa]/20 text-[#dfa2da] border border-[#cf30aa]/40">
-                        v2.4 Pro
-                      </span>
+                      <p className="text-[11px] font-mono text-slate-400 flex items-center gap-1.5 mt-0.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                        <span>Available for Q2 Projects</span>
+                      </p>
                     </div>
+                  </div>
 
-                    {/* Primary Navigation Grid with Elemental Cards */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                      {[
-                        { id: 'portfolio', title: 'Featured Work & Portfolio', desc: 'Brand identity, SaaS UI & packaging', icon: Briefcase, tag: '01 Work' },
-                        { id: 'pricing', title: 'Transparent Pricing Tiers', desc: 'Starter, Pro & Enterprise blueprints', icon: Calendar, tag: '02 Pricing' },
-                        { id: 'estimator', title: 'Project Cost Estimator', desc: 'Instant scope & budget calculator', icon: Zap, tag: '03 Estimator' },
-                        { id: 'process', title: '4-Step Design Process', desc: 'Bulletproof delivery pipeline', icon: Workflow, tag: '04 Process' },
-                        { id: 'reviews', title: 'Verified Client Reviews', desc: '5.0-star rating from 120+ founders', icon: Star, tag: '05 Reviews' },
-                        { id: 'social-banners', title: 'Social & Visual Banners', desc: 'Gritty sports & luxury corporate ads', icon: Globe, tag: '06 Social' },
-                        { id: 'design-templates', title: 'Design Templates Blueprint', desc: 'Figma & React UI resource files', icon: Layers, tag: '07 Templates' },
-                        { id: 'faq', title: 'Frequently Asked Questions', desc: 'Turnaround, revisions & files', icon: HelpCircle, tag: '08 FAQ' },
-                      ].map((item) => {
-                        const IconComponent = item.icon;
-                        const isActive = activeSection === item.id;
-                        return (
-                          <button
-                            key={item.id}
-                            onClick={() => {
-                              setMobileMenuOpen(false);
-                              handleLinkClick(item.id);
-                            }}
-                            className={`p-3.5 rounded-2xl text-left transition-all flex items-start gap-3 cursor-pointer group border ${
-                              isActive
-                                ? 'bg-[#cf30aa]/20 text-white border-[#cf30aa]/60 shadow-[0_0_20px_rgba(207,48,170,0.3)]'
-                                : 'bg-[#0d0a1b] text-slate-200 hover:bg-[#14102d] hover:text-white border-white/10 hover:border-[#cf30aa]/40'
-                            }`}
-                          >
-                            <div className="p-2.5 rounded-xl bg-black/40 border border-white/10 text-[#dfa2da] group-hover:scale-110 transition-transform shrink-0">
-                              <IconComponent className="w-4 h-4" />
-                            </div>
-                            <div className="flex-1 min-w-0">
-                              <div className="flex items-center justify-between mb-0.5">
-                                <span className="font-bold text-white font-display truncate group-hover:text-[#dfa2da] transition-colors">{item.title}</span>
-                                <span className="text-[9px] font-mono text-[#dfa2da] px-1.5 py-0.5 rounded bg-black/50 border border-white/10">{item.tag}</span>
-                              </div>
-                              <p className="text-[11px] text-slate-400 truncate">{item.desc}</p>
-                            </div>
-                          </button>
-                        );
-                      })}
-                    </div>
-
-                {/* Quick Action & Contact Suite with All Icons */}
-                <div className="pt-2 border-t border-white/10 grid grid-cols-1 sm:grid-cols-3 gap-2">
-                  <button
-                    onClick={() => {
-                      setMobileMenuOpen(false);
-                      setCommandPaletteOpen(true);
-                    }}
-                    className="flex items-center justify-center gap-2 py-3 text-xs font-semibold text-slate-200 bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl transition-all cursor-pointer"
-                  >
-                    <Search className="w-4 h-4 text-[#dfa2da]" />
-                    <span>Search (⌘K)</span>
-                  </button>
-
-                  <a
-                    href="https://wa.me/8801342900364"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 py-3 text-xs font-bold text-[#dfa2da] bg-[#cf30aa]/20 hover:bg-[#cf30aa]/30 border border-[#cf30aa]/40 rounded-2xl transition-all"
-                  >
-                    <MessageCircle className="w-4 h-4 text-[#dfa2da]" />
-                    <span>WhatsApp Chat</span>
-                  </a>
-
-                  <button
-                    onClick={() => handleLinkClick('contact')}
-                    className="py-3 text-xs font-bold text-white neu-3d-btn-primary rounded-2xl flex items-center justify-center gap-1.5 shadow-lg transition-all cursor-pointer"
-                  >
-                    <Sparkles className="w-4 h-4 stroke-[2.5]" />
-                    <span>Book Project</span>
-                  </button>
-                </div>
-
-                {/* Quick Contacts Footer */}
-                <div className="flex items-center justify-between pt-2 border-t border-white/5 text-[11px] text-slate-400 px-1">
-                  <a
-                    href="mailto:contact@abdullahforhad.com"
-                    className="flex items-center gap-1.5 hover:text-[#dfa2da] transition-colors"
-                  >
-                    <Mail className="w-3.5 h-3.5 text-slate-500" />
-                    <span>Email Direct</span>
-                  </a>
-                  <a
-                    href="tel:+8801342900364"
-                    className="flex items-center gap-1.5 hover:text-[#dfa2da] transition-colors"
-                  >
-                    <Phone className="w-3.5 h-3.5 text-slate-500" />
-                    <span>Call Hotline</span>
-                  </a>
+                  <div className="flex items-center gap-2">
+                    <span className="hidden sm:inline-flex items-center gap-1 px-2 py-1 text-[10px] font-mono text-slate-400 bg-white/5 border border-white/10 rounded-lg">
+                      <span>ESC</span>
+                    </span>
+                    <button
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="w-8 h-8 rounded-full bg-white/5 hover:bg-[#cf30aa] border border-white/15 hover:border-[#cf30aa] text-slate-300 hover:text-white flex items-center justify-center transition-all cursor-pointer shadow-sm group"
+                      aria-label="Close navigation menu"
+                      title="Close Menu (Esc)"
+                    >
+                      <X className="w-4 h-4 group-hover:rotate-90 transition-transform duration-200" />
+                    </button>
                   </div>
                 </div>
+
+                {/* 2. Scrollable Body with Clean Single Scrollbar */}
+                <div className="overflow-y-auto flex-1 p-4 sm:p-5 md:p-6 space-y-4 custom-scrollbar bg-[#05040d]">
+                  
+                  {/* Studio Overview Status Bar */}
+                  <div className="p-3 sm:p-3.5 rounded-2xl bg-gradient-to-r from-[#120e29]/90 via-[#0d0a1f]/90 to-[#120e29]/90 border border-white/10 flex flex-wrap items-center justify-between gap-2.5 text-xs">
+                    <div className="flex items-center gap-2 text-slate-300">
+                      <span className="text-[#dfa2da] font-bold">● Studio Directory</span>
+                      <span className="text-slate-600">|</span>
+                      <span className="text-[11px] text-slate-400 font-mono">11 Sections · Instant Jump</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-[11px] font-mono">
+                      <span className="text-emerald-400 flex items-center gap-1">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                        100% On-Time
+                      </span>
+                      <span className="text-slate-600">·</span>
+                      <span className="text-[#dfa2da] flex items-center gap-0.5">
+                        <Star className="w-3 h-3 fill-[#dfa2da]" />
+                        5.0★ (120+ Reviews)
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Primary Navigation Grid with Elemental Cards (No clipping, rich layout) */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 text-xs">
+                    {[
+                      { id: 'portfolio', title: 'Featured Work & Portfolio', desc: 'Brand identity, original logo marks & SaaS UI systems', icon: Briefcase, tag: '01 Work' },
+                      { id: 'graphics-design', title: 'Graphics & Visual Design', desc: 'Packaging dielines, apparel, print & brand assets', icon: Layers, tag: '02 Graphics' },
+                      { id: 'design-templates', title: 'Design Templates Blueprint', desc: 'Premium Figma, Photoshop & vector resource sets', icon: Layers, tag: '03 Templates' },
+                      { id: 'social-banners', title: 'Social & Visual Banners', desc: 'Gritty sports posters & luxury corporate ad campaigns', icon: Globe, tag: '04 Social' },
+                      { id: 'services', title: 'Specialized Freelance Gigs', desc: 'Verified Fiverr Pro design services & rapid delivery', icon: Zap, tag: '05 Services' },
+                      { id: 'pricing', title: 'Transparent Pricing Tiers', desc: 'Starter, Pro & Enterprise blueprints with deliverables', icon: Calendar, tag: '06 Pricing' },
+                      { id: 'estimator', title: 'Project Cost Estimator', desc: 'Interactive scope calculator with real-time quote generation', icon: Sliders, tag: '07 Estimator' },
+                      { id: 'process', title: '4-Step Design Pipeline', desc: 'Discovery, concept drafting, iterative polish & final handoff', icon: Workflow, tag: '08 Process' },
+                      { id: 'reviews', title: 'Verified Client Reviews', desc: '5.0-star ratings and testimonials from 120+ founders', icon: Star, tag: '09 Reviews' },
+                      { id: 'contact', title: 'Direct Client Booking & Quote', desc: 'Schedule your project, customize deliverables & start work', icon: Send, tag: '10 Booking' },
+                      { id: 'faq', title: 'Frequently Asked Questions', desc: 'Turnaround speed, vector source files, revisions & copyright', icon: HelpCircle, tag: '11 FAQ' },
+                    ].map((item) => {
+                      const IconComponent = item.icon;
+                      const isActive = activeSection === item.id;
+                      return (
+                        <button
+                          key={item.id}
+                          onClick={() => {
+                            setMobileMenuOpen(false);
+                            handleLinkClick(item.id);
+                          }}
+                          className={`p-3 sm:p-3.5 rounded-2xl text-left transition-all duration-200 flex items-start gap-3 cursor-pointer group border ${
+                            isActive
+                              ? 'bg-[#cf30aa]/20 text-white border-[#cf30aa]/70 shadow-[0_0_20px_rgba(207,48,170,0.3)] ring-1 ring-[#cf30aa]/50'
+                              : 'bg-[#0c091d]/85 text-slate-200 hover:bg-[#151033] hover:text-white border-white/10 hover:border-[#cf30aa]/50 hover:shadow-[0_4px_16px_rgba(0,0,0,0.4)]'
+                          }`}
+                        >
+                          <div className={`p-2.5 rounded-xl border group-hover:scale-105 transition-transform shrink-0 ${
+                            isActive 
+                              ? 'bg-[#cf30aa]/30 border-[#cf30aa]/60 text-white shadow-[0_0_10px_#cf30aa]' 
+                              : 'bg-black/40 border-white/10 text-[#dfa2da] group-hover:border-[#cf30aa]/40'
+                          }`}>
+                            <IconComponent className="w-4 h-4" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center justify-between gap-1.5 mb-1">
+                              <span className="font-bold text-white font-display text-[13px] group-hover:text-[#dfa2da] transition-colors leading-tight">
+                                {item.title}
+                              </span>
+                              <span className={`text-[9px] font-mono px-1.5 py-0.5 rounded shrink-0 border ${
+                                isActive 
+                                  ? 'bg-[#cf30aa]/40 text-white border-[#cf30aa]' 
+                                  : 'bg-black/50 text-[#dfa2da] border-white/10'
+                              }`}>
+                                {item.tag}
+                              </span>
+                            </div>
+                            <p className="text-[11px] text-slate-400 group-hover:text-slate-300 transition-colors line-clamp-2 leading-snug">
+                              {item.desc}
+                            </p>
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+
+                </div>
+
+                {/* 3. Pinned Window Bottom Action Suite & Contact Bar */}
+                <div className="p-3.5 sm:p-4 bg-[#0a0718]/95 backdrop-blur-xl border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 shrink-0">
+                  
+                  {/* Direct Communication Channels */}
+                  <div className="flex items-center gap-4 text-[11px] text-slate-400">
+                    <a
+                      href="mailto:contact@abdullahforhad.com"
+                      className="flex items-center gap-1.5 hover:text-[#dfa2da] transition-colors"
+                    >
+                      <Mail className="w-3.5 h-3.5 text-[#dfa2da]" />
+                      <span className="font-mono">contact@abdullahforhad.com</span>
+                    </a>
+                    <span className="text-slate-700 hidden sm:inline">|</span>
+                    <a
+                      href="tel:+8801342900364"
+                      className="flex items-center gap-1.5 hover:text-[#dfa2da] transition-colors"
+                    >
+                      <Phone className="w-3.5 h-3.5 text-[#dfa2da]" />
+                      <span className="font-mono">+880 1342 900364</span>
+                    </a>
+                  </div>
+
+                  {/* 3 Quick Action Buttons */}
+                  <div className="flex items-center gap-2 w-full sm:w-auto">
+                    <button
+                      onClick={() => {
+                        setMobileMenuOpen(false);
+                        setCommandPaletteOpen(true);
+                      }}
+                      className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-semibold text-slate-200 bg-white/5 hover:bg-white/10 border border-white/15 rounded-xl transition-all cursor-pointer"
+                    >
+                      <Search className="w-3.5 h-3.5 text-[#dfa2da]" />
+                      <span>Search</span>
+                      <span className="text-[10px] font-mono text-slate-400">⌘K</span>
+                    </button>
+
+                    <a
+                      href="https://wa.me/8801342900364"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-bold text-[#dfa2da] bg-[#cf30aa]/15 hover:bg-[#cf30aa]/25 border border-[#cf30aa]/40 rounded-xl transition-all"
+                    >
+                      <MessageCircle className="w-3.5 h-3.5 text-[#dfa2da]" />
+                      <span>WhatsApp</span>
+                    </a>
+
+                    <button
+                      onClick={() => handleLinkClick('contact')}
+                      className="flex-1 sm:flex-initial px-3.5 py-2 text-xs font-bold text-white neu-3d-btn-primary rounded-xl flex items-center justify-center gap-1.5 shadow-md transition-all cursor-pointer"
+                    >
+                      <Sparkles className="w-3.5 h-3.5 stroke-[2.5]" />
+                      <span>Book Project</span>
+                    </button>
+                  </div>
+
+                </div>
+
               </div>
             </div>
           </div>
-          )}
-        </AnimatePresence>
-
-      </header>
+        )}
+      </AnimatePresence>
 
       {/* Modern Floating Mobile Bottom Navigation Dock (1-thumb touch navigation) */}
       <nav
@@ -703,7 +756,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection: propA
         {/* 1. Work */}
         <button
           onClick={() => handleLinkClick('portfolio')}
-          className={`relative px-3 py-2 rounded-full flex flex-col items-center gap-0.5 transition-all cursor-pointer ${
+          className={`relative px-2.5 py-2 rounded-full flex flex-col items-center gap-0.5 transition-all cursor-pointer ${
             activeSection === 'portfolio'
               ? 'text-[#dfa2da] font-bold'
               : 'text-slate-400 hover:text-white'
@@ -720,12 +773,30 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection: propA
           )}
         </button>
 
-
+        {/* 2. Pricing */}
+        <button
+          onClick={() => handleLinkClick('pricing')}
+          className={`relative px-2.5 py-2 rounded-full flex flex-col items-center gap-0.5 transition-all cursor-pointer ${
+            activeSection === 'pricing'
+              ? 'text-[#dfa2da] font-bold'
+              : 'text-slate-400 hover:text-white'
+          }`}
+          title="Pricing"
+        >
+          <Calendar className="w-4 h-4" />
+          <span className="text-[10px] font-medium leading-none">Pricing</span>
+          {activeSection === 'pricing' && (
+            <motion.span
+              layoutId="mobile-dock-dot"
+              className="absolute -bottom-0.5 w-1.5 h-1.5 rounded-full bg-[#cf30aa] shadow-[0_0_8px_#cf30aa]"
+            />
+          )}
+        </button>
 
         {/* 3. Estimator */}
         <button
           onClick={() => handleLinkClick('estimator')}
-          className={`relative px-3 py-2 rounded-full flex flex-col items-center gap-0.5 transition-all cursor-pointer ${
+          className={`relative px-2.5 py-2 rounded-full flex flex-col items-center gap-0.5 transition-all cursor-pointer ${
             activeSection === 'estimator'
               ? 'text-[#dfa2da] font-bold'
               : 'text-slate-400 hover:text-white'
@@ -750,7 +821,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection: propA
           href="https://wa.me/8801342900364"
           target="_blank"
           rel="noopener noreferrer"
-          className="relative px-3 py-2 rounded-full flex flex-col items-center gap-0.5 text-[#dfa2da] hover:text-white transition-all cursor-pointer"
+          className="relative px-2.5 py-2 rounded-full flex flex-col items-center gap-0.5 text-[#dfa2da] hover:text-white transition-all cursor-pointer"
           title="WhatsApp"
         >
           <div className="relative">
@@ -763,7 +834,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection: propA
         {/* 5. Menu / More */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className={`relative px-3 py-2 rounded-full flex flex-col items-center gap-0.5 transition-all cursor-pointer ${
+          className={`relative px-2.5 py-2 rounded-full flex flex-col items-center gap-0.5 transition-all cursor-pointer ${
             mobileMenuOpen
               ? 'text-[#dfa2da] font-bold'
               : 'text-slate-400 hover:text-white'
