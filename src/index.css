@@ -40,7 +40,7 @@
   }
 
   /* Touch ergonomics and responsive manipulation */
-  button, a, input, select, textarea, [role="button"] {
+  button, a, input, select, textarea, [role="button"], [tabindex] {
     touch-action: manipulation;
   }
   
@@ -743,4 +743,17 @@ select:focus::after {
 .pt-safe {
   padding-top: max(env(safe-area-inset-top, 0px), 0.75rem);
 }
+
+@keyframes flutter {
+  0% {
+    transform: scaleX(1) rotate(0deg);
+  }
+  50% {
+    transform: scaleX(0.2) rotate(5deg);
+  }
+  100% {
+    transform: scaleX(1) rotate(0deg);
+  }
+}
+
 

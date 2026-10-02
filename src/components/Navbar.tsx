@@ -549,14 +549,14 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection: propA
           role="dialog"
           aria-modal="true"
           aria-label="Menu Toggle Window"
-          className="fixed inset-0 z-[99995] flex items-start justify-center sm:justify-end pt-20 sm:pt-24 px-3 sm:px-6 md:px-10 pb-8 bg-black/80 backdrop-blur-xl animate-fadeIn visual-window modal-window no-butterfly"
+          className="fixed inset-0 z-[99995] flex items-center sm:items-start justify-center sm:justify-end pt-16 sm:pt-24 px-3 sm:px-6 md:px-10 pb-20 sm:pb-8 bg-black/80 backdrop-blur-xl animate-fadeIn visual-window modal-window no-butterfly"
           onClick={() => setMobileMenuOpen(false)}
         >
           {/* Floating Visual Submenu Window */}
           <div
             data-no-butterfly="true"
             data-visual-window="true"
-            className="relative w-full sm:w-[440px] max-w-[460px] max-h-[calc(100dvh-6.5rem)] p-[2.5px] rounded-2xl overflow-hidden flex flex-col z-10 visual-window no-butterfly shadow-[0_0_60px_rgba(207,48,170,0.5),0_0_35px_rgba(64,47,181,0.7)] animate-modalIn"
+            className="relative w-full sm:w-[440px] max-w-[460px] max-h-[85vh] sm:max-h-[calc(100dvh-6.5rem)] p-[2.5px] rounded-2xl overflow-hidden flex flex-col z-10 visual-window no-butterfly shadow-[0_0_60px_rgba(207,48,170,0.5),0_0_35px_rgba(64,47,181,0.7)] animate-modalIn"
             style={{ isolation: 'isolate' }}
             onClick={(e) => e.stopPropagation()}
           >
@@ -577,13 +577,13 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection: propA
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
-                      <span className="text-sm font-bold text-white font-display">Menu Toggle Window</span>
+                      <span className="text-sm font-bold text-white font-display">Abdullah Forhad Studio</span>
                       <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-[#cf30aa]/25 text-[#dfa2da] border border-[#cf30aa]/40 font-bold">
-                        6 Sections
+                        Directory
                       </span>
                     </div>
                     <p className="text-[11px] text-slate-400 font-mono">
-                      Submenu directory for all device sizes
+                      Brand Identity &amp; Visual Design
                     </p>
                   </div>
                 </div>

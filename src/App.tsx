@@ -17,6 +17,7 @@ import { Footer } from './components/Footer';
 import { FloatingChat } from './components/FloatingChat';
 import { BackToTop } from './components/BackToTop';
 import { ScrollSection } from './components/ScrollSection';
+import { ButterflyCursor } from './components/ButterflyCursor';
 import { PortfolioItem, PricingPackage, FiverrGig } from './types';
 
 export default function App() {
@@ -76,6 +77,9 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#04030a] text-[#F3F4F6] relative overflow-x-hidden flex flex-col font-sans selection:bg-[#cf30aa]/30 selection:text-[#dfa2da]">
+      {/* Live Butterfly Cursor */}
+      <ButterflyCursor />
+
       {/* Navigation */}
       <Navbar onNavigate={scrollToSection} />
 

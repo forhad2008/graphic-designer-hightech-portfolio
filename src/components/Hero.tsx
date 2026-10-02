@@ -156,7 +156,19 @@ export const Hero: React.FC<HeroProps> = ({ onExploreWork, onBookProject, onOpen
           </div>
 
           {/* RIGHT COLUMN: Minimal Design Showcase Container (7 cols) with Rotating Conic Glow */}
-          <div className="xl:col-span-7">
+          <div className="xl:col-span-7 relative pt-3 sm:pt-0">
+            
+            {/* Floating Status Badge / Tag */}
+            <div className="absolute -top-4 sm:-top-5 right-4 sm:right-6 z-30 inline-flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-2xl bg-[#080614]/95 border border-[#cf30aa]/60 shadow-[0_0_30px_rgba(207,48,170,0.45)] backdrop-blur-xl text-xs font-mono text-white">
+              <span className="relative flex h-2.5 w-2.5 shrink-0">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
+              </span>
+              <span className="font-bold text-emerald-300">Open for New Projects</span>
+              <span className="text-slate-500">·</span>
+              <span className="text-[#dfa2da] font-medium">Available for Hire</span>
+            </div>
+
             <GlowCard alwaysGlow intensity="vibrant" rounded="rounded-3xl">
               <div className="relative rounded-3xl bg-[#090714]/90 neu-3d-raised-lg p-5 sm:p-6 backdrop-blur-xl">
                 
