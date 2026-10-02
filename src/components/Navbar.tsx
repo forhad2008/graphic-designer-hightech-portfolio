@@ -139,7 +139,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection: propA
 
   return (
     <>
-      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isAnyModalOpen ? 'opacity-0 pointer-events-none -translate-y-full' : 'opacity-100 translate-y-0'}`}>
+      <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
         
         {/* Top Minimal Notice Bar */}
         {showTopNotice && (
@@ -453,7 +453,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection: propA
                 layout
                 data-no-butterfly="true"
                 data-round-icon="true"
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setMobileMenuOpen(!mobileMenuOpen);
+                }}
                 onMouseEnter={() => setHoveredButton('menu')}
                 onMouseLeave={() => setHoveredButton(null)}
                 whileTap={{ scale: 0.94 }}
@@ -527,180 +530,107 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection: propA
 
         </div>
 
-        {/* All-Device Supported Menu Drawer & Modal Overlay */}
+        {/* All-Device Supported Menu Drawer & Modal Window */}
         <AnimatePresence>
           {mobileMenuOpen && (
-            <>
-              {/* Backdrop Overlay with Blur (Click outside to close) */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.2 }}
-                onClick={() => setMobileMenuOpen(false)}
-                className="fixed inset-0 bg-black/80 backdrop-blur-md z-40"
-                aria-hidden="true"
-              />
+            <div 
+              data-no-butterfly="true"
+              data-visual-window="true"
+              data-modal="true"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Site Navigation Menu"
+              className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-xl overflow-y-auto animate-fadeIn visual-window modal-window no-butterfly"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              <div className="fixed inset-0" onClick={() => setMobileMenuOpen(false)} />
 
-              {/* Menu Container */}
-              <motion.div
-                initial={{ opacity: 0, y: -20, scale: 0.98 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: -20, scale: 0.98 }}
-                transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                className="fixed inset-x-3 sm:inset-x-6 top-18 sm:top-24 max-w-2xl mx-auto bg-[#070B13]/98 backdrop-blur-2xl border border-white/15 rounded-3xl p-4 sm:p-6 space-y-4 shadow-[0_20px_60px_rgba(0,0,0,0.85)] z-50 max-h-[84vh] overflow-y-auto"
-                role="dialog"
-                aria-modal="true"
-                aria-label="Site Navigation Menu"
+              {/* Uiverse Glow Rotating Conic Border Wrapper */}
+              <div 
+                data-no-butterfly="true"
+                data-visual-window="true"
+                className="relative w-full max-w-2xl p-[2px] rounded-3xl overflow-hidden my-auto max-h-[92vh] flex flex-col z-10 visual-window no-butterfly transition-all duration-500 shadow-[0_0_50px_rgba(207,48,170,0.35),0_0_30px_rgba(64,47,181,0.5)]"
+                onClick={(e) => e.stopPropagation()}
               >
-                {/* Header Bar inside Drawer */}
-                <div className="flex items-center justify-between pb-3 border-b border-white/10">
-                  <div className="flex items-center gap-2">
-                    <div className="w-2.5 h-2.5 rounded-full bg-[#cf30aa] animate-ping" />
-                    <span className="text-xs font-bold text-white tracking-wide uppercase">
-                      Quick Navigator
-                    </span>
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-[#cf30aa]/20 text-[#dfa2da] border border-[#cf30aa]/30">
-                      8 Sections
-                    </span>
-                  </div>
+                {/* Outer Rotating Conic Glow */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300%] h-[300%] animate-[conicRotate_6s_linear_infinite] bg-[conic-gradient(rgba(0,0,0,0)_0%,#402fb5_12%,#a099d8_20%,rgba(0,0,0,0)_35%,rgba(0,0,0,0)_50%,#cf30aa_65%,#dfa2da_75%,rgba(0,0,0,0)_90%)] filter blur-[18px] opacity-75 pointer-events-none -z-20" />
+                
+                {/* Crisp Rotating Conic Border */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300%] h-[300%] animate-[conicRotate_6s_linear_infinite] bg-[conic-gradient(rgba(0,0,0,0)_0%,#402fb5_12%,#a099d8_18%,rgba(0,0,0,0)_30%,rgba(0,0,0,0)_50%,#cf30aa_65%,#dfa2da_72%,rgba(0,0,0,0)_85%)] opacity-100 pointer-events-none -z-10" />
+
+                {/* Modal Core Window */}
+                <div className="relative w-full bg-[#080712] rounded-[22px] overflow-hidden flex flex-col max-h-[90vh]">
+                  
+                  {/* Floating Absolute Close Button */}
                   <button
                     onClick={() => setMobileMenuOpen(false)}
-                    className="p-1.5 rounded-full bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white transition-colors cursor-pointer"
+                    className="absolute top-4 right-4 z-50 p-2 rounded-full bg-black/60 text-white/90 border border-white/10 hover:bg-[#cf30aa] hover:border-transparent transition-all shadow-[0_4px_12px_rgba(0,0,0,0.5)] backdrop-blur-md cursor-pointer"
                     aria-label="Close menu"
                   >
-                    <X className="w-4 h-4" />
-                  </button>
-                </div>
-
-                {/* Primary Navigation Grid with rich icons */}
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
-                  <button
-                    onClick={() => handleLinkClick('portfolio')}
-                    className={`p-3 rounded-2xl text-left font-medium transition-all flex flex-col justify-between h-20.5 cursor-pointer ${
-                      activeSection === 'portfolio'
-                        ? 'bg-[#cf30aa]/20 text-[#dfa2da] font-bold border border-[#cf30aa]/50 shadow-[0_0_16px_rgba(207,48,170,0.2)]'
-                        : 'bg-white/5 text-slate-200 hover:bg-white/10 hover:text-white border border-white/5'
-                    }`}
-                  >
-                    <div className="flex items-center justify-between w-full">
-                      <Briefcase className="w-4 h-4 text-[#dfa2da]" />
-                      <span className="text-[10px] font-mono text-slate-400">01</span>
-                    </div>
-                    <div>
-                      <div className="font-bold">Work</div>
-                      <div className="text-[10px] text-slate-400">Featured Projects</div>
-                    </div>
+                    <X className="w-5 h-5" />
                   </button>
 
-                  <button
-                    onClick={() => handleLinkClick('pricing')}
-                    className={`p-3 rounded-2xl text-left font-medium transition-all flex flex-col justify-between h-20.5 cursor-pointer ${
-                      activeSection === 'pricing'
-                        ? 'bg-[#cf30aa]/20 text-[#dfa2da] font-bold border border-[#cf30aa]/50 shadow-[0_0_16px_rgba(207,48,170,0.2)]'
-                        : 'bg-white/5 text-slate-200 hover:bg-white/10 hover:text-white border border-white/5'
-                    }`}
-                  >
-                    <div className="flex items-center justify-between w-full">
-                      <Calendar className="w-4 h-4 text-[#dfa2da]" />
-                      <span className="text-[10px] font-mono text-slate-400">02</span>
+                  {/* Content Wrapper */}
+                  <div className="overflow-y-auto flex-1 p-5 sm:p-6 space-y-4 custom-scrollbar bg-[#05040d]">
+                    
+                    {/* Header Studio Profile Card inside Window */}
+                    <div className="p-4 rounded-2xl neu-3d-raised-sm bg-[#0d0a1f] border border-white/10 flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <ProfileAvatar sizeClassName="w-10 h-10 rounded-xl" textSizeClassName="text-sm" />
+                        <div>
+                          <h4 className="text-sm font-bold text-white font-display">Abdullah Forhad</h4>
+                          <p className="text-[10px] font-mono text-[#dfa2da] flex items-center gap-1">
+                            <span>● Studio Quick Navigator</span>
+                            <span className="text-slate-400">· 8 Sections</span>
+                          </p>
+                        </div>
+                      </div>
+                      <span className="text-[10px] font-mono px-2.5 py-1 rounded-xl bg-[#cf30aa]/20 text-[#dfa2da] border border-[#cf30aa]/40">
+                        v2.4 Pro
+                      </span>
                     </div>
-                    <div>
-                      <div className="font-bold">Pricing</div>
-                      <div className="text-[10px] text-slate-400">Tier Packages</div>
-                    </div>
-                  </button>
 
-                  <button
-                    onClick={() => handleLinkClick('estimator')}
-                    className={`p-3 rounded-2xl text-left font-medium transition-all flex flex-col justify-between h-20.5 cursor-pointer ${
-                      activeSection === 'estimator'
-                        ? 'bg-[#cf30aa]/30 text-[#dfa2da] font-bold border border-[#cf30aa]/60 shadow-[0_0_16px_rgba(207,48,170,0.3)]'
-                        : 'bg-[#cf30aa]/15 text-[#dfa2da] hover:bg-[#cf30aa]/25 border border-[#cf30aa]/30'
-                    }`}
-                  >
-                    <div className="flex items-center justify-between w-full">
-                      <Zap className="w-4 h-4 text-[#dfa2da]" />
-                      <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-[#cf30aa]/30 text-[#dfa2da] font-bold">CALC</span>
+                    {/* Primary Navigation Grid with Elemental Cards */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                      {[
+                        { id: 'portfolio', title: 'Featured Work & Portfolio', desc: 'Brand identity, SaaS UI & packaging', icon: Briefcase, tag: '01 Work' },
+                        { id: 'pricing', title: 'Transparent Pricing Tiers', desc: 'Starter, Pro & Enterprise blueprints', icon: Calendar, tag: '02 Pricing' },
+                        { id: 'estimator', title: 'Project Cost Estimator', desc: 'Instant scope & budget calculator', icon: Zap, tag: '03 Estimator' },
+                        { id: 'process', title: '4-Step Design Process', desc: 'Bulletproof delivery pipeline', icon: Workflow, tag: '04 Process' },
+                        { id: 'reviews', title: 'Verified Client Reviews', desc: '5.0-star rating from 120+ founders', icon: Star, tag: '05 Reviews' },
+                        { id: 'social-banners', title: 'Social & Visual Banners', desc: 'Gritty sports & luxury corporate ads', icon: Globe, tag: '06 Social' },
+                        { id: 'design-templates', title: 'Design Templates Blueprint', desc: 'Figma & React UI resource files', icon: Layers, tag: '07 Templates' },
+                        { id: 'faq', title: 'Frequently Asked Questions', desc: 'Turnaround, revisions & files', icon: HelpCircle, tag: '08 FAQ' },
+                      ].map((item) => {
+                        const IconComponent = item.icon;
+                        const isActive = activeSection === item.id;
+                        return (
+                          <button
+                            key={item.id}
+                            onClick={() => {
+                              setMobileMenuOpen(false);
+                              handleLinkClick(item.id);
+                            }}
+                            className={`p-3.5 rounded-2xl text-left transition-all flex items-start gap-3 cursor-pointer group border ${
+                              isActive
+                                ? 'bg-[#cf30aa]/20 text-white border-[#cf30aa]/60 shadow-[0_0_20px_rgba(207,48,170,0.3)]'
+                                : 'bg-[#0d0a1b] text-slate-200 hover:bg-[#14102d] hover:text-white border-white/10 hover:border-[#cf30aa]/40'
+                            }`}
+                          >
+                            <div className="p-2.5 rounded-xl bg-black/40 border border-white/10 text-[#dfa2da] group-hover:scale-110 transition-transform shrink-0">
+                              <IconComponent className="w-4 h-4" />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center justify-between mb-0.5">
+                                <span className="font-bold text-white font-display truncate group-hover:text-[#dfa2da] transition-colors">{item.title}</span>
+                                <span className="text-[9px] font-mono text-[#dfa2da] px-1.5 py-0.5 rounded bg-black/50 border border-white/10">{item.tag}</span>
+                              </div>
+                              <p className="text-[11px] text-slate-400 truncate">{item.desc}</p>
+                            </div>
+                          </button>
+                        );
+                      })}
                     </div>
-                    <div>
-                      <div className="font-bold">Estimator</div>
-                      <div className="text-[10px] text-[#dfa2da]/90">Instant Quote</div>
-                    </div>
-                  </button>
-
-                  <button
-                    onClick={() => handleLinkClick('process')}
-                    className={`p-3 rounded-2xl text-left font-medium transition-all flex flex-col justify-between h-20.5 cursor-pointer ${
-                      activeSection === 'process'
-                        ? 'bg-[#cf30aa]/20 text-[#dfa2da] font-bold border border-[#cf30aa]/50 shadow-[0_0_16px_rgba(207,48,170,0.2)]'
-                        : 'bg-white/5 text-slate-200 hover:bg-white/10 hover:text-white border border-white/5'
-                    }`}
-                  >
-                    <div className="flex items-center justify-between w-full">
-                      <Workflow className="w-4 h-4 text-[#dfa2da]" />
-                      <span className="text-[10px] font-mono text-slate-400">03</span>
-                    </div>
-                    <div>
-                      <div className="font-bold">Process</div>
-                      <div className="text-[10px] text-slate-400">4-Step Flow</div>
-                    </div>
-                  </button>
-
-                  <button
-                    onClick={() => handleLinkClick('reviews')}
-                    className={`p-3 rounded-2xl text-left font-medium transition-all flex flex-col justify-between h-20.5 cursor-pointer ${
-                      activeSection === 'reviews'
-                        ? 'bg-[#cf30aa]/20 text-[#dfa2da] font-bold border border-[#cf30aa]/50 shadow-[0_0_16px_rgba(207,48,170,0.2)]'
-                        : 'bg-white/5 text-slate-200 hover:bg-white/10 hover:text-white border border-white/5'
-                    }`}
-                  >
-                    <div className="flex items-center justify-between w-full">
-                      <Star className="w-4 h-4 text-amber-400 fill-amber-400" />
-                      <span className="text-[10px] font-mono text-slate-400">04</span>
-                    </div>
-                    <div>
-                      <div className="font-bold">Reviews</div>
-                      <div className="text-[10px] text-slate-400">5.0 Star Rating</div>
-                    </div>
-                  </button>
-
-                  <button
-                    onClick={() => handleLinkClick('social')}
-                    className={`p-3 rounded-2xl text-left font-medium transition-all flex flex-col justify-between h-20.5 cursor-pointer ${
-                      activeSection === 'social'
-                        ? 'bg-[#cf30aa]/20 text-[#dfa2da] font-bold border border-[#cf30aa]/50 shadow-[0_0_16px_rgba(207,48,170,0.2)]'
-                        : 'bg-white/5 text-slate-200 hover:bg-white/10 hover:text-white border border-white/5'
-                    }`}
-                  >
-                    <div className="flex items-center justify-between w-full">
-                      <Globe className="w-4 h-4 text-[#dfa2da]" />
-                      <span className="text-[10px] font-mono text-slate-400">05</span>
-                    </div>
-                    <div>
-                      <div className="font-bold">Social</div>
-                      <div className="text-[10px] text-slate-400">Channels &amp; Proof</div>
-                    </div>
-                  </button>
-
-                  <button
-                    onClick={() => handleLinkClick('faq')}
-                    className={`p-3 rounded-2xl text-left font-medium transition-all flex flex-col justify-between h-20.5 cursor-pointer ${
-                      activeSection === 'faq'
-                        ? 'bg-[#cf30aa]/20 text-[#dfa2da] font-bold border border-[#cf30aa]/50 shadow-[0_0_16px_rgba(207,48,170,0.2)]'
-                        : 'bg-white/5 text-slate-200 hover:bg-white/10 hover:text-white border border-white/5'
-                    }`}
-                  >
-                    <div className="flex items-center justify-between w-full">
-                      <HelpCircle className="w-4 h-4 text-[#dfa2da]" />
-                      <span className="text-[10px] font-mono text-slate-400">06</span>
-                    </div>
-                    <div>
-                      <div className="font-bold">FAQ</div>
-                      <div className="text-[10px] text-slate-400">Questions &amp; Help</div>
-                    </div>
-                  </button>
-                </div>
 
                 {/* Quick Action & Contact Suite with All Icons */}
                 <div className="pt-2 border-t border-white/10 grid grid-cols-1 sm:grid-cols-3 gap-2">
@@ -750,9 +680,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, activeSection: propA
                     <Phone className="w-3.5 h-3.5 text-slate-500" />
                     <span>Call Hotline</span>
                   </a>
+                  </div>
                 </div>
-              </motion.div>
-            </>
+              </div>
+            </div>
+          </div>
           )}
         </AnimatePresence>
 

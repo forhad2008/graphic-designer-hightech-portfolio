@@ -40,7 +40,7 @@ export const FloatingChat: React.FC = () => {
   };
 
   return (
-    <div className={`fixed bottom-5 right-5 z-40 flex flex-col items-end transition-all duration-300 ${isModalOpen ? 'opacity-0 pointer-events-none translate-y-10' : 'opacity-100 translate-y-0'}`}>
+    <div className="fixed bottom-5 right-5 z-40 flex flex-col items-end transition-all duration-300">
       
       {/* Animated Chat & Work Process Inquiry Drawer */}
       <AnimatePresence>
@@ -188,7 +188,10 @@ export const FloatingChat: React.FC = () => {
         onMouseLeave={() => setIsHovered(false)}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.92 }}
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={(e) => {
+          e.stopPropagation();
+          setIsOpen(!isOpen);
+        }}
         transition={{ type: 'spring', stiffness: 400, damping: 26 }}
         className="relative h-13 rounded-full neu-3d-btn-primary text-white font-extrabold flex items-center overflow-hidden cursor-pointer select-none group transition-shadow"
         style={{
