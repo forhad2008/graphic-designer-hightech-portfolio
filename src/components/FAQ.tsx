@@ -65,6 +65,29 @@ export const FAQ: React.FC = () => {
           })}
         </div>
 
+        {/* Ask AI Advisor Banner */}
+        <div className="mt-8 p-4 rounded-2xl bg-white/[0.02] border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl bg-[#cf30aa]/20 border border-[#cf30aa]/40 flex items-center justify-center text-[#dfa2da] shrink-0">
+              <HelpCircle className="w-4 h-4" />
+            </div>
+            <div>
+              <p className="text-xs sm:text-sm font-bold text-white font-display">Have a different question?</p>
+              <p className="text-[11px] text-slate-400">Our AI Design Advisor can answer immediately or connect you on WhatsApp.</p>
+            </div>
+          </div>
+          <button
+            type="button"
+            onClick={() => {
+              const el = document.getElementById('ai-intelligence');
+              el?.scrollIntoView({ behavior: 'smooth' });
+            }}
+            className="px-4 py-2 rounded-xl neu-3d-btn-primary text-white text-xs font-mono font-bold cursor-pointer shrink-0"
+          >
+            Chat with AI Advisor
+          </button>
+        </div>
+
       </div>
     </section>
   );

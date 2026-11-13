@@ -134,6 +134,15 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
       action: () => { onNavigate('contact'); onClose(); }
     },
     {
+      id: 'sec-ai',
+      title: 'AI Design Advisor & Chat',
+      subtitle: 'Instant specific answers on pricing, 24h delivery, files & dielines',
+      category: 'Section',
+      icon: Sparkles,
+      action: () => { onNavigate('ai-intelligence'); onClose(); },
+      badge: 'AI Agent'
+    },
+    {
       id: 'sec-faq',
       title: 'FAQ',
       subtitle: 'Licensing, formats, and turnaround',
