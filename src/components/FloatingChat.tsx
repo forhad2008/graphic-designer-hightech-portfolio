@@ -27,27 +27,52 @@ export const FloatingChat: React.FC = () => {
   const [isHovered, setIsHovered] = useState<boolean>(false);
   const [userMessage, setUserMessage] = useState<string>('');
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isAiSectionVisible, setIsAiSectionVisible] = useState<boolean>(false);
   const [chatLoading, setChatLoading] = useState<boolean>(false);
   const chatScrollContainerRef = useRef<HTMLDivElement>(null);
+  const latestAssistantMsgRef = useRef<HTMLDivElement>(null);
 
   const [messages, setMessages] = useState<ChatMessage[]>([INITIAL_ASSISTANT_MESSAGE]);
 
-  // Reliable, smooth auto-scroll to the bottom of the conversation thread
+  // Reliable, smooth auto-scroll inside the floating chat drawer
   const scrollToReply = (behavior: ScrollBehavior = 'smooth') => {
-    requestAnimationFrame(() => {
-      if (chatScrollContainerRef.current) {
-        chatScrollContainerRef.current.scrollTo({
-          top: chatScrollContainerRef.current.scrollHeight,
-          behavior
-        });
-      }
-      setTimeout(() => {
-        if (chatScrollContainerRef.current) {
-          chatScrollContainerRef.current.scrollTop = chatScrollContainerRef.current.scrollHeight;
-        }
-      }, 80);
-    });
+    if (!chatScrollContainerRef.current) return;
+    const container = chatScrollContainerRef.current;
+    const lastMsg = messages[messages.length - 1];
+
+    if (lastMsg?.role === 'assistant' && latestAssistantMsgRef.current && messages.length > 1) {
+      const offsetTop = latestAssistantMsgRef.current.offsetTop;
+      container.scrollTo({
+        top: Math.max(0, offsetTop - 10),
+        behavior
+      });
+    } else {
+      container.scrollTo({
+        top: container.scrollHeight,
+        behavior
+      });
+    }
   };
+
+  // Hide floating chat button when scrolled to the on-page AI Assistant section to prevent clutter and overlap
+  useEffect(() => {
+    const aiSection = document.getElementById('ai-intelligence');
+    if (!aiSection) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        setIsAiSectionVisible(entry.isIntersecting);
+        if (entry.isIntersecting) {
+          setIsOpen(false);
+        }
+      },
+      { threshold: 0.12 }
+    );
+
+    observer.observe(aiSection);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const checkModals = () => {
@@ -76,9 +101,17 @@ export const FloatingChat: React.FC = () => {
 
   // Auto-scroll when messages arrive (bypasses initial mount so page never jumps on open)
   useEffect(() => {
-    if (messages.length > 1) {
-      scrollToReply('smooth');
-    }
+    if (messages.length <= 1) return;
+
+    const rafId = requestAnimationFrame(() => scrollToReply('smooth'));
+    const t1 = setTimeout(() => scrollToReply('smooth'), 60);
+    const t2 = setTimeout(() => scrollToReply('smooth'), 180);
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
   }, [messages, chatLoading]);
 
   const quickPrompts = [
@@ -184,7 +217,9 @@ export const FloatingChat: React.FC = () => {
   return (
     <div
       className={`fixed bottom-4 right-3.5 sm:bottom-5 sm:right-5 md:bottom-5 md:right-5 z-40 flex flex-col items-end transition-all duration-300 ${
-        isModalOpen ? 'opacity-0 pointer-events-none translate-y-24 scale-75' : 'opacity-100 translate-y-0 scale-100'
+        isModalOpen || isAiSectionVisible
+          ? 'opacity-0 pointer-events-none translate-y-16 scale-75'
+          : 'opacity-100 translate-y-0 scale-100'
       }`}
     >
       {/* Animated Chat & Work Process Inquiry Drawer */}
@@ -261,11 +296,14 @@ export const FloatingChat: React.FC = () => {
               {/* Chat Body & Conversation Thread */}
               <div ref={chatScrollContainerRef} className="relative flex-1 p-3.5 space-y-3 overflow-y-auto custom-scrollbar bg-gradient-to-b from-[#080712] to-[#05040d]">
                 {/* Message list */}
-                {messages.map((m) => (
-                  <div
-                    key={m.id}
-                    className={`flex items-start gap-2.5 ${m.role === 'user' ? 'flex-row-reverse' : ''}`}
-                  >
+                {messages.map((m, mIdx) => {
+                  const isLatestAssistant = m.role === 'assistant' && mIdx === messages.length - 1;
+                  return (
+                    <div
+                      key={m.id}
+                      ref={isLatestAssistant ? latestAssistantMsgRef : undefined}
+                      className={`flex items-start gap-2.5 ${m.role === 'user' ? 'flex-row-reverse' : ''}`}
+                    >
                     <div
                       className={`w-6 h-6 rounded-lg flex items-center justify-center shrink-0 text-xs ${
                         m.role === 'user'
@@ -348,7 +386,8 @@ export const FloatingChat: React.FC = () => {
                       </span>
                     </div>
                   </div>
-                ))}
+                );
+              })}
 
                 {chatLoading && (
                   <div className="flex items-start gap-2.5">

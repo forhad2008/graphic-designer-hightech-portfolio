@@ -40,6 +40,8 @@ export const ServicesGigs: React.FC<ServicesGigsProps> = ({ onSelectGig }) => {
                     <img
                       src={gig.image}
                       alt={gig.title}
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#080712] via-transparent to-black/40" />

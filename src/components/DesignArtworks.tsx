@@ -40,6 +40,7 @@ export const DesignArtwork: React.FC<ArtworkProps> = ({
           src={initialSrc}
           alt={altText}
           loading="lazy"
+          decoding="async"
           onLoad={() => setImageLoaded(true)}
           onError={() => setHasError(true)}
           className={`w-full h-full object-cover object-center transition-all duration-700 ease-out group-hover:scale-108 group-hover:brightness-105 ${

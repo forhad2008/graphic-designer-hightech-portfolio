@@ -41,6 +41,7 @@ export const ProfileAvatar: React.FC<ProfileAvatarProps> = ({
         <img
           src={currentSrc}
           alt="Abdullah Forhad"
+          decoding="async"
           onError={handleImgError}
           className="w-full h-full object-cover"
         />

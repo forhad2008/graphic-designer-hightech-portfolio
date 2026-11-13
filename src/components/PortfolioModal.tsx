@@ -140,6 +140,7 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({ item, onClose, o
                   alt={`${item.title} Presentation - Part ${idx + 1}`}
                   className="w-full h-auto block select-none"
                   loading="lazy"
+                  decoding="async"
                 />
               ))}
             </div>

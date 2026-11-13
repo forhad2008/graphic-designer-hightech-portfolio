@@ -174,6 +174,7 @@ export const SocialMediaCovers: React.FC<SocialMediaCoversProps> = ({ onSelectIt
                   src={item.image}
                   alt={item.title}
                   loading="lazy"
+                  decoding="async"
                   className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-108 group-hover:brightness-105"
                 />
 

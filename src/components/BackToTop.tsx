@@ -7,6 +7,23 @@ export const BackToTop: React.FC = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAiSectionVisible, setIsAiSectionVisible] = useState(false);
+
+  useEffect(() => {
+    const aiSection = document.getElementById('ai-intelligence');
+    if (!aiSection) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        setIsAiSectionVisible(entry.isIntersecting);
+      },
+      { threshold: 0.12 }
+    );
+
+    observer.observe(aiSection);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -58,7 +75,7 @@ export const BackToTop: React.FC = () => {
 
   return (
     <AnimatePresence>
-      {isVisible && !isModalOpen && (
+      {isVisible && !isModalOpen && !isAiSectionVisible && (
         <motion.div
           initial={{ opacity: 0, scale: 0.6, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}

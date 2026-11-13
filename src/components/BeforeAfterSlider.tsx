@@ -42,6 +42,8 @@ const RobustImage: React.FC<{
     <img
       src={currentSrc}
       alt={alt}
+      loading="lazy"
+      decoding="async"
       onError={() => {
         setIndex((prev) => prev + 1);
       }}

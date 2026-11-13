@@ -27,29 +27,44 @@ export const AiAssistantSection: React.FC = () => {
   const [chatLoading, setChatLoading] = useState(false);
   const chatContainerRef = useRef<HTMLDivElement>(null);
   const messagesBottomRef = useRef<HTMLDivElement>(null);
+  const latestAssistantMsgRef = useRef<HTMLDivElement>(null);
 
-  // Reliable, smooth auto-scroll to the bottom of the conversation thread
+  // Reliable, smooth auto-scroll inside the chat container
   const scrollToReply = (behavior: ScrollBehavior = 'smooth') => {
-    requestAnimationFrame(() => {
-      if (chatContainerRef.current) {
-        chatContainerRef.current.scrollTo({
-          top: chatContainerRef.current.scrollHeight,
-          behavior
-        });
-      }
-      setTimeout(() => {
-        if (chatContainerRef.current) {
-          chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
-        }
-      }, 80);
-    });
+    if (!chatContainerRef.current) return;
+    const container = chatContainerRef.current;
+    const lastMsg = messages[messages.length - 1];
+
+    if (lastMsg?.role === 'assistant' && latestAssistantMsgRef.current && messages.length > 1) {
+      // Smoothly scroll container to the start of the assistant's reply so user can read immediately
+      const offsetTop = latestAssistantMsgRef.current.offsetTop;
+      container.scrollTo({
+        top: Math.max(0, offsetTop - 12),
+        behavior
+      });
+    } else {
+      // Scroll to bottom (e.g., when user sends a message or during loading)
+      container.scrollTo({
+        top: container.scrollHeight,
+        behavior
+      });
+    }
   };
 
-  // Auto-scroll when messages arrive (bypasses initial mount so page never jumps on open)
+  // Auto-scroll when new messages arrive or loading state changes
   useEffect(() => {
-    if (messages.length > 1) {
-      scrollToReply('smooth');
-    }
+    if (messages.length <= 1) return;
+
+    // Run across multiple animation frames to ensure full markdown/button layout rendering
+    const rafId = requestAnimationFrame(() => scrollToReply('smooth'));
+    const t1 = setTimeout(() => scrollToReply('smooth'), 60);
+    const t2 = setTimeout(() => scrollToReply('smooth'), 180);
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
   }, [messages, chatLoading]);
 
   const handleSend = async (textToSend?: string) => {
@@ -69,17 +84,22 @@ export const AiAssistantSection: React.FC = () => {
     setChatLoading(true);
 
     // Scroll immediately to show the user's message & loading state
-    scrollToReply('smooth');
+    requestAnimationFrame(() => {
+      if (chatContainerRef.current) {
+        chatContainerRef.current.scrollTo({
+          top: chatContainerRef.current.scrollHeight,
+          behavior: 'smooth'
+        });
+      }
+    });
 
     try {
       const assistantReply = await sendChatMessage(newHistory, text);
       setMessages([...newHistory, assistantReply]);
-      scrollToReply('smooth');
     } catch (err) {
       console.error('Chat error:', err);
     } finally {
       setChatLoading(false);
-      scrollToReply('smooth');
     }
   };
 
@@ -232,11 +252,14 @@ export const AiAssistantSection: React.FC = () => {
 
             {/* Messages Thread */}
             <div ref={chatContainerRef} className="relative flex-1 overflow-y-auto space-y-4 pr-2 mb-3 custom-scrollbar">
-              {messages.map((m) => (
-                <div
-                  key={m.id}
-                  className={`flex items-start gap-3 ${m.role === 'user' ? 'flex-row-reverse' : ''}`}
-                >
+              {messages.map((m, mIdx) => {
+                const isLatestAssistant = m.role === 'assistant' && mIdx === messages.length - 1;
+                return (
+                  <div
+                    key={m.id}
+                    ref={isLatestAssistant ? latestAssistantMsgRef : undefined}
+                    className={`flex items-start gap-3 ${m.role === 'user' ? 'flex-row-reverse' : ''}`}
+                  >
                   <div
                     className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 ${
                       m.role === 'user'
@@ -317,7 +340,8 @@ export const AiAssistantSection: React.FC = () => {
                     </span>
                   </div>
                 </div>
-              ))}
+              );
+            })}
 
               {chatLoading && (
                 <div className="flex items-start gap-3">
@@ -346,6 +370,12 @@ export const AiAssistantSection: React.FC = () => {
                   type="text"
                   value={inputMessage}
                   onChange={(e) => setInputMessage(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                      e.preventDefault();
+                      handleSend();
+                    }
+                  }}
                   placeholder="Ask about pricing, 24h delivery, .AI/.SVG formats, packaging dielines..."
                   className="w-full pl-4 pr-24 py-3.5 rounded-2xl bg-[#04030a] border border-white/15 focus:border-[#cf30aa] focus:ring-2 focus:ring-[#cf30aa]/30 text-white placeholder-slate-500 text-xs sm:text-sm outline-none transition-all shadow-inner"
                 />

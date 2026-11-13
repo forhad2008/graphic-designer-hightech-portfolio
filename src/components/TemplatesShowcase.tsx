@@ -388,6 +388,8 @@ export const TemplatesShowcase: React.FC<TemplatesShowcaseProps> = ({ onOrderSim
                     <img
                       src={selectedTemplate.image}
                       alt={selectedTemplate.title}
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-contain max-h-[460px]"
                     />
                   </div>

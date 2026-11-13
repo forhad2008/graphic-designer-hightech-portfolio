@@ -208,6 +208,8 @@ export const Hero: React.FC<HeroProps> = ({ onExploreWork, onBookProject, onOpen
                       <img
                         src={activeItem.image}
                         alt={activeItem.title}
+                        loading="eager"
+                        decoding="async"
                         className="w-full h-full object-cover min-h-[260px] transition-transform duration-500 group-hover:scale-105"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />

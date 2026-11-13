@@ -93,6 +93,8 @@ export const SocialVisibility: React.FC = () => {
                   <img
                     src={item.image}
                     alt={item.platform}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 opacity-80 group-hover:opacity-100"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#080712] via-[#080712]/40 to-transparent" />
