@@ -29,9 +29,25 @@ export const FloatingChat: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [chatLoading, setChatLoading] = useState<boolean>(false);
   const chatScrollContainerRef = useRef<HTMLDivElement>(null);
-  const latestAnswerRef = useRef<HTMLDivElement>(null);
 
   const [messages, setMessages] = useState<ChatMessage[]>([INITIAL_ASSISTANT_MESSAGE]);
+
+  // Reliable, smooth auto-scroll to the bottom of the conversation thread
+  const scrollToReply = (behavior: ScrollBehavior = 'smooth') => {
+    requestAnimationFrame(() => {
+      if (chatScrollContainerRef.current) {
+        chatScrollContainerRef.current.scrollTo({
+          top: chatScrollContainerRef.current.scrollHeight,
+          behavior
+        });
+      }
+      setTimeout(() => {
+        if (chatScrollContainerRef.current) {
+          chatScrollContainerRef.current.scrollTop = chatScrollContainerRef.current.scrollHeight;
+        }
+      }, 80);
+    });
+  };
 
   useEffect(() => {
     const checkModals = () => {
@@ -58,21 +74,12 @@ export const FloatingChat: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
-  // Auto-scroll smoothly to reveal the new assistant answer and options
+  // Auto-scroll when messages arrive (bypasses initial mount so page never jumps on open)
   useEffect(() => {
-    const lastMsg = messages[messages.length - 1];
-    if (lastMsg && lastMsg.role === 'assistant' && messages.length > 1) {
-      const timer = setTimeout(() => {
-        if (chatScrollContainerRef.current) {
-          chatScrollContainerRef.current.scrollTo({
-            top: chatScrollContainerRef.current.scrollHeight,
-            behavior: 'smooth'
-          });
-        }
-      }, 50);
-      return () => clearTimeout(timer);
+    if (messages.length > 1) {
+      scrollToReply('smooth');
     }
-  }, [messages]);
+  }, [messages, chatLoading]);
 
   const quickPrompts = [
     { label: '💼 Logo & Brand Identity Quote', query: 'What are your logo & brand design pricing packages?' },
@@ -99,13 +106,17 @@ export const FloatingChat: React.FC = () => {
     if (!customText) setUserMessage('');
     setChatLoading(true);
 
+    scrollToReply('smooth');
+
     try {
-      const reply = await sendChatMessage(messages, text);
+      const reply = await sendChatMessage(newHistory, text);
       setMessages([...newHistory, reply]);
+      scrollToReply('smooth');
     } catch (err) {
       console.error(err);
     } finally {
       setChatLoading(false);
+      scrollToReply('smooth');
     }
   };
 
@@ -250,14 +261,11 @@ export const FloatingChat: React.FC = () => {
               {/* Chat Body & Conversation Thread */}
               <div ref={chatScrollContainerRef} className="relative flex-1 p-3.5 space-y-3 overflow-y-auto custom-scrollbar bg-gradient-to-b from-[#080712] to-[#05040d]">
                 {/* Message list */}
-                {messages.map((m, idx) => {
-                  const isLatestAnswer = m.role === 'assistant' && idx === messages.length - 1;
-                  return (
-                    <div
-                      key={m.id}
-                      ref={isLatestAnswer ? latestAnswerRef : undefined}
-                      className={`flex items-start gap-2.5 ${m.role === 'user' ? 'flex-row-reverse' : ''}`}
-                    >
+                {messages.map((m) => (
+                  <div
+                    key={m.id}
+                    className={`flex items-start gap-2.5 ${m.role === 'user' ? 'flex-row-reverse' : ''}`}
+                  >
                     <div
                       className={`w-6 h-6 rounded-lg flex items-center justify-center shrink-0 text-xs ${
                         m.role === 'user'
@@ -340,7 +348,7 @@ export const FloatingChat: React.FC = () => {
                       </span>
                     </div>
                   </div>
-                ); })}
+                ))}
 
                 {chatLoading && (
                   <div className="flex items-start gap-2.5">

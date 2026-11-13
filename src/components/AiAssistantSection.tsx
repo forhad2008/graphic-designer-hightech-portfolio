@@ -26,23 +26,31 @@ export const AiAssistantSection: React.FC = () => {
   const [inputMessage, setInputMessage] = useState('');
   const [chatLoading, setChatLoading] = useState(false);
   const chatContainerRef = useRef<HTMLDivElement>(null);
-  const latestAnswerRef = useRef<HTMLDivElement>(null);
+  const messagesBottomRef = useRef<HTMLDivElement>(null);
 
-  // Auto-scroll smoothly to reveal the new assistant answer and options
-  useEffect(() => {
-    const lastMsg = messages[messages.length - 1];
-    if (lastMsg && lastMsg.role === 'assistant' && messages.length > 1) {
-      const timer = setTimeout(() => {
+  // Reliable, smooth auto-scroll to the bottom of the conversation thread
+  const scrollToReply = (behavior: ScrollBehavior = 'smooth') => {
+    requestAnimationFrame(() => {
+      if (chatContainerRef.current) {
+        chatContainerRef.current.scrollTo({
+          top: chatContainerRef.current.scrollHeight,
+          behavior
+        });
+      }
+      setTimeout(() => {
         if (chatContainerRef.current) {
-          chatContainerRef.current.scrollTo({
-            top: chatContainerRef.current.scrollHeight,
-            behavior: 'smooth'
-          });
+          chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
         }
-      }, 50);
-      return () => clearTimeout(timer);
+      }, 80);
+    });
+  };
+
+  // Auto-scroll when messages arrive (bypasses initial mount so page never jumps on open)
+  useEffect(() => {
+    if (messages.length > 1) {
+      scrollToReply('smooth');
     }
-  }, [messages]);
+  }, [messages, chatLoading]);
 
   const handleSend = async (textToSend?: string) => {
     const text = (textToSend || inputMessage).trim();
@@ -60,13 +68,18 @@ export const AiAssistantSection: React.FC = () => {
     if (!textToSend) setInputMessage('');
     setChatLoading(true);
 
+    // Scroll immediately to show the user's message & loading state
+    scrollToReply('smooth');
+
     try {
-      const assistantReply = await sendChatMessage(messages, text);
+      const assistantReply = await sendChatMessage(newHistory, text);
       setMessages([...newHistory, assistantReply]);
+      scrollToReply('smooth');
     } catch (err) {
       console.error('Chat error:', err);
     } finally {
       setChatLoading(false);
+      scrollToReply('smooth');
     }
   };
 
@@ -219,14 +232,11 @@ export const AiAssistantSection: React.FC = () => {
 
             {/* Messages Thread */}
             <div ref={chatContainerRef} className="relative flex-1 overflow-y-auto space-y-4 pr-2 mb-3 custom-scrollbar">
-              {messages.map((m, idx) => {
-                const isLatestAnswer = m.role === 'assistant' && idx === messages.length - 1;
-                return (
-                  <div
-                    key={m.id}
-                    ref={isLatestAnswer ? latestAnswerRef : undefined}
-                    className={`flex items-start gap-3 ${m.role === 'user' ? 'flex-row-reverse' : ''}`}
-                  >
+              {messages.map((m) => (
+                <div
+                  key={m.id}
+                  className={`flex items-start gap-3 ${m.role === 'user' ? 'flex-row-reverse' : ''}`}
+                >
                   <div
                     className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 ${
                       m.role === 'user'
@@ -307,7 +317,7 @@ export const AiAssistantSection: React.FC = () => {
                     </span>
                   </div>
                 </div>
-              ); })}
+              ))}
 
               {chatLoading && (
                 <div className="flex items-start gap-3">
@@ -320,6 +330,7 @@ export const AiAssistantSection: React.FC = () => {
                   </div>
                 </div>
               )}
+              <div ref={messagesBottomRef} />
             </div>
 
             {/* Input Form */}
