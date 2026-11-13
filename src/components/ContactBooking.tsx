@@ -200,8 +200,9 @@ export const ContactBooking: React.FC<ContactBookingProps> = ({
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                   <div>
-                    <label className="font-mono text-slate-300 block mb-1.5 font-bold">Your Name *</label>
+                    <label htmlFor="contact-name" className="font-mono text-slate-300 block mb-1.5 font-bold">Your Name *</label>
                     <input
+                      id="contact-name"
                       type="text"
                       required
                       placeholder="Alex / Brand Name"
@@ -212,8 +213,9 @@ export const ContactBooking: React.FC<ContactBookingProps> = ({
                   </div>
 
                   <div>
-                    <label className="font-mono text-slate-300 block mb-1.5 font-bold">Email Address *</label>
+                    <label htmlFor="contact-email" className="font-mono text-slate-300 block mb-1.5 font-bold">Email Address *</label>
                     <input
+                      id="contact-email"
                       type="email"
                       required
                       placeholder="alex@company.com"
@@ -226,8 +228,9 @@ export const ContactBooking: React.FC<ContactBookingProps> = ({
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                   <div>
-                    <label className="font-mono text-slate-300 block mb-1.5 font-bold">Service Discipline</label>
+                    <label htmlFor="contact-service" className="font-mono text-slate-300 block mb-1.5 font-bold">Service Discipline</label>
                     <select
+                      id="contact-service"
                       value={formData.serviceType}
                       onChange={(e) => setFormData({ ...formData, serviceType: e.target.value })}
                       className="w-full px-3.5 py-3 min-h-[46px] rounded-2xl neu-inset neu-inset-focus text-white text-[16px] sm:text-xs focus:outline-none bg-[#04070d]"
@@ -242,8 +245,9 @@ export const ContactBooking: React.FC<ContactBookingProps> = ({
                   </div>
 
                   <div>
-                    <label className="font-mono text-slate-300 block mb-1.5 font-bold">Budget Tier</label>
+                    <label htmlFor="contact-budget" className="font-mono text-slate-300 block mb-1.5 font-bold">Budget Tier</label>
                     <select
+                      id="contact-budget"
                       value={formData.budget}
                       onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
                       className="w-full px-3.5 py-3 min-h-[46px] rounded-2xl neu-inset neu-inset-focus text-white text-[16px] sm:text-xs focus:outline-none bg-[#04070d]"
@@ -257,8 +261,9 @@ export const ContactBooking: React.FC<ContactBookingProps> = ({
                 </div>
 
                 <div>
-                  <label className="font-mono text-slate-300 block mb-1.5 font-bold">Project Details &amp; Notes *</label>
+                  <label htmlFor="contact-desc" className="font-mono text-slate-300 block mb-1.5 font-bold">Project Details &amp; Notes *</label>
                   <textarea
+                    id="contact-desc"
                     required
                     rows={3}
                     placeholder="Describe your brand vision, colors, deliverables, and text requirements..."

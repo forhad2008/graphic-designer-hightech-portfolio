@@ -17,7 +17,7 @@ export const ScrollSection: React.FC<ScrollSectionProps> = ({
   className = '',
 }) => {
   return (
-    <div id={id} className={className}>
+    <div id={id} className={`scroll-mt-24 md:scroll-mt-28 ${className}`}>
       {children}
     </div>
   );
