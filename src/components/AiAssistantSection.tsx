@@ -207,9 +207,12 @@ export const AiAssistantSection: React.FC = () => {
                 type="button"
                 onClick={() => handleSend(prompt.query)}
                 disabled={chatLoading}
-                className="shrink-0 px-3.5 py-2 rounded-xl bg-white/[0.03] hover:bg-[#cf30aa]/15 border border-white/10 hover:border-[#cf30aa]/40 text-slate-300 hover:text-white text-xs font-mono transition-all flex items-center gap-1.5 cursor-pointer disabled:opacity-40"
+                className="shrink-0 px-3 py-1.5 rounded-xl bg-white/[0.03] hover:bg-[#cf30aa]/15 border border-white/10 hover:border-[#cf30aa]/40 text-slate-300 hover:text-white text-xs font-mono transition-all flex items-center gap-1.5 cursor-pointer disabled:opacity-40"
               >
                 <span>{prompt.label}</span>
+                {prompt.shortTag && (
+                  <span className="text-[10px] font-semibold text-[#dfa2da] opacity-90">({prompt.shortTag})</span>
+                )}
                 <ArrowUpRight className="w-3 h-3 text-slate-500" />
               </button>
             ))}
@@ -294,10 +297,15 @@ export const AiAssistantSection: React.FC = () => {
 
                       {/* Interactive Service & Question Options */}
                       {m.options && m.options.length > 0 && (
-                        <div className="mt-3 pt-3 border-t border-white/10 space-y-1.5">
-                          <p className="text-[11px] font-mono text-[#dfa2da] mb-1 font-semibold flex items-center gap-1">
-                            <span>👇 Choose an option to get immediate answers:</span>
-                          </p>
+                        <div className="mt-3 pt-3 border-t border-white/10">
+                          <div className="flex items-center justify-between mb-2 px-0.5">
+                            <span className="text-[11px] font-mono font-semibold text-[#dfa2da] flex items-center gap-1.5">
+                              <span>Select an option for immediate answers:</span>
+                            </span>
+                            <span className="text-[10px] font-mono text-slate-500 hidden sm:inline-block">
+                              Instant Verified Info
+                            </span>
+                          </div>
                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
                             {m.options.map((opt, optIdx) => (
                               <button
@@ -305,17 +313,19 @@ export const AiAssistantSection: React.FC = () => {
                                 type="button"
                                 onClick={() => handleSend(opt.query)}
                                 disabled={chatLoading}
-                                className="p-2.5 rounded-xl bg-white/[0.04] hover:bg-[#cf30aa]/20 border border-white/10 hover:border-[#cf30aa]/50 text-left transition-all flex flex-col gap-0.5 group cursor-pointer disabled:opacity-40"
+                                className="px-3 py-2 rounded-xl bg-white/[0.03] hover:bg-[#cf30aa]/15 border border-white/10 hover:border-[#cf30aa]/50 text-left transition-all flex items-center justify-between gap-2 group cursor-pointer disabled:opacity-40 shadow-sm"
                               >
-                                <div className="flex items-center justify-between text-xs font-semibold text-white group-hover:text-[#dfa2da]">
-                                  <span>{opt.label}</span>
-                                  <ArrowUpRight className="w-3.5 h-3.5 text-slate-500 group-hover:text-[#dfa2da] shrink-0" />
+                                <span className="text-xs font-medium text-slate-200 group-hover:text-white truncate">
+                                  {opt.label}
+                                </span>
+                                <div className="flex items-center gap-1.5 shrink-0">
+                                  {opt.shortTag && (
+                                    <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-[#cf30aa]/15 text-[#dfa2da] border border-[#cf30aa]/30 font-semibold group-hover:bg-[#cf30aa]/25 transition-colors">
+                                      {opt.shortTag}
+                                    </span>
+                                  )}
+                                  <ArrowUpRight className="w-3.5 h-3.5 text-slate-500 group-hover:text-[#dfa2da] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                                 </div>
-                                {opt.description && (
-                                  <span className="text-[10px] font-mono text-slate-400 group-hover:text-slate-300">
-                                    {opt.description}
-                                  </span>
-                                )}
                               </button>
                             ))}
                           </div>

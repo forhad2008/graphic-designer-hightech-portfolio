@@ -338,9 +338,9 @@ export const FloatingChat: React.FC = () => {
 
                         {/* Interactive Service & Question Options */}
                         {m.options && m.options.length > 0 && (
-                          <div className="mt-2.5 pt-2.5 border-t border-white/10 space-y-1">
-                            <p className="text-[10px] font-mono text-[#dfa2da] mb-1 font-semibold">
-                              👇 Tap an option to explore:
+                          <div className="mt-2 pt-2 border-t border-white/10">
+                            <p className="text-[10px] font-mono text-[#dfa2da] mb-1.5 font-semibold">
+                              Select a topic for instant answers:
                             </p>
                             <div className="grid grid-cols-1 gap-1">
                               {m.options.map((opt, optIdx) => (
@@ -349,19 +349,19 @@ export const FloatingChat: React.FC = () => {
                                   type="button"
                                   onClick={() => handleSendMessage(opt.query)}
                                   disabled={chatLoading}
-                                  className="w-full p-2 rounded-xl bg-white/[0.04] hover:bg-[#cf30aa]/20 border border-white/10 hover:border-[#cf30aa]/50 text-left transition-all flex items-center justify-between group cursor-pointer disabled:opacity-40"
+                                  className="w-full px-2.5 py-1.5 rounded-lg bg-white/[0.04] hover:bg-[#cf30aa]/20 border border-white/10 hover:border-[#cf30aa]/50 text-left transition-all flex items-center justify-between gap-1.5 group cursor-pointer disabled:opacity-40"
                                 >
-                                  <div className="flex flex-col truncate pr-1">
-                                    <span className="text-[11px] font-semibold text-white group-hover:text-[#dfa2da]">
-                                      {opt.label}
-                                    </span>
-                                    {opt.description && (
-                                      <span className="text-[9px] font-mono text-slate-400 group-hover:text-slate-300 truncate">
-                                        {opt.description}
+                                  <span className="text-[11px] font-medium text-slate-200 group-hover:text-white truncate">
+                                    {opt.label}
+                                  </span>
+                                  <div className="flex items-center gap-1 shrink-0">
+                                    {opt.shortTag && (
+                                      <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-[#cf30aa]/15 text-[#dfa2da] border border-[#cf30aa]/30 font-semibold group-hover:bg-[#cf30aa]/25">
+                                        {opt.shortTag}
                                       </span>
                                     )}
+                                    <ArrowUpRight className="w-3 h-3 text-slate-500 group-hover:text-[#dfa2da] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                                   </div>
-                                  <ArrowUpRight className="w-3 h-3 text-slate-500 group-hover:text-[#dfa2da] shrink-0" />
                                 </button>
                               ))}
                             </div>

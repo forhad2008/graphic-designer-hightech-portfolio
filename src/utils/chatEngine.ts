@@ -3,6 +3,7 @@ import { AGENT_KNOWLEDGE_BASE, findMatchingKnowledge, KnowledgeItem } from '../d
 export interface ChatOption {
   label: string;
   query: string;
+  shortTag?: string;
   description?: string;
 }
 
@@ -24,47 +25,56 @@ export const STUDIO_TOPIC_OPTIONS: ChatOption[] = [
   {
     label: '💼 Pricing & Packages',
     query: 'What are your logo & brand design pricing packages?',
-    description: 'Starter ($45), Standard Pro ($120), Premium ($280)'
+    shortTag: 'From $45',
+    description: 'Starter, Standard Pro & Premium Suite'
   },
   {
-    label: '⚡ Turnaround & 24h Rush',
+    label: '⚡ 24h Express Delivery',
     query: 'Can you deliver within 24 hours? What is your turnaround time?',
-    description: 'Standard 2–4 days or 24-hour express rush'
+    shortTag: 'Rush Available',
+    description: '24-hour turnaround option'
   },
   {
-    label: '📁 Deliverables & Files',
+    label: '📁 Source Files & Vector',
     query: 'What source files and deliverables will I receive?',
-    description: 'Master .AI, .SVG, .EPS, .PSD, 300 DPI CMYK PDF'
+    shortTag: '.AI · .SVG · PDF',
+    description: 'Master vector files & 300 DPI print-ready'
   },
   {
     label: '🔄 Revision Policy',
     query: 'How do revisions work and how many are included?',
-    description: 'Unlimited revisions on Standard and Premium'
+    shortTag: 'Unlimited',
+    description: 'Unlimited revisions on Standard & Premium'
   },
   {
-    label: '©️ Commercial Rights',
+    label: '🛡️ Commercial Rights',
     query: 'Do I get full commercial copyright and trademark ownership?',
-    description: '100% exclusive copyright and trademark ready'
+    shortTag: '100% Transfer',
+    description: 'Full legal commercial transfer'
   },
   {
     label: '📦 Packaging & Dielines',
     query: 'Do you design product packaging, labels, and box dielines?',
-    description: 'Box dielines, pouches, bottle & jar labels'
+    shortTag: 'Print-Ready',
+    description: 'Box dielines, pouches & bottle labels'
   },
   {
     label: '📱 Social Media & Ads',
     query: 'Do you design high-converting social media ads and banners?',
-    description: 'High-CTR YouTube thumbnails, LinkedIn & Meta ads'
+    shortTag: 'High-CTR',
+    description: 'YouTube, Meta & LinkedIn ad creatives'
   },
   {
-    label: '🚀 How to Start Project',
+    label: '🚀 Project Workflow',
     query: 'How do we get started on my design project?',
-    description: 'Easy 4-step workflow from brief to delivery'
+    shortTag: '4 Simple Steps',
+    description: 'Brief to final delivery process'
   },
   {
-    label: '📞 Talk to Abdullah Directly',
+    label: '💬 Chat on WhatsApp',
     query: 'How can I contact Abdullah Forhad directly right now?',
-    description: 'WhatsApp (+880 1342 900364) · Average reply: 15m'
+    shortTag: 'Live Chat',
+    description: 'Direct WhatsApp support (+880 1342 900364)'
   }
 ];
 
